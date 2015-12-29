@@ -26,43 +26,48 @@ To make sure that the user always plays the card he got, the circles are created
 
 #Tables
 ##Templates
-size (integer - 4 would indicate a 4x4 bingo card. 5 is the default.  Must be between 4 x 7)
-belong to an organization
-name
-rating (enum) - easy, medium, hard
-public? - boolean (default to false)
+- size (integer - 4 would indicate a 4x4 bingo card. 5 is the default.  Must be between 4 x 7)
+- belong to an organization
+- name
+- rating (enum) - easy, medium, hard
+- public? - boolean (default to false)
 
-accept_nested_attributes_for squares
+'accept_nested_attributes_for' squares
 
 ##Squares
-position_x (1 to size)
-position_y (1 to size)
-picture
-question
-belong to a template
-free_space?
-(unique index position_x, position_y, template_id)
+- position_x (1 to size)
+- position_y (1 to size)
+- picture
+- question
+- belong to a template
+- free_space?
+Unique index: [position_x, position_y, template_id]
 
 ##Cards
-belong to a template
-belong to a user
-has_many circles
-token (for url for sharing)
-public? (default to false)
+- belong to a template
+- belong to a user
+- has_many circles
+- token (for url for sharing)
+- public? (default to false)
 
-has_bingo? (called after every change and saved, because otherwise it has to be computed all the time)
+method: has_bingo? (called after every change and saved, because otherwise it has to be computed all the time)
 
 ##Circles
-belong to a card
-belong_to a user and a template through card
-belongs_to a square (saving the position)
-response
-[value, picture, position_x, position_y - copy of original value in case admin changes after the user plays the game]
+- belong to a card
+- belong_to a user and a template through card
+- belongs_to a square (saving the position)
+- response
+- part_of_bingo? (default to false); go ahead and store this, as it otherwise it will have to be computed all the time
+- copies of original value at time of creation (in case admin changes after user starts playing)
+ - value
+ - picture
+ - position_x
+ - position_y
 
-(unique index card_id, square_id)
+Unique index: [card_id, square_id]
 
-marked? (default to false)
-part_of_bingo? (default to false)
+Or methods
+- marked? (default to false)
 
 # Controller rules
 ##Templates
@@ -147,6 +152,6 @@ Only a user can update their circle.
 ```ruby
   resources :circles, only: [:update]
 ```
---new, create, edit, destroy, show, index--
+~~new, create, edit, destroy, show, index~~
 
 Since the circles are copies of the squares and are destroyed/created at the same time as the cards, you don't need those parts of a circle.  You also don't need to show or index the circles, since you will see them on the card.
