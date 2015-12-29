@@ -21,8 +21,8 @@ User-Cards = 1 to many
 Card-Circles = 1 to many
 User-Circles = 1 to many (through card)
 
-
-# NOTE - to make sure that the user always plays the card he got, the circles are created at the same time the card is
+#NOTE:
+To make sure that the user always plays the card he got, the circles are created at the same time the card is created.
 
 #Tables
 ##Templates
@@ -72,15 +72,15 @@ All users should be able to see a template (because that's where they will pick 
 
 The show page should show the template.  In addition, admins should be able to see the statuses of players on that template.)
 
-###What if an admin deletes or edits a template that a user has already played?
+####What if an admin deletes or edits a template that a user has already played?
 An admin can edit or delete a template but instances of the template (cards) in play will not be affected
 Let the admin know at the time of editing/deleting that they will not be deleting all instances
 
-`ruby
+```ruby
   resources :organizations do
     resources :templates, except: :index
   end
-`
+```
 
 1. The organization token should be only for sign ups
 2. The organization page (by id) is public
@@ -121,9 +121,10 @@ Only a user can create, edit, update, or destroy their own card.
 Admins can view cards for their organization but cannot edit, update, or destroy.
 Public cards can be seen without a login.
 
-resources :cards, except: :new
-get cards/:token/share => 'cards#share'
-
+```ruby
+  resources :cards, except: :new
+  get cards/:token/share => 'cards#share'
+```
 create --> (params[:card][:template_id]) (only member)
 edit --> (only owner)
 update --> (only owner)
@@ -143,8 +144,9 @@ share -->
 No views for circles, but controller is available to handle updates (json should also be available)
 Only a user can update their circle.
 
-resources :circles, only: [:update]
-
--new, create, edit, destroy, show, index-
+```ruby
+  resources :circles, only: [:update]
+```
+--new, create, edit, destroy, show, index--
 
 Since the circles are copies of the squares and are destroyed/created at the same time as the cards, you don't need those parts of a circle.  You also don't need to show or index the circles, since you will see them on the card.
