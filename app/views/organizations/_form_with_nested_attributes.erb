@@ -1,0 +1,58 @@
+<div class="row">
+  <%= form_for(@organization) do |f| %>
+      <% if @organization.errors.any? %>
+        <div id="error_explanation" class="col col-xs-12">
+          <h4><%= pluralize(@organization.errors.count, "error") %> prohibited this organization from being saved:</h4>
+
+          <ul>
+          <% @organization.errors.full_messages.each do |message| %>
+            <li class="has-error has-feedback"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="col col-xs-12">
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: "organization name", class: "form-control" %>
+        </div>
+        <div class="user">
+          <% @user = @organization.users.first || @organization.users.build %>
+          <%= f.fields_for :users do |ff| %>
+            <div class="user">
+              <div class="">
+                  <div class="form form-horizontal col col-xs-12">
+                    <%= form_for @user do |f| %>
+                        <div class="form-group">
+                           <%= ff.label :email %><br />
+                           <%= ff.text_field :email, class: "form-control", placeholder: "email@address.com" %>
+                        </div>
+                        <div class="form-group">
+                           <%= ff.label :first_name %><br />
+                           <%= ff.text_field :first_name, class: "form-control", placeholder: "your first name" %>
+                        </div>
+                        <div class="form-group">
+                           <%= ff.label :last_name %><br />
+                           <%= ff.text_field :last_name, class: "form-control", placeholder: "your last name" %>
+                        </div>
+                        <div class="form-group">
+                           <%= ff.label :password %><br />
+                           <%= ff.password_field :password, class: "form-control", placeholder: "password" %>
+                        </div>
+                        <div class="form-group">
+                           <%= ff.label :password_confirmation %><br />
+                           <%= ff.password_field :password_confirmation, class: "form-control", placeholder: "confirm your password" %>
+                        </div>
+                    <% end %>
+  
+                  </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="actions form-group">
+          <%= f.button class: "btn accent-background"  %>
+        </div>
+      </div>
+    <% end %>
+</div>

@@ -1,0 +1,46 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                              :integer          not null, primary key
+#  email                           :string           not null
+#  crypted_password                :string
+#  salt                            :string
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  remember_me_token               :string
+#  remember_me_token_expires_at    :datetime
+#  reset_password_token            :string
+#  reset_password_token_expires_at :datetime
+#  reset_password_email_sent_at    :datetime
+#  first_name                      :string
+#  last_name                       :string
+#  profile_picture                 :string
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_remember_me_token     (remember_me_token)
+#  index_users_on_reset_password_token  (reset_password_token)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+susan:
+    email: susanEmail@email.com
+    first_name: susan
+    last_name: surname
+    salt: <%= salt = "asdasdastr4325234324sdfds" %>
+    crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) %>
+    reset_password_token: "ARealResetToken"
+
+david:
+  email: davidEmail@email.com
+  first_name: david
+  last_name: surname
+  salt: <%= salt = "asdasdastr4325234324sdfds" %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) %>

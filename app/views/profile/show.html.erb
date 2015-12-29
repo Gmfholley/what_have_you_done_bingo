@@ -1,0 +1,15 @@
+<div class="row">
+  <h2 class="accent-font text-center">Hi, <%= @user.first_name %></h2>
+  <% @user.organizations.each do |org| %>
+    <h4 class="text-center">Member of <%= link_to org.name, organization_path(org.token)%>  <%= link_to "Drop organization", organization_user_path(org.token, @user.id), method: "delete", class: "btn" %>
+</h4>
+ <% end %>
+  <div class="row">
+    <div class="col col-xs-12 col-md-6 text-center">
+      <%= link_to 'Edit Profile', edit_profile_path, class: 'btn accent-background' %>    
+    </div>
+    <div class="col col-xs-12 col-md-6 text-center">
+      <%= link_to 'Delete Account', profile_path, method: 'delete', class: 'btn accent-background' %>
+    </div>
+  </div>  
+</div>

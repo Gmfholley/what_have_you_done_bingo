@@ -1,0 +1,49 @@
+<div class="row">
+  <h2 class="accent-font text-center"><%= @organization.name %></h2>
+    <% if @is_admin %>
+      <div class="col col-xs-12 col-md-6 text-center">
+        <%= link_to 'Edit Organization', edit_organization_path(@organization.token), class: 'accent-background btn' %>    
+      </div>
+      <div class="col col-xs-12 col-md-6 text-center">
+        <%= link_to 'Delete Organization', organization_path(@organization.token), method: 'delete', class: 'accent-background btn' %>
+      </div>
+    <div class="margin30"></div>
+    <h3 class="text-center">Link to share for new member sign-ups:</h3>
+    <h5 class="text-center"><%= organization_sign_up_url(@organization.token) %></h5>
+  <% end %>
+  <div class="col col-xs-12 col-md-8 col-md-offset-2">
+    <table class="table table-condensed table-responsive table-hover">
+      <thead class="accent-background">
+        <th>Name</th>
+        <th>Status</th>
+      </thead>
+      <tbody>
+        <% @organization.users.each do |user| %>
+          <tr>
+            <% if user == @user %>
+                <td><%= link_to "#{user.first_name} #{user.last_name}", profile_path %></td>
+                <td><%= user.role(@organization).name %> 
+                  <%= link_to "Drop organization", organization_user_path(@organization.token, user.id), method: "delete", class: "btn" %></td>
+              
+            <% elsif @is_admin %>  
+                <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id) %></td>
+                <td><%= user.role(@organization).name %> 
+                  <%= link_to "Remove user", organization_user_path(@organization.token, user.id), method: "delete", class: "btn" %>
+                  <% if user.role(@organization) == Role.admin %>
+                    <%= link_to "Remove admin", organization_user_path(@organization.token, user.id, organization_user: {role_id: @user_id}), method: "put", class: "btn" %>
+                  <% else %>
+                    <%= link_to "Make an admin", organization_user_path(@organization.token, user.id, organization_user: {role_id: @admin_id}), method: "put", class: "btn" %>              
+                  <% end %>
+                </td>
+            <% else %>
+                <td><%= "#{user.first_name} #{user.last_name}" %></td>
+                <td></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="clear:both"></div>
+</div>

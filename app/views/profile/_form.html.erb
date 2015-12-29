@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col col-xs-12 errors">
+      <% @user.errors.full_messages.each do |error| %>
+        <p class="has-feedback has-error"><%= error %></p>
+      <% end %>
+    </div>
+
+    <div class="form form-horizontal col col-xs-12">
+      <%= form_for @user do |f| %>
+          <div class="form-group">
+             <%= f.label :email %><br />
+             <%= f.text_field :email, class: "form-control", placeholder: "email@address.com" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :first_name %><br />
+             <%= f.text_field :first_name, class: "form-control", placeholder: "your first name" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :last_name %><br />
+             <%= f.text_field :last_name, class: "form-control", placeholder: "your last name" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :password %><br />
+             <%= f.password_field :password, class: "form-control", placeholder: "password" %>
+          </div>
+          <div class="form-group">
+             <%= f.label :password_confirmation %><br />
+             <%= f.password_field :password_confirmation, class: "form-control", placeholder: "confirm your password" %>
+          </div>
+
+
+          <div class="form-group">
+            <%= f.button class: "btn accent-background" %>
+          </div>
+      <% end %>
+  
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Project</title>
+  <%= stylesheet_link_tag  'application', media: 'all'%>
+  <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' %>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <div class="navbar accent-background">
+      <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-navbar" aria-expanded="false">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="fa fa-2x fa-bars"></span>
+           </button>
+           <a class="btn navbar-brand accent-font" href="#"><i class="fa fa-2x fa-life-ring"></i> My Brand</a>
+         </div>
+         <div class="collapse navbar-collapse" id="my-navbar">
+           <ul class="nav navbar-nav pull-right">
+            <% if current_user %>
+              <li><%= link_to ("<i class='fa fa-2x fa-cogs'></i> Edit Profile").html_safe, edit_profile_path, class: "btn" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-sign-out'></i> Logout").html_safe, :logout, method: :delete, class: "btn" %></li>
+            <% else %>
+              <li><%= link_to ("<i class='fa fa-2x fa-users'></i> Create a Group").html_safe, new_organization_path, class: "btn" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-user-plus'></i> Create Account").html_safe, new_user_path, class: "btn" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-sign-in'></i> Login").html_safe, :login, class: "btn" %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div>
+        <p class="accent-font" id="notice"><%= flash[:notice] %></p>
+        <p class="accent-font has-error has-feedback" id="alert"><%= flash[:alert] %></p>
+      </div>
+      <%= yield %>
+  </div>
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js' %>
+  <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js' %>
+  <%= javascript_include_tag 'application' %>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<div class="row">
+  <%= form_for(@organization) do |f| %>
+      <% if @organization.errors.any? %>
+        <div id="error_explanation" class="col col-xs-12">
+          <h4><%= pluralize(@organization.errors.count, "error") %> prohibited this organization from being saved:</h4>
+
+          <ul>
+          <% @organization.errors.full_messages.each do |message| %>
+            <li class="has-error has-feedback"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="col col-xs-12">
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: "organization name", class: "form-control" %>
+        </div>
+        <div class="actions form-group">
+          <%= f.button class: "btn accent-background"  %>
+        </div>
+      </div>
+    <% end %>
+</div>

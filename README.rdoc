@@ -1,0 +1,5 @@
+README for Template Rails Project
+
+Sorcery used
+
+User authentication set up

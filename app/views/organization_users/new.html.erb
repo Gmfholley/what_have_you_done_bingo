@@ -1,0 +1,2 @@
+    <h2 class="accent-font"><%= "#{@change_user.first_name}, Join #{@organization.name}'s group!" %></h2>
+    <%= link_to 'Join!', organization_user_path(@organization.token, @change_user.id), method: "post", class: "btn accent-background" %>
