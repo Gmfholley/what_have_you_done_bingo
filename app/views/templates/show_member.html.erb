@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @template.size %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @template.organization_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @template.name %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @template.rating %>
+</p>
+
+<p>
+  <strong>Public:</strong>
+  <%= @template.public %>
+</p>
+
+<%= link_to 'Edit', edit_template_path(@template) %> |
+<%= link_to 'Back', templates_path %>
