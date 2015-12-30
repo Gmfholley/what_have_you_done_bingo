@@ -5,43 +5,37 @@ class TemplatesControllerTest < ActionController::TestCase
     @template = templates(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:templates)
-  end
-
   test "should get new" do
-    get :new
+    get :new, organization_id: organizations(:factory)
     assert_response :success
   end
 
   test "should create template" do
     assert_difference('Template.count') do
-      post :create, template: { name: @template.name, organization_id: @template.organization_id, public: @template.public, rating: @template.rating, size: @template.size }
+      post :create, organization_id: organizations(:factory), template: { name: @template.name, organization_id: @template.organization_id, public: @template.public, rating: @template.rating, size: @template.size }
     end
 
-    assert_redirected_to template_path(assigns(:template))
+    assert_redirected_to organization_template_path(organizations(:factory), assigns(:template))
   end
 
   test "should show template" do
-    get :show, id: @template
+    get :show, organization_id: organizations(:factory), id: @template
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @template
+    get :edit, organization_id: organizations(:factory), id: @template
     assert_response :success
   end
 
   test "should update template" do
-    patch :update, id: @template, template: { name: @template.name, organization_id: @template.organization_id, public: @template.public, rating: @template.rating, size: @template.size }
-    assert_redirected_to template_path(assigns(:template))
+    patch :update, organization_id: organizations(:factory), id: @template, template: { name: @template.name, organization_id: @template.organization_id, public: @template.public, rating: @template.rating, size: @template.size }
+    assert_redirected_to organization_template_path(organizations(:factory), assigns(:template))
   end
 
   test "should destroy template" do
     assert_difference('Template.count', -1) do
-      delete :destroy, id: @template
+      delete :destroy, organization_id: organizations(:factory), id: @template
     end
 
     assert_redirected_to templates_path

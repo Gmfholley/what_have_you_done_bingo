@@ -7,7 +7,7 @@
 #  organization_id :integer
 #  name            :string
 #  rating          :string
-#  public          :boolean
+#  is_public       :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

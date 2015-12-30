@@ -7,7 +7,7 @@
 #  organization_id :integer
 #  name            :string
 #  rating          :string
-#  public          :boolean
+#  is_public       :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
@@ -16,14 +16,14 @@
 
 one:
   size: 1
-  organization_id: 1
+  organization: factory
   name: MyString
   rating: MyString
   public: false
 
 two:
   size: 1
-  organization_id: 1
+  organization: bank
   name: MyString
   rating: MyString
   public: false
