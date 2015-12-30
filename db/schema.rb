@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230034958) do
+ActiveRecord::Schema.define(version: 20151230041236) do
 
   create_table "organization_users", force: :cascade do |t|
     t.integer  "organization_id"
@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(version: 20151230034958) do
     t.integer  "size"
     t.integer  "organization_id"
     t.string   "name"
-    t.integer  "rating"
     t.boolean  "is_public"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "token"
+    t.integer  "rating"
   end
 
   create_table "users", force: :cascade do |t|

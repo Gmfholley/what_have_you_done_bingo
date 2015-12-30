@@ -6,11 +6,11 @@
 #  size            :integer
 #  organization_id :integer
 #  name            :string
-#  rating          :integer
 #  is_public       :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  token           :string
+#  rating          :integer
 #
 
 require 'test_helper'
@@ -40,7 +40,7 @@ class TemplateTest < ActiveSupport::TestCase
   
   test 'template should be allowed a rating of easy, medium and hard (enum)' do
     a = Template.create(name: "test", organization: organizations(:factory))
-    assert a.update(rating: :easy), "Did not allow rating to be easy"
+    assert a.update!(ratings: :easy), "Did not allow rating to be easy"
     assert a.update(rating: :medium), "Did not allow rating to be medium"
     assert a.update(rating: :hard), "Did not allow rating to be hard"
     assert_not a.update(rating: :some_other_thing), "Allowed an update of rating to any random thing"

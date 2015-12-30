@@ -6,11 +6,11 @@
 #  size            :integer
 #  organization_id :integer
 #  name            :string
-#  rating          :integer
 #  is_public       :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  token           :string
+#  rating          :integer
 #
 
 class Template < ActiveRecord::Base
@@ -38,8 +38,10 @@ class Template < ActiveRecord::Base
   #
   # returns nothing
   def set_defaults
-    self.size ||=  5
+    # By the way, this method can NEVER return false or the method will return invalid, without an error message.  Yay!
     self.is_public ||= false
+    self.size ||=  5
+    true
   end
   
   # returns the number of bingo squares this bingo card template should have, based on the size
