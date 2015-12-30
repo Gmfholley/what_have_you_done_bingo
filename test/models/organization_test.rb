@@ -46,4 +46,9 @@ class OrganizationTest < ActiveSupport::TestCase
   test 'organizations should have many users' do
     assert_instance_of User, organizations(:factory).users.first, "Has_many relationship does not exist"
   end
+  
+  test 'organization should have many templates' do 
+    assert_instance_of Template, organizations(:factory).templates.first, "Has_many relationship does not exist"
+  end
+  
 end
