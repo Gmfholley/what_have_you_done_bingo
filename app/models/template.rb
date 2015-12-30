@@ -14,7 +14,7 @@
 #
 
 class Template < ActiveRecord::Base
-  validates_numericality_of :size, :in => 4..6
+  validates_numericality_of :size, :greater_than_or_equal_to => 4, :less_than_or_equal_to => 6
   validates :name, presence: true
   validates :organization, presence: true
 
@@ -24,6 +24,14 @@ class Template < ActiveRecord::Base
   before_validation :set_defaults
   before_create :generate_token
 
+  # returns the number of bingo squares this bingo card template should have, based on the size
+  #
+  # returns an integer
+  def num_squares
+    self.size ** 2
+  end
+
+  private
   # generates a token for itself for public sharing
   #
   # returns a string
@@ -42,12 +50,5 @@ class Template < ActiveRecord::Base
     self.is_public ||= false
     self.size ||=  5
     true
-  end
-  
-  # returns the number of bingo squares this bingo card template should have, based on the size
-  #
-  # returns an integer
-  def num_squares
-    self.size ** 2
   end
 end

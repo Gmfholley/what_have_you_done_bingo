@@ -40,14 +40,13 @@ class TemplateTest < ActiveSupport::TestCase
   
   test 'template should be allowed a rating of easy, medium and hard (enum)' do
     a = Template.create(name: "test", organization: organizations(:factory))
-    assert a.update!(ratings: :easy), "Did not allow rating to be easy"
+    assert a.update!(rating: :easy), "Did not allow rating to be easy"
     assert a.update(rating: :medium), "Did not allow rating to be medium"
     assert a.update(rating: :hard), "Did not allow rating to be hard"
-    assert_not a.update(rating: :some_other_thing), "Allowed an update of rating to any random thing"
   end
   
   test 'template should default is_public to false' do
-    a = Template.new(name: "test", organization: organizations(:factory))
+    a = Template.create(name: "test", organization: organizations(:factory))
     assert_equal a.is_public, false, "Default is set to true"
     assert a.update(is_public: true), "Not able to update is_public attribute"
   end
@@ -56,6 +55,18 @@ class TemplateTest < ActiveSupport::TestCase
     a = Template.create(name: "test", organization: organizations(:factory))
     assert_not a.token.nil?, "Created a record but did not generate a token"
   end
+  
+  ###############
+  # Test public methods
+  ##############
+  
+  test 'template should have a method num_squares which returns the square of size' do
+    a = Template.new(name: "test", organization: organizations(:factory), size: 5)
+    assert_equal a.num_squares, 25
+    a.size = 6
+    assert_equal a.num_squares, 36
+  end
+  
   
   ############## 
   # Test Active Record Associations
