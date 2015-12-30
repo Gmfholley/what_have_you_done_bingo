@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   post 'organizations/:id/users/:user_id' => 'organization_users#create'
   
   
-  resources :organizations, except: :index
+  resources :organizations, except: :index do
+    resources :templates, except: :index    
+  end
 
 
   post 'password_resets' => 'password_resets#create', as: :password_resets
