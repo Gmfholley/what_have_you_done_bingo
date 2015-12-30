@@ -12,10 +12,10 @@ class TemplatesControllerTest < ActionController::TestCase
 
   test "should create template" do
     assert_difference('Template.count') do
-      post :create, organization_id: organizations(:factory), template: { name: @template.name, organization_id: @template.organization_id, public: @template.public, rating: @template.rating, size: @template.size }
+      post :create, organization_id: organizations(:factory), template: { name: @template.name, organization_id: @template.organization_id, is_public: @template.is_public, rating: @template.rating, size: @template.size }
     end
 
-    assert_redirected_to organization_template_path(organizations(:factory), assigns(:template))
+    assert_redirected_to organization_template_path(organizations(:factory).id, assigns(:template).id)
   end
 
   test "should show template" do
@@ -29,8 +29,8 @@ class TemplatesControllerTest < ActionController::TestCase
   end
 
   test "should update template" do
-    patch :update, organization_id: organizations(:factory), id: @template, template: { name: @template.name, organization_id: @template.organization_id, public: @template.public, rating: @template.rating, size: @template.size }
-    assert_redirected_to organization_template_path(organizations(:factory), assigns(:template))
+    patch :update, organization_id: organizations(:factory), id: @template, template: { name: @template.name, organization_id: @template.organization_id, is_public: @template.is_public, rating: @template.rating, size: @template.size }
+    assert_redirected_to organization_template_path(organizations(:factory).id, assigns(:template).id)
   end
 
   test "should destroy template" do
