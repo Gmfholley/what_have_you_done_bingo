@@ -31,6 +31,7 @@ To make sure that the user always plays the card he got, the circles are created
 - name
 - rating (enum) - easy, medium, hard
 - public? - boolean (default to false)
+- token (for public sharing)
 
 'accept_nested_attributes_for' squares
 

@@ -22,7 +22,18 @@ class Template < ActiveRecord::Base
   belongs_to :organization
   
   before_save :set_defaults
+  before_create :generate_token
 
+  # generates a token for itself for public sharing
+  #
+  # returns a string
+  def generate_token
+    self.token = loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      break random_token unless Organization.exists?(token: random_token)
+    end
+  end
+  
   # sets default values of self
   #
   # returns nothing

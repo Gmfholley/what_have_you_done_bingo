@@ -21,10 +21,11 @@ one:
   name: MyString
   rating: MyString
   is_public: false
-
+  token: someotherstring
 two:
   size: 1
   organization: factory
   name: MyString
   rating: MyString
   is_public: false
+  token: somecrazystring
