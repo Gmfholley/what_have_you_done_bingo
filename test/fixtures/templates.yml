@@ -16,24 +16,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  size: 1
+  size: 5
   organization: factory
   name: MyString
   rating: MyString
   is_public: false
   token: someotherstring
 two:
-  size: 1
+  size: 5
   organization: factory
   name: MyString
   rating: MyString
   is_public: false
   token: somecrazystring
   
-three:
-  size: 1
-  organization: factory
-  name: MyString
-  rating: MyString
-  is_public: true
-  token: somecrazystring

@@ -54,16 +54,15 @@ class TemplatesControllerTest < ActionController::TestCase
     assert_equal flash[:alert], not_authorized_alert
   end
 
-  test "should not show a private template" do
+  test "should not show a private template but should show public ones" do
     get :show, organization_id: organizations(:factory), id: @template
     assert_redirected_to :root
     assert_equal flash[:notice], private_notice
-  end
-
-
-  test "should allow you to see the template if public" do
-    get :show, organization_id: organizations(:factory), id: templates(:three)
+    
+    @template.update(is_public: true)
+    get :show, organization_id: organizations(:factory), id: @template
     assert_response :success  
+    
   end
   
   test "should always show private templates to member" do
@@ -99,9 +98,7 @@ class TemplatesControllerTest < ActionController::TestCase
     login_user(user = @admin, route = login_path) 
     
     patch :update, organization_id: organizations(:factory), id: @template, template: { name: @template.name, is_public: @template.is_public, rating: @template.rating }
-    assert_response :success
-    # assert_template :show
-    assert_equal @template.valid?, true
+    assert_redirected_to organization_template_path(@organization.id, @template)
   end
   
   test "should not get update template if not an admin" do
