@@ -22,8 +22,8 @@
 
 <p>
   <strong>Public:</strong>
-  <%= @template.public %>
+  <%= @template.is_public %>
 </p>
 
-<%= link_to 'Edit', edit_template_path(@template) %> |
-<%= link_to 'Back', templates_path %>
+<%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id) %> |
+<%= link_to 'Group', organization_path(@organization) %>
