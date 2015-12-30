@@ -16,14 +16,14 @@
 
 one:
   size: 1
-  organization_id: 1
+  organization: factory
   name: MyString
   rating: MyString
   is_public: false
 
 two:
   size: 1
-  organization_id: 1
+  organization: factory
   name: MyString
   rating: MyString
   is_public: false
