@@ -29,3 +29,11 @@ two:
   rating: MyString
   is_public: false
   token: somecrazystring
+  
+three:
+  size: 1
+  organization: factory
+  name: MyString
+  rating: MyString
+  is_public: true
+  token: somecrazystring
