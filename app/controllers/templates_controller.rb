@@ -9,7 +9,7 @@ class TemplatesController < ApplicationController
   def show
     if logged_in? && is_admin?
       render :show_admin
-    elsif @template.is_public? || (logged_in? && belongs_to_organization?)
+    elsif @template.is_public || (logged_in? && belongs_to_organization?)
       render :show
     else
       redirect_to :root, notice: "Sorry.  That is a private template."
@@ -19,7 +19,7 @@ class TemplatesController < ApplicationController
   # GET play/:token
   def share
     @template = Template.find_by(token: params[:token])
-    if @template.is_public?
+    if @template.is_public
       render :show
     else
       redirect_to :root, notice: "Sorry.  That is a private template."
