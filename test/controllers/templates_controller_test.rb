@@ -10,8 +10,14 @@ class TemplatesControllerTest < ActionController::TestCase
     @member = users(:david)
     @admin = users(:sally)
     @template = templates(:one)
-    not_authorized_alert = "You do not have access to view that page."
-    private_notice = "Sorry.  That is a private template."
+  end
+  
+  def not_authorized_alert
+    "You do not have access to view that page."
+  end
+  
+  def private_notice
+    "Sorry.  That is a private template."
   end
   
 
@@ -43,21 +49,23 @@ class TemplatesControllerTest < ActionController::TestCase
     assert_no_difference('Template.count') do
       post :create, organization_id: organizations(:factory), template: { name: @template.name, is_public: @template.is_public, rating: @template.rating }
     end
-
+    
     assert_redirected_to profile_path
     assert_equal flash[:alert], not_authorized_alert
   end
 
-  test "should show template if public and not if not" do
+  test "should not show a private template" do
     get :show, organization_id: organizations(:factory), id: @template
     assert_redirected_to :root
     assert_equal flash[:notice], private_notice
-    
-    @template.update(is_public: true)
-    get :show, organization_id: organizations(:factory), id: @template
-    assert_response :success    
   end
 
+
+  test "should allow you to see the template if public" do
+    get :show, organization_id: organizations(:factory), id: templates(:three)
+    assert_response :success  
+  end
+  
   test "should always show private templates to member" do
     login_user(user = @member, route = login_path) 
     get :show, organization_id: organizations(:factory), id: @template
@@ -73,8 +81,7 @@ class TemplatesControllerTest < ActionController::TestCase
   end
 
   test "should get edit if an admin" do
-    login_user(user = @admin, route = login_path) 
-
+    login_user(user = @admin, route = login_path)
     get :edit, organization_id: organizations(:factory), id: @template
     assert_response :success
   end
@@ -92,7 +99,9 @@ class TemplatesControllerTest < ActionController::TestCase
     login_user(user = @admin, route = login_path) 
     
     patch :update, organization_id: organizations(:factory), id: @template, template: { name: @template.name, is_public: @template.is_public, rating: @template.rating }
-    assert_redirected_to organization_template_path(organizations(:factory).id, assigns(:template).id)
+    assert_response :success
+    # assert_template :show
+    assert_equal @template.valid?, true
   end
   
   test "should not get update template if not an admin" do
