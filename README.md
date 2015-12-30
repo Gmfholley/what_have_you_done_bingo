@@ -93,9 +93,9 @@ Let the admin know at the time of editing/deleting that they will not be deletin
 3. Templates are public on case-by-case basis on the organizations page
 
 admin-only
-new --> organizations/:id/templates/new
+new --> organizations/:organization_id/templates/new
 create 
-edit --> organizations/:id/templates/template_id
+edit --> organizations/:organization_id/templates/:id
 update
 destroy -->
 
