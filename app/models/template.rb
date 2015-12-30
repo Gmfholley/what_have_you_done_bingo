@@ -6,7 +6,7 @@
 #  size            :integer
 #  organization_id :integer
 #  name            :string
-#  rating          :string
+#  rating          :integer
 #  is_public       :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -21,7 +21,7 @@ class Template < ActiveRecord::Base
   enum rating: [:easy, :medium, :hard]
   belongs_to :organization
   
-  before_save :set_defaults
+  before_validation :set_defaults
   before_create :generate_token
 
   # generates a token for itself for public sharing
