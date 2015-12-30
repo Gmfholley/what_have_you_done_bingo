@@ -9,10 +9,10 @@ class TemplatesController < ApplicationController
   def show
     if is_admin?
       render :show_admin
-    elsif belongs_to_organization?
-      render :show_member
-    else
+    elsif belongs_to_organization? || @template.is_public?
       render :show
+    else
+      redirect_to :back, notice: "Sorry.  This is a private template."
     end
   end
 
