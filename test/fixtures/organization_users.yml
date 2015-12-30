@@ -21,3 +21,8 @@ two:
   organization: factory
   user: david
   role: user
+  
+three:
+  organization: factory
+  user: sally
+  role: admin

@@ -44,3 +44,10 @@ david:
   last_name: surname
   salt: <%= salt = "asdasdastr4325234324sdfds" %>
   crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) %>
+
+sally:
+  email: sallyEmail@email.com
+  first_name: sally
+  last_name: surname
+  salt: <%= salt = "asdasdastr4325234324sdfds" %>
+  crypted_password: <%= Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) %>

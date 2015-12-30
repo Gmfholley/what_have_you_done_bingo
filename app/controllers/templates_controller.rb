@@ -12,11 +12,11 @@ class TemplatesController < ApplicationController
     elsif belongs_to_organization? || @template.is_public?
       render :show
     else
-      redirect_to :back, notice: "Sorry.  That is a private template."
+      redirect_to :root, notice: "Sorry.  That is a private template."
     end
   end
   
-  # Get play/:token
+  # GET play/:token
   def share
     @template = Template.find_by(token: params[:token])
     if @template.is_public?
@@ -42,7 +42,7 @@ class TemplatesController < ApplicationController
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to @template, notice: 'Template was successfully created.' }
+        format.html { redirect_to @template, notice: 'Cool card created!' }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
+        format.html { redirect_to @template, notice: 'Successfully updated.' }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }
@@ -70,7 +70,7 @@ class TemplatesController < ApplicationController
   def destroy
     @template.destroy
     respond_to do |format|
-      format.html { redirect_to templates_url, notice: 'Template was successfully destroyed.' }
+      format.html { redirect_to organization_path(@organization.id), notice: 'The template was deleted.' }
       format.json { head :no_content }
     end
   end
