@@ -12,7 +12,17 @@ class TemplatesController < ApplicationController
     elsif belongs_to_organization? || @template.is_public?
       render :show
     else
-      redirect_to :back, notice: "Sorry.  This is a private template."
+      redirect_to :back, notice: "Sorry.  That is a private template."
+    end
+  end
+  
+  # Get play/:token
+  def share
+    @template = Template.find_by(token: params[:token])
+    if @template.is_public?
+      render :show
+    else
+      redirect_to :root, notice: "Sorry.  That is a private template."
     end
   end
 
@@ -28,7 +38,7 @@ class TemplatesController < ApplicationController
   # POST /templates
   # POST /templates.json
   def create
-    @template = Organization.templates.build(template_params)
+    @template = Organization.templates.create(template_params)
 
     respond_to do |format|
       if @template.save
