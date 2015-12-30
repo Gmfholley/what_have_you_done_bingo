@@ -7,9 +7,9 @@ class TemplatesController < ApplicationController
   # GET /templates/1
   # GET /templates/1.json
   def show
-    if is_admin?
+    if logged_in? && is_admin?
       render :show_admin
-    elsif belongs_to_organization? || @template.is_public?
+    elsif @template.is_public? || (logged_in? && belongs_to_organization?)
       render :show
     else
       redirect_to :root, notice: "Sorry.  That is a private template."
@@ -28,7 +28,7 @@ class TemplatesController < ApplicationController
 
   # GET /templates/new
   def new
-    @template = Organization.templates.build
+    @template = @organization.templates.build
   end
 
   # GET /templates/1/edit
@@ -38,11 +38,11 @@ class TemplatesController < ApplicationController
   # POST /templates
   # POST /templates.json
   def create
-    @template = Organization.templates.create(template_params)
+    @template = @organization.templates.create(template_params)
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to @template, notice: 'Cool card created!' }
+        format.html { redirect_to organization_template_path(@organization, @template), notice: 'Cool card created!' }
         format.json { render :show, status: :created, location: @template }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to @template, notice: 'Successfully updated.' }
+        format.html { redirect_to organization_template_path(@organization, @template), notice: 'Successfully updated.' }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit }
@@ -83,11 +83,11 @@ class TemplatesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Template.find(params[:organization_id])
+      @organization = Organization.find(params[:organization_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def template_params
-      params.require(:template).permit(:size, :name, :rating, :is_public)
+      params.require(:template).permit(:size, :name, :is_public, :rating)
     end
 end
