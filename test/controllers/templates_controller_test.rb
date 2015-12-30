@@ -134,6 +134,7 @@ class TemplatesControllerTest < ActionController::TestCase
   end
   
   test "share should render if public" do 
+    @template.update(is_public: false)
     get :share, token: @template.token
     assert_redirected_to :root
     assert_equal flash[:notice], private_notice

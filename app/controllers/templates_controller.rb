@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
-  skip_before_filter :require_login, only: [:show]
-  before_action :set_organization
+  skip_before_filter :require_login, only: [:show, :share]
+  before_action :set_organization, except: [:share]
   before_action :set_template, only: [:show, :edit, :update, :destroy]
   before_action :handle_if_not_authorized, only: [:new, :create, :edit, :update, :destroy]
 
@@ -19,6 +19,7 @@ class TemplatesController < ApplicationController
   # GET play/:token
   def share
     @template = Template.find_by(token: params[:token])
+    @organization = @template.organization
     if @template.is_public
       render :show
     else
