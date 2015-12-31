@@ -1,3 +1,7 @@
 <h1 class="accent-font">New Organization</h1>
 
+<% if current_user %>
+<%= render 'form' %>
+<% else %>
 <%= render 'form_with_nested_attributes' %>
+<% end %>

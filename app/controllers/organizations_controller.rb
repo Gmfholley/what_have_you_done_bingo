@@ -1,6 +1,5 @@
 class OrganizationsController < ApplicationController
-  skip_before_filter :require_login, only: [:new, :create]
-  before_action :prevent_duplicate_sessions, only: [:new, :create]
+  skip_before_filter :require_login, only: [:new, :create, :show]
   before_action :set_organization, except: [:new, :create]
   before_action :handle_if_not_authorized, only: [:edit, :update, :destroy]
   before_action :handle_if_not_member, only: [:edit, :update, :show, :destroy]
@@ -11,7 +10,11 @@ class OrganizationsController < ApplicationController
   
   def create
     @organization = Organization.create(organization_only_params)
-    @user = User.create(organization_user_only_params)
+    if current_user
+      @user = current_user
+    else
+      @user = User.create(organization_user_only_params)
+    end
     @org_user = OrganizationUser.create(organization: @organization, user: @user, role: Role.admin)
     
     if @org_user.blank?
@@ -19,7 +22,9 @@ class OrganizationsController < ApplicationController
       @organization.destroy
       render :new, :notice => "Unable to create a new organization."
     else
-      @user = login(@user.email,password_params)
+      if !current_user
+        @user = login(@user.email,password_params)
+      end
       redirect_to organization_path(@organization.token), :notice => "Thanks for signing up!"
     end
   end

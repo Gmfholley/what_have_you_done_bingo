@@ -49,7 +49,7 @@ Unique index: [position_x, position_y, template_id]
 - belong to a user
 - has_many circles
 - token (for url for sharing)
-- public? (default to false)
+- is_public? (default to false)
 - num_bingos
 
 method: has_bingo? (called after every change and saved, because otherwise it has to be computed all the time)
