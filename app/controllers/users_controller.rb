@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   
   def handle_logged_in_user_to_this_organization
     if logged_in?
-      redirect_to organization_users_path(@organization.id, current_user.id)
+      redirect_to organization_user_path(@organization.token, current_user.id)
     end
   end  
 end
