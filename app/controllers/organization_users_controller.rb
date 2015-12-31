@@ -1,10 +1,14 @@
 class OrganizationUsersController < ApplicationController
   before_action :set_organization_user
   before_action :has_authorization
-     
+  
+  # You are never creating a user at this place
+  # GET /organizations/:id/users/:user_id
   def new
   end
   
+  
+  # POST /organizations/:id/users/:user_id
   def create
     if @organization_user.save
       respond_to do |format|
@@ -20,6 +24,7 @@ class OrganizationUsersController < ApplicationController
     end
   end
   
+  # Patch/Put /organizations/:id/users/:user_id
   def update
     if @organization_user.update(organization_user_params)
       respond_to do |format|
@@ -34,6 +39,7 @@ class OrganizationUsersController < ApplicationController
     end
   end
   
+  # DELETE /organizations/:id/users/:user_id
   def destroy
     if @organization_user.destroy
       respond_to do |format|
