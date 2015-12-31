@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   
   resources :users, except: [:edit, :update, :destroy, :index]
   get 'organizations/:id/sign_up' => 'users#new', as: :organization_sign_up
-  post 'organizations/:id/sign_up'
+  post 'organizations/:id/sign_up' => 'users#create'
   
   get 'organizations/:id/users/:user_id' => 'organization_users#new'
   put 'organizations/:id/users/:user_id' => 'organization_users#update', as: :organization_user

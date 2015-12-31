@@ -8,8 +8,10 @@ class UsersController < ApplicationController
   def new
     if @organization.blank?
       @user = User.new
+      @submit_url = users_path
     else
       @user = @organization.users.build
+      @submit_url = request.path
     end
   end
   
@@ -18,8 +20,9 @@ class UsersController < ApplicationController
     # for users that sign up through an organization page, also create the association
     # was not able to create embedded params for the user
     if !@organization.blank? && !@user.id.blank?
-      assoc = OrganizationUser.create(user: @user.id, organization: @organization.id, role: Role.user)
+      assoc = OrganizationUser.create(user: @user, organization: @organization, role: Role.user)
      if assoc.blank?
+       @submit_url = request.path
        render :new, :notice => "Unable to create your account."  
        @user.destroy
      else
@@ -29,6 +32,7 @@ class UsersController < ApplicationController
     else
       # for users who sign up outside of an organization page, do not create association
       if @user.id.blank?
+        @submit_url = request.path
         render :new, :notice => "Unable to create your account."  
       else
         @user = login(@user.email, user_password_params)
