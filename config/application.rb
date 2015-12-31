@@ -28,9 +28,9 @@ module WellnessTracker
       host: 'example.com', protocol: 'https://'
     }
 
-    # default host for controllers
-    config.action_controller.default_url_options = {
-      :host => "www.example.com"
-    }
+    # # default host for controllers
+    # config.action_controller.default_url_options = {
+    #   :host => "www.example.com"
+    # }
   end
 end
