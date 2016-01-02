@@ -1,10 +1,13 @@
 class OrganizationSignupController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
   before_action :set_organization
-  before_action :set_user
+  before_action :set_user, only: [:destroy]
   before_action :set_default_role
   
   # GET /organizations/:id/sign_up
   def new
+    @organization_user = OrganizationUser.new
+    @user = User.new
     if is_member?
       redirect_to organization_path(@organization), notice: "You are already a member."
     end
@@ -12,16 +15,25 @@ class OrganizationSignupController < ApplicationController
   
   # POST /organizations/:id/sign_up
   def create
-    @organization_user = OrganizationUser.new(user: @user, organization: @organization, role: @role)
-    if @organization_user.save
-      respond_to do |format|
-        format.json { render :json => @organization_user, status: :success }
-        format.html { redirect_to organization_path(@organization), notice: "Thanks! You joined #{@organization.name}" }
+    @user = User.new(user_params)
+    if @user.save
+      @organization_user = OrganizationUser.new(user: @user, organization: @organization, role: @role)
+      if @organization_user.save
+        respond_to do |format|
+          format.json { render :json => @organization_user, status: :success }
+          format.html { redirect_to organization_path(@organization), notice: "Thanks! You joined #{@organization.name}" }
+        end
+      else
+        @user.destroy
+        respond_to do |format|
+          format.json { render :json => @organization_user.errors.full_messages, status: 422}
+          format.html { redirect_to :back, notice: "Oops!  Something happened.  Try again." }        
+        end
       end
     else
       respond_to do |format|
-        format.json { render :json => @organization_user.errors.full_messages, status: 422}
-        format.html { redirect_to :back, notice: "Oops!  Something happened.  Try again." }        
+        format.json { render :json => @user.errors.full_messages, status: 422}
+        format.html { render :new, notice: "Sorry, there were some problems creating your account."}
       end
     end
   end
@@ -58,5 +70,9 @@ class OrganizationSignupController < ApplicationController
   def set_default_role    
     @role = Role.user
   end
+  
+  def user_params
+    params.require(:user).permit(:email, :first_name, :last_name, :password,  :password_confirmation)
+  end 
 
 end

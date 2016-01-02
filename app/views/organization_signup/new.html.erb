@@ -1,2 +1,7 @@
+  <% if @user.blank? %>
+    <h2 class="accent-font"><%= "Join #{@organization.name}'s group!" %></h2>
+    <%= render 'form' %>
+  <% else %>
     <h2 class="accent-font"><%= "#{@user.first_name}, Join #{@organization.name}'s group!" %></h2>
     <%= link_to 'Join!', organization_sign_up_path(@organization.token), method: "post", class: "btn accent-background" %>
+  <% end %>
