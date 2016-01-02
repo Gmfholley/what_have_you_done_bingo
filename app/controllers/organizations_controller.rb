@@ -4,6 +4,7 @@ class OrganizationsController < ApplicationController
   before_action :require_admin, only: [:edit, :update, :destroy]
   before_action :require_membership, only: [:edit, :update, :show, :destroy]
   
+  # if you are already logged in, it will just show the form.
   def new
     @organization = Organization.new
   end
@@ -25,7 +26,7 @@ class OrganizationsController < ApplicationController
       if !current_user
         @user = login(@user.email,password_params)
       end
-      redirect_to organization_path(@organization.token), :notice => "Thanks for signing up!"
+      redirect_to organization_path(@organization), :notice => "Thanks for signing up!"
     end
   end
   
@@ -34,7 +35,7 @@ class OrganizationsController < ApplicationController
   
   def update
     if @organization.update(organization_only_params)
-      redirect_to organization_path(@organization.token), :notice => "Account updated!"
+      redirect_to organization_path(@organization), :notice => "Account updated!"
     else
       render :edit, :notice => "Unable to update your account."
     end
@@ -51,14 +52,14 @@ class OrganizationsController < ApplicationController
     if @organization.destroy
       redirect_to login_path, :notice => "Your account was deleted."
     else
-      redirect_to organization_path(@organization.token), :notice => "Sorry.  Something went wrong.  We are unable to delete the account."
+      redirect_to organization_path(@organization), :notice => "Sorry.  Something went wrong.  We are unable to delete the account."
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Organization.find_by(token: params[:id])
+      @organization = Organization.find(params[:id])
     end
     
     def organization_and_user_params
