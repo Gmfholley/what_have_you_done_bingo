@@ -14,6 +14,7 @@ New functionality - Have you ever...bingo?
 
 #Relationships
 Users-Organizations = many to many
+Organization_User = 
 Organization-Templates = 1 to many
 Template-Squares = 1 to many
 Templates-Users = many to many (through cards)
