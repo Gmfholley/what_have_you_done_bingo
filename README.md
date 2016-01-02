@@ -34,13 +34,22 @@ Login is required for all but the following:
 - password resets page (password_resets#new and password_resets#create)
 - show page of a public template (templates#show)
 - show page of a public card (cards#show)
-- sign up page of an organization (organization_signup#new organization_signup#create)
-- creation page of an organization (which will prompt user to create a user also)
+- sign up page of an organization (which will prompt user to create user also: organization_signup#new organization_signup#create)
+- creation page of an organization (which will prompt user to create a user also: organizations#new)
+
 
 #User-Organizations relationships
 A user may have many organizations.  A user_organization relationship is defined by the user, organization, and the user's role for the organization.  A user may be an admin for one organization but a member of another.  Therefore, this is not a bridge table but its own model.
 
-An admin can not sign up users to their organization. But only they will have access to a url that they can share with their users.
+An admin can not sign up users to their organization. But only they will have access to a url that they can share with their users.  This will appear to admins and will be up to the admin to share.
+
+The sign up page will appear with a organizations/:token/sign_up url.  All other organizations/:id will be the organization id, and the permissions will be tested on the server-side for security.
+
+The admin can re-generate a token if they think their current token has been compromised. Again, they would have to communicate to any new users the new url where they can sign up for their organization.
+
+An admin will also have the power to get a list of all their members, change the roles of their members (to user or admin), remove a member from the organization (without deleting the user account), and see the status of the challenges of their members.
+
+A user only has the power to add/remove their relationship with an organization, not edit their role also.
 
 #NOTE:
 To make sure that the user always plays the card he got, the circles are created at the same time the card is created.
