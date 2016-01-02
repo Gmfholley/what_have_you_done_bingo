@@ -55,7 +55,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     login_user(user = @current_user, route = login_path) 
     patch :update, id: @organization.token, organization: { name: "changedName" }
     assert_equal assigns(:organization).name, "changedName"
-    assert_redirected_to organization_path(@organization.token)
+    assert_redirected_to organization_path(@organization)
   end
 
   test "should not get update if not an admin" do

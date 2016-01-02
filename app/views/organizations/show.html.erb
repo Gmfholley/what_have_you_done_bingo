@@ -2,10 +2,10 @@
   <h2 class="accent-font text-center"><%= @organization.name %></h2>
     <% if @is_admin %>
       <div class="col col-xs-12 col-md-6 text-center">
-        <%= link_to 'Edit Organization', edit_organization_path(@organization.token), class: 'accent-background btn' %>    
+        <%= link_to 'Edit Organization', edit_organization_path(@organization), class: 'accent-background btn' %>    
       </div>
       <div class="col col-xs-12 col-md-6 text-center">
-        <%= link_to 'Delete Organization', organization_path(@organization.token), method: 'delete', class: 'accent-background btn' %>
+        <%= link_to 'Delete Organization', organization_path(@organization), method: 'delete', class: 'accent-background btn' %>
       </div>
     <div class="margin30"></div>
     <h3 class="text-center">Link to share for new member sign-ups:</h3>
