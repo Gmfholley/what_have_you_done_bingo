@@ -1,4 +1,4 @@
-class OrganizationSignUpController < ApplicationController
+class OrganizationSignupController < ApplicationController
   before_action :set_organization
   before_action :set_user
   before_action :set_default_role
@@ -45,7 +45,7 @@ class OrganizationSignUpController < ApplicationController
   private
 
   def set_organization
-    @organization = Organization.find_by(token: params[:organization_id])
+    @organization = Organization.find_by(token: params[:id])
     if @organization.blank?
       redirect_to :back, notice: "Sorry, that is not a valid request."
     end
