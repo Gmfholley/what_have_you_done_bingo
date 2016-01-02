@@ -12,6 +12,10 @@
 #  token           :string
 #  rating          :integer
 #
+# Indexes
+#
+#  index_templates_on_token  (token)
+#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

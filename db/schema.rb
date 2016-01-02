@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102233555) do
+ActiveRecord::Schema.define(version: 20160102233847) do
 
   create_table "organization_users", force: :cascade do |t|
     t.integer  "organization_id"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20160102233555) do
     t.datetime "updated_at", null: false
     t.string   "token"
   end
+
+  add_index "organizations", ["token"], name: "index_organizations_on_token"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -55,6 +57,8 @@ ActiveRecord::Schema.define(version: 20160102233555) do
     t.string   "token"
     t.integer  "rating"
   end
+
+  add_index "templates", ["token"], name: "index_templates_on_token"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                           null: false

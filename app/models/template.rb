@@ -12,6 +12,10 @@
 #  token           :string
 #  rating          :integer
 #
+# Indexes
+#
+#  index_templates_on_token  (token)
+#
 
 class Template < ActiveRecord::Base
   validates_numericality_of :size, :greater_than_or_equal_to => 4, :less_than_or_equal_to => 6

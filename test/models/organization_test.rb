@@ -8,6 +8,10 @@
 #  updated_at :datetime         not null
 #  token      :string
 #
+# Indexes
+#
+#  index_organizations_on_token  (token)
+#
 
 require 'test_helper'
 

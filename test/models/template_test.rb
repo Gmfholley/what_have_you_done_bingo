@@ -12,6 +12,10 @@
 #  token           :string
 #  rating          :integer
 #
+# Indexes
+#
+#  index_templates_on_token  (token)
+#
 
 require 'test_helper'
 
