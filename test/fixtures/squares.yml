@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: squares
+#
+#  id          :integer          not null, primary key
+#  position_x  :integer
+#  position_y  :integer
+#  picture     :string
+#  question    :string
+#  free_space  :boolean
+#  template_id :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  position_x: 1
+  position_y: 1
+  picture: MyString
+  question: MyString
+  free_space: false
+  template_id: 1
+
+two:
+  position_x: 1
+  position_y: 1
+  picture: MyString
+  question: MyString
+  free_space: false
+  template_id: 1
