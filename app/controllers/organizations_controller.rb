@@ -65,6 +65,10 @@ class OrganizationsController < ApplicationController
       params.require(:organization).permit(:users_attributes => [:email, :first_name, :last_name, :password,  :password_confirmation])
     end 
     
+    # Note: only allow the sign up of a single user at a time
+    # sets the params for the first user (user_attributes array - zeroth element)
+    #
+    # returns params for the user
     def organization_user_only_params
       organization_and_user_params["users_attributes"]["0"]
     end
