@@ -5,6 +5,9 @@ class OrganizationUsersController < ApplicationController
   # You are never creating a user at this place
   # GET /organizations/:id/users/:user_id
   def new
+    if is_member?
+      redirect_to organization_path(@organization), notice: "You are already a member"
+    end
   end
   
   
