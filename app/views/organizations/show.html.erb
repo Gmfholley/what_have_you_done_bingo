@@ -10,7 +10,10 @@
     <div class="margin30"></div>
     <h3 class="text-center">Link to share for new member sign-ups:</h3>
     <h5 class="text-center"><%= organization_sign_up_url(@organization.token) %></h5>
+    <%= link_to "Update your company's token.", update_organization_token_path(@organization), class: 'accent-background btn' %>
   <% end %>
+  
+  
   <div class="col col-xs-12 col-md-8 col-md-offset-2">
     <table class="table table-condensed table-responsive table-hover">
       <thead class="accent-background">

@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
   skip_before_filter :require_login, only: [:new, :create, :show]
   before_action :set_organization, except: [:new, :create]
-  before_action :require_admin, only: [:edit, :update, :destroy]
+  before_action :require_admin, only: [:edit, :update, :destroy, :udpate_token]
   before_action :require_membership, only: [:edit, :update, :show, :destroy]
   
   # if you are already logged in, it will just show the form.
@@ -31,6 +31,12 @@ class OrganizationsController < ApplicationController
   end
   
   def edit
+  end
+  
+  def update_token
+    @organization.generate_token
+    @organization.save
+    render :show, notice: "Token updated."
   end
   
   def update

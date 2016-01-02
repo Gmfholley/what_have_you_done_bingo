@@ -13,14 +13,7 @@ Rails.application.routes.draw do
   patch 'profile' => 'profile#update'
   delete 'profile' => 'profile#destroy'
   get 'profile/edit' => 'profile#edit', as: :edit_profile
-  
-  resources :users, except: [:edit, :update, :destroy, :index]
-  
-  # public sign up pages for users to create or destroy group
-  get 'organizations/:id/sign_up' => 'organization_signup#new', as: :organization_sign_up
-  post 'organizations/:id/sign_up' => 'organization_signup#create'
-  delete 'organization/:id/remove'  => 'organization_signup#destroy'
-  
+      
   # admin controller actions to control members of group
   get 'organizations/:organization_id/users/:id' => 'organization_users#new'
   post 'organizations/:organization_id/users/:id' => 'organization_users#create'
@@ -28,6 +21,15 @@ Rails.application.routes.draw do
   patch 'organizations/:organization_d/users/:id' => 'organization_users#update'
   delete 'organizations/:organization_id/users/:id' => 'organization_users#destroy'
   
+  # public sign up pages for users to create or destroy group
+  get 'organizations/:id/sign_up' => 'organization_signup#new', as: :organization_sign_up
+  post 'organizations/:id/sign_up' => 'organization_signup#create'
+  delete 'organization/:id/remove'  => 'organization_signup#destroy'
+  
+  
+  get 'organization/:id/update_token' => 'organizations#update_token', as: :update_organization_token
+  
+  resources :users, except: [:edit, :update, :destroy, :index]
   
   resources :organizations, except: :index do
     resources :templates, except: :index
