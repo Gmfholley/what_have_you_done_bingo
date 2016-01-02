@@ -13,14 +13,34 @@ New functionality - Have you ever...bingo?
 
 
 #Relationships
-Users-Organizations = many to many
-Organization_User = 
+Users-Organizations = many to many, through Organization_Users
+Roles-Organization_User = 1 to many
 Organization-Templates = 1 to many
 Template-Squares = 1 to many
 Templates-Users = many to many (through cards)
 User-Cards = 1 to many
 Card-Circles = 1 to many
 User-Circles = 1 to many (through card)
+
+
+#Authorization-Login
+Login security is done with the gem Sorcery.  The password must be confirmed but the password is not stored, so both the password and password confirmation are required to update, and they must both be the same.  A salt and crypted password are saved to the database.
+
+At the time a new user is created, their session is also created.  Otherwise, sessions are handled by the login and logout paths.
+
+Login is required for all but the following:
+- welcome page (root)
+- login page (`user_sessions#new' and `user_sessions#create`)
+- password resets page (password_resets#new and password_resets#create)
+- show page of a public template (templates#show)
+- show page of a public card (cards#show)
+- sign up page of an organization (organization_signup#new organization_signup#create)
+- creation page of an organization (which will prompt user to create a user also)
+
+#User-Organizations relationships
+A user may have many organizations.  A user_organization relationship is defined by the user, organization, and the user's role for the organization.  A user may be an admin for one organization but a member of another.  Therefore, this is not a bridge table but its own model.
+
+An admin can not sign up users to their organization. But only they will have access to a url that they can share with their users.
 
 #NOTE:
 To make sure that the user always plays the card he got, the circles are created at the same time the card is created.

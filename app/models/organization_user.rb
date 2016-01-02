@@ -19,9 +19,7 @@ class OrganizationUser < ActiveRecord::Base
   validates :role, presence: true
   validates :organization, presence: true
   validates_uniqueness_of :user, scope: :organization
-  
-  accepts_nested_attributes_for :users, reject_if: :all_blank
-  
+    
   
   before_save :set_default_role, :if => :new_record?
 
