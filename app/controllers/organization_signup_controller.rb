@@ -26,6 +26,8 @@ class OrganizationSignupController < ApplicationController
           format.html { render :new, notice: "Sorry, there were some problems creating your account."}
         end
         return
+      else
+        @user = login(@user.email, params["user"]["password"])
       end
     end
     @organization_user = OrganizationUser.new(user: @user, organization: @organization, role: @role)
