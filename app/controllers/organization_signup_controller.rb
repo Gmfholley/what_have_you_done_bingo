@@ -16,7 +16,7 @@ class OrganizationSignUpController < ApplicationController
     if @organization_user.save
       respond_to do |format|
         format.json { render :json => @organization_user, status: :success }
-        format.html { redirect_to :back, notice: "Thanks! You joined #{@organization.name}" }
+        format.html { redirect_to organization_path(@organization), notice: "Thanks! You joined #{@organization.name}" }
       end
     else
       respond_to do |format|
@@ -32,7 +32,7 @@ class OrganizationSignUpController < ApplicationController
     if @organization_user.destroy
       respond_to do |format|
         format.json { render :nothing, status: :success }
-        format.html { redirect_to :back, notice: "Thanks!  You dropped #{@organization.name}." }
+        format.html { redirect_to profile_path, notice: "Thanks!  You dropped #{@organization.name}." }
       end
     else
       respond_to do |format|
