@@ -14,6 +14,7 @@ class OrganizationSignupController < ApplicationController
   end
   
   # POST /organizations/:id/sign_up
+  # Can also sign up here if you want
   def create
     if logged_in?
       @user = current_user

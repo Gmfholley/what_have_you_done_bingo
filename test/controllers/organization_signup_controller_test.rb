@@ -37,13 +37,19 @@ class OrganizationSignupControllerTest < ActionController::TestCase
   
   test 'logged in user should be able to become a member' do 
     login_user(user = @non_member, route = login_path)
-    post :create, id: @organization.token
     
     assert_difference('OrganizationUser.count', 1) do 
       post :create, id: @organization.token
     end
-
-
+    assert_redirected_to organization_path(@organization)
+  end
+  
+  test 'if not logged in, should be able to create self and become a member' do
+    assert_difference('User.count', 1) do
+      assert_difference('OrganizationUser.count', 1) do
+        post :create, id: @organization.token, user: { email: "test@t.com", first_name: "test", last_name: "test", password: "password", password_confirmation: "password" }
+      end
+    end
     assert_redirected_to organization_path(@organization)
   end
   
