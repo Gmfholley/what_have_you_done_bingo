@@ -2,14 +2,14 @@ class TemplatesController < ApplicationController
   skip_before_filter :require_login, only: [:show, :share]
   before_action :set_organization, except: [:share]
   before_action :set_template, only: [:show, :edit, :update, :destroy]
-  before_action :handle_if_not_authorized, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /templates/1
   # GET /templates/1.json
   def show
     if logged_in? && is_admin?
       render :show_admin
-    elsif @template.is_public || (logged_in? && belongs_to_organization?)
+    elsif @template.is_public || (logged_in? && is_member?)
       render :show
     else
       redirect_to :root, notice: "Sorry.  That is a private template."

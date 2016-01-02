@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   # if not an admin, redirects to not_admin path
   #
   # returns nothing
-  def handle_if_not_authorized
+  def require_admin
     if !is_admin?
       not_authorized
     end
@@ -39,15 +39,15 @@ class ApplicationController < ActionController::Base
   # checks if be current user belongs to @organization and if not redirects them
   #
   # returns an boolean
-  def belongs_to_organization?
+  def is_member?
     @organization.users.include?(current_user)
   end
   
   # if not an admin, redirects to not_admin path
   #
   # returns nothing
-  def handle_if_not_member
-    if !belongs_to_organization?
+  def require_membership
+    if !is_member?
       not_authorized
     end
   end
@@ -56,5 +56,5 @@ class ApplicationController < ActionController::Base
     if current_user
       redirect_to profile_path, :notice => "You are already logged in.  To create a new account, log out first."
     end
-  end  
+  end
 end
