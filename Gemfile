@@ -44,6 +44,8 @@ gem 'email_validator', '~> 1.6.0'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  
+  gem 'rails-erd', '~> 1.4', '>= 1.4.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-byebug'
