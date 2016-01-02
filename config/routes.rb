@@ -15,18 +15,22 @@ Rails.application.routes.draw do
   get 'profile/edit' => 'profile#edit', as: :edit_profile
   
   resources :users, except: [:edit, :update, :destroy, :index]
-  get 'organizations/:id/sign_up' => 'users#new', as: :organization_sign_up
-  post 'organizations/:id/sign_up' => 'users#create'
   
-  get 'organizations/:id/users/:user_id' => 'organization_users#new'
-  put 'organizations/:id/users/:user_id' => 'organization_users#update', as: :organization_user
-  patch 'organizations/:id/users/:user_id' => 'organization_users#update'
-  delete 'organizations/:id/users/:user_id' => 'organization_users#destroy'
-  post 'organizations/:id/users/:user_id' => 'organization_users#create'
+  # public sign up pages for users to create or destroy group
+  get 'organizations/:id/sign_up' => 'organization_signup#new', as: :organization_sign_up
+  post 'organizations/:id/sign_up' => 'organization_signup#create'
+  delete 'organization/:id/remove'  => 'organization_signup#destroy'
+  
+  # admin controller actions to control members of group
+  get 'organizations/:organization_id/users/:id' => 'organization_users#new'
+  post 'organizations/:organization_id/users/:id' => 'organization_users#create'
+  put 'organizations/:organization_id/users/:id' => 'organization_users#update', as: :organization_user
+  patch 'organizations/:organization_d/users/:id' => 'organization_users#update'
+  delete 'organizations/:organization_id/users/:id' => 'organization_users#destroy'
   
   
   resources :organizations, except: :index do
-    resources :templates, except: :index    
+    resources :templates, except: :index
   end
   get 'play/:token' => 'templates#share', as: :share_template #path for sharing the template
 
