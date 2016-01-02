@@ -20,21 +20,30 @@ class OrganizationSignupControllerTest < ActionController::TestCase
   test 'user should be able to get new membership page if not a member' do 
     login_user(user = @non_member, route = login_path) 
     get :new, id: @organization.token
+    assert_response :success
   end
   
   test 'if already a user should be redirected back to organization page' do
     login_user(user = @member, route = login_path) 
     get :new, id: @organization.token
-    
     assert_redirected_to organization_path(@organization)
     assert_equal flash[:notice], "You are already a member."
   end
   
-  test 'user should be able to get new membership page' do 
+  test 'if not logged in, should allow user to create an account page' do
+    get :new, id: @organization.token
+    assert_response :success    
+  end
+  
+  test 'logged in user should be able to become a member' do 
     login_user(user = @non_member, route = login_path)
+    post :create, id: @organization.token
+    
     assert_difference('OrganizationUser.count', 1) do 
       post :create, id: @organization.token
     end
+
+
     assert_redirected_to organization_path(@organization)
   end
   

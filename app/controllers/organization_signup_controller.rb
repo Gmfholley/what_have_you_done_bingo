@@ -15,25 +15,28 @@ class OrganizationSignupController < ApplicationController
   
   # POST /organizations/:id/sign_up
   def create
-    @user = User.new(user_params)
-    if @user.save
-      @organization_user = OrganizationUser.new(user: @user, organization: @organization, role: @role)
-      if @organization_user.save
+    if logged_in?
+      @user = current_user
+    else
+      @user = User.new(user_params)
+      if !@user.save
         respond_to do |format|
-          format.json { render :json => @organization_user, status: :success }
-          format.html { redirect_to organization_path(@organization), notice: "Thanks! You joined #{@organization.name}" }
+          format.json { render :json => @user.errors.full_messages, status: 422}
+          format.html { render :new, notice: "Sorry, there were some problems creating your account."}
         end
-      else
-        @user.destroy
-        respond_to do |format|
-          format.json { render :json => @organization_user.errors.full_messages, status: 422}
-          format.html { redirect_to :back, notice: "Oops!  Something happened.  Try again." }        
-        end
+        return
+      end
+    end
+    @organization_user = OrganizationUser.new(user: @user, organization: @organization, role: @role)
+    if @organization_user.save
+      respond_to do |format|
+        format.json { render :json => @organization_user, status: :success }
+        format.html { redirect_to organization_path(@organization), notice: "Thanks! You joined #{@organization.name}" }
       end
     else
       respond_to do |format|
-        format.json { render :json => @user.errors.full_messages, status: 422}
-        format.html { render :new, notice: "Sorry, there were some problems creating your account."}
+        format.json { render :json => @organization_user.errors.full_messages, status: 422}
+        format.html { redirect_to :back, notice: "Oops!  Something happened.  Try again." }        
       end
     end
   end
