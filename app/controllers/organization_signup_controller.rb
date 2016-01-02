@@ -1,4 +1,4 @@
-class OrganizationUsersController < ApplicationController
+class OrganizationSignUpController < ApplicationController
   before_action :set_organization
   before_action :set_user
   before_action :set_default_role

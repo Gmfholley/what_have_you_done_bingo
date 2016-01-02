@@ -25,6 +25,21 @@ class OrganizationsControllerTest < ActionController::TestCase
     
     assert_redirected_to organization_path(assigns(:organization)), "Did not redirect to the organization path"
   end
+  
+  test 'should update the token of the company if an admin' do
+    login_user(user = @current_user, route = login_path) 
+    @token = @organization.token
+    
+    get :update_token, id: @organization
+    assert_redirected_to organization_path(@organization)
+    assert_equal flash[:notice], "Token updated."
+  end
+
+  test 'should not update the token of the company if not an admin' do
+    login_user(user = users(:david), route = login_path)
+    get :update_token, id: @organization
+    assert_redirected_to profile_path
+  end
 
   test "should show organization if a member" do
     login_user(user = @current_user, route = login_path) 

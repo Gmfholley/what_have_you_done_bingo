@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   # returns nothing
   def not_authenticated
     redirect_to login_path, alert: "You are not logged in. Please log in."
+    return
   end
   
   # returns to profile path
@@ -18,6 +19,7 @@ class ApplicationController < ActionController::Base
   # returns nothing
   def not_authorized
     redirect_to profile_path, alert: "You do not have access to view that page."
+    return
   end
   
   # if not an admin, redirects to not_admin path
