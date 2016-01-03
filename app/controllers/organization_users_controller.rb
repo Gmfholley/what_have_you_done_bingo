@@ -81,7 +81,7 @@ class OrganizationUsersController < ApplicationController
   end
   
   def set_role      
-    @role = Role.find(params[:organization_user][:role_id])
+    @role = Role.find(params[:organization_user][:role_id]) unless params[:organization_user].blank?
     if @role.blank?
       @role = Role.user
     end
