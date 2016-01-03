@@ -46,7 +46,6 @@ class TemplatesController < ApplicationController
   # POST /templates.json
   def create
     @template = @organization.templates.create(template_params)
-    binding.pry
     respond_to do |format|
       if @template.save
         format.html { redirect_to organization_template_path(@organization, @template), notice: 'Cool card created!' }
