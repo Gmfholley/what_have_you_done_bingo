@@ -3,7 +3,7 @@ class OrganizationUsersController < ApplicationController
   before_action :set_organization
   before_action :require_admin
   before_action :set_user
-  before_action :set_role
+  before_action :set_role, except: [:destroy]
   before_action :set_organization_user
   
   # GET /organizations/:id/users/:user_id
