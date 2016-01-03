@@ -1,10 +1,12 @@
 class CardsController < ApplicationController
   skip_before_action :require_login, only: [:share]
   before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :require_users_card, only: [:edit, :update, :destroy]
+  before_action :require_admin_or_user, except: [:share, :play, :new, :create]
   
-  # play a public card
+  # play a card from a public template or user is member of private tmeplate
   # GET play/:token
-  def play
+  def new
     @template = Template.find_by(token: params[:token])
     @organization = @template.organization
     
@@ -16,8 +18,33 @@ class CardsController < ApplicationController
     end
   end
   
+  # POST play/:token  
+  def create
+    @template = Template.find_by(token: params[:token])
+    @organization = @template.organization
+    
+    if @template.is_public || is_member?
+      @card = Card.new(card_params)
+    else
+       redirect_to :root, notice: "Sorry.  That is a private template."
+       return
+    end
+
+    respond_to do |format|
+      if @card.save
+        format.html { redirect_to @card, notice: 'Woot!  You have begun to play this bingo card.' }
+        format.json { render :show, status: :created, location: @card }
+      else
+        format.html { render :new }
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  # shows public card
   def share
     @card = Card.find_by(token: params[:token])
+    render :show
   end
   
   # GET /cards
@@ -31,31 +58,10 @@ class CardsController < ApplicationController
   def show
   end
 
-  # GET /cards/new
-  def new
-    @card = Card.new
-  end
-
   # GET /cards/1/edit
   def edit
   end
-
-  # POST /cards
-  # POST /cards.json
-  def create
-    @card = Card.new(card_params)
-
-    respond_to do |format|
-      if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
-        format.json { render :show, status: :created, location: @card }
-      else
-        format.html { render :new }
-        format.json { render json: @card.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
+  
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
@@ -75,7 +81,7 @@ class CardsController < ApplicationController
   def destroy
     @card.destroy
     respond_to do |format|
-      format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
+      format.html { redirect_to cards_url, notice: 'You destroyed this card.' }
       format.json { head :no_content }
     end
   end
@@ -88,7 +94,7 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:template_id, :user_id, :token, :is_public, :num_bingos)
+      params.require(:card).permit(:is_public, :num_bingos)
     end
 
     # checks if current user owns this card
@@ -118,8 +124,8 @@ class CardsController < ApplicationController
     # checks if current_user is an admin and if not redirects them
     #
     # returns an boolean
-    def require_admin_of_card_template
-      unless admin_of_template?
+    def require_admin_or_user
+      unless admin_of_template? || users_card?
         redirect_to :back, :notice => "You do not have access to that page."
       end
     end
