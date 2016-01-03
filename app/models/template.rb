@@ -27,10 +27,11 @@ class Template < ActiveRecord::Base
   has_many :squares
   
   after_initialize :set_defaults
-  # before_validation :set_defaults
   before_create :generate_token
   
   accepts_nested_attributes_for :squares
+
+
   # returns the number of bingo squares this bingo card template should have, based on the size
   #
   # returns an integer
@@ -47,6 +48,21 @@ class Template < ActiveRecord::Base
       break random_token unless Organization.exists?(token: random_token)
     end
   end
+
+  # integer of the smallest size a template can be
+  #
+  # returns int
+  def self.smallest_size
+    4
+  end
+  
+  # integer of the largest size a template can be
+  #
+  # returns int
+  def self.largest_size
+    6
+  end
+
   
   private
   # sets default values of self
