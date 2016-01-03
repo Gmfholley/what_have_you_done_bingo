@@ -28,7 +28,8 @@ class Template < ActiveRecord::Base
   
   before_validation :set_defaults
   before_create :generate_token
-
+  
+  accepts_nested_attributes_for :squares
   # returns the number of bingo squares this bingo card template should have, based on the size
   #
   # returns an integer
