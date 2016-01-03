@@ -44,12 +44,12 @@ class TemplatesController < ApplicationController
   # POST /templates.json
   def create
     @template = @organization.templates.create(template_params)
-
     respond_to do |format|
       if @template.save
         format.html { redirect_to organization_template_path(@organization, @template), notice: 'Cool card created!' }
         format.json { render :show, status: :created, location: @template }
       else
+        @ratings = Template.ratings
         format.html { render :new }
         format.json { render json: @template.errors, status: :unprocessable_entity }
       end
@@ -93,6 +93,6 @@ class TemplatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def template_params
-      params.require(:template).permit(:size, :name, :is_public, :rating)
+      params.require(:template).permit(:size, :name, :is_public, :rating, :squares_attributes => [:question, :position_x, :position_y, :picture, :free_space])
     end
 end
