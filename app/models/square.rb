@@ -24,7 +24,7 @@ class SquarePositionValidator < ActiveModel::Validator
   private  
   def template_size(record)
     if record.template.blank?
-      0
+      Template.largest_size
     else
       record.template.size
     end
