@@ -24,10 +24,12 @@ class Template < ActiveRecord::Base
 
   enum rating: [:easy, :medium, :hard]
   belongs_to :organization
-  has_many :squares
+  has_many :squares, dependent: :destroy
   
   after_initialize :set_defaults
   before_create :generate_token
+  
+  before_delete :squares
   
   accepts_nested_attributes_for :squares
 
