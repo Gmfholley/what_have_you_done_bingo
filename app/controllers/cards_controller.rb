@@ -17,12 +17,13 @@ class CardsController < ApplicationController
   end
   
   def share
+    @card = Card.find_by(token: params[:token])
   end
   
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    @cards = current_user.cards
   end
 
   # GET /cards/1
@@ -88,5 +89,38 @@ class CardsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
       params.require(:card).permit(:template_id, :user_id, :token, :is_public, :num_bingos)
+    end
+
+    # checks if current user owns this card
+    #
+    # returns boolean
+    def users_card?
+      @card.user == current_user
+    end
+    
+    # checks if current user is admin of the template associated with this card
+    #
+    # returns boolean
+    def admin_of_template?
+      @organization = @card.template.organization
+      current_user.role(@organization) == Role.admin
+    end
+    
+    # checks if current user belongs to @organization and if not redirects them
+    #
+    # returns an boolean
+    def require_users_card
+      unless users_card?
+        redirect_to :back, :notice => "You do not have access to that page."
+      end
+    end    
+    
+    # checks if current_user is an admin and if not redirects them
+    #
+    # returns an boolean
+    def require_admin_of_card_template
+      unless admin_of_template?
+        redirect_to :back, :notice => "You do not have access to that page."
+      end
     end
 end
