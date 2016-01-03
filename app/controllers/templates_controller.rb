@@ -43,7 +43,7 @@ class TemplatesController < ApplicationController
   # POST /templates
   # POST /templates.json
   def create
-    @template = @organization.templates.create(template_params)
+    @template = @organization.templates.create(template_only_params)
     respond_to do |format|
       if @template.save
         format.html { redirect_to organization_template_path(@organization, @template), notice: 'Cool card created!' }
@@ -59,11 +59,22 @@ class TemplatesController < ApplicationController
   # PATCH/PUT /templates/1
   # PATCH/PUT /templates/1.json
   def update
+    #TODO - refactor this prettier
     respond_to do |format|
-      if @template.update(template_params)
+      @template.update(template_only_params)
+      @errors = []
+      squares_only_params.each_with_index do |square, x|
+        @square = Square.find_by(position_x: square[1]["position_x"], position_y: square[1]["position_y"], template_id: @template.id)
+        unless @square.update(question: square[1]["question"], free_space: square[1]["free_space"])
+          @errors << @square.errors
+        end
+      end
+      
+      if @template.errors.blank? && @errors.length == 0
         format.html { redirect_to organization_template_path(@organization, @template), notice: 'Successfully updated.' }
         format.json { render :show, status: :ok, location: @template }
       else
+        @ratings = Template.ratings
         format.html { render :edit }
         format.json { render json: @template.errors, status: :unprocessable_entity }
       end
@@ -94,5 +105,13 @@ class TemplatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def template_params
       params.require(:template).permit(:size, :name, :is_public, :rating, :squares_attributes => [:question, :position_x, :position_y, :picture, :free_space])
+    end
+    
+    def template_only_params
+      params.require(:template).permit(:size, :name, :is_public, :rating)
+    end
+    
+    def squares_only_params
+      template_params["squares_attributes"]
     end
 end
