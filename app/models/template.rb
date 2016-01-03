@@ -26,7 +26,8 @@ class Template < ActiveRecord::Base
   belongs_to :organization
   has_many :squares
   
-  before_validation :set_defaults
+  after_initialize :set_defaults
+  # before_validation :set_defaults
   before_create :generate_token
   
   accepts_nested_attributes_for :squares

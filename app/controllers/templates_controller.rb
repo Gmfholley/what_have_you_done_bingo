@@ -30,6 +30,7 @@ class TemplatesController < ApplicationController
   # GET /templates/new
   def new
     @template = @organization.templates.build
+    CreateSquares.work(@template)
   end
 
   # GET /templates/1/edit
