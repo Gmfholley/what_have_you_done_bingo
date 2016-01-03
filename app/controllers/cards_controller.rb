@@ -1,10 +1,14 @@
 class CardsController < ApplicationController
+  skip_before_action :require_login, only: [:share]
   before_action :set_card, only: [:show, :edit, :update, :destroy]
   
+  # play a public card
   # GET play/:token
   def play
     @template = Template.find_by(token: params[:token])
-    if @template.is_public
+    @organization = @template.organization
+    
+    if @template.is_public || is_member?
       @card = @template.cards.build
       @card.user = current_user
     else
@@ -14,7 +18,6 @@ class CardsController < ApplicationController
   
   def share
   end
-  
   
   # GET /cards
   # GET /cards.json

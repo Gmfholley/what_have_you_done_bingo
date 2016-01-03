@@ -26,6 +26,10 @@
 
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
+
+  has_many :organization_users
+  has_many :organizations, through: :organization_users
+  has_many :cards
   
   validates :password_confirmation, presence: true
   validates :password, confirmation: true, length: {minimum: 5}
@@ -33,8 +37,6 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   
-  has_many :organization_users
-  has_many :organizations, through: :organization_users
   
   # for an organization, returns the user's role (or nil if not found)
   #

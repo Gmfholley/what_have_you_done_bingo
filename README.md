@@ -29,11 +29,12 @@ Login security is done with the gem Sorcery.  The password must be confirmed but
 At the time a new user is created, their session is also created.  Otherwise, sessions are handled by the login and logout paths.
 
 Login is required for all but the following:
-- welcome page (root)
+
+- welcome page (root) 
 - login page (`user_sessions#new' and `user_sessions#create`)
 - password resets page (password_resets#new and password_resets#create)
-- show page of a public template (templates#show)
-- show page of a public card (cards#show)
+- ~~show page of a public template (templates#show)~~ I changed this to cards#play, because it creates a new form for a card...not sure yet.  Will come back to this.
+- show page of a public card (cards#share)
 - sign up page of an organization (which will prompt user to create user also: organization_signup#new organization_signup#create)
 - creation page of an organization (which will prompt user to create a user also: organizations#new)
 

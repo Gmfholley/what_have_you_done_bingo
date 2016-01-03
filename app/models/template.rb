@@ -18,13 +18,14 @@
 #
 
 class Template < ActiveRecord::Base
-  validates_numericality_of :size, :greater_than_or_equal_to => 4, :less_than_or_equal_to => 6
-  validates :name, presence: true
-  validates :organization, presence: true
-
   enum rating: [:easy, :medium, :hard]
   belongs_to :organization
   has_many :squares, dependent: :destroy
+  has_many :cards # do not destroy dependent cards
+
+  validates_numericality_of :size, :greater_than_or_equal_to => 4, :less_than_or_equal_to => 6
+  validates :name, presence: true
+  validates :organization, presence: true
   
   after_initialize :set_defaults
   before_create :generate_token
