@@ -19,14 +19,15 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+template_one:
   size: 5
   organization: factory
   name: MyString
   rating: MyString
   is_public: false
   token: someotherstring
-two:
+  
+template_two:
   size: 5
   organization: factory
   name: MyString

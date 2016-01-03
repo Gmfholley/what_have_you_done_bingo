@@ -16,12 +16,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  position_x: 1
-  position_y: 1
+  position_x: 0
+  position_y: 0
   picture: MyString
   question: MyString
   free_space: false
-  template_id: 1
+  template: template_one
 
 two:
   position_x: 1
@@ -29,4 +29,4 @@ two:
   picture: MyString
   question: MyString
   free_space: false
-  template_id: 1
+  template: template_one

@@ -31,7 +31,7 @@ class SquarePositionValidator < ActiveModel::Validator
   end
   
   def this_position(record, attribute, value)
-    unless record.send(attribute) >=0 && record.send(attribute) < value
+    unless !record.send(attribute).blank? && record.send(attribute) >=0 && record.send(attribute) < value
       record.errors.add attribute, "cannot be less than 0 or greater than template size"
     end
   end

@@ -9,7 +9,7 @@ class TemplatesControllerTest < ActionController::TestCase
     @non_member = users(:susan)
     @member = users(:david)
     @admin = users(:sally)
-    @template = templates(:one)
+    @template = templates(:template_one)
   end
   
   def not_authorized_alert
