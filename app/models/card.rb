@@ -26,9 +26,16 @@ class Card < ActiveRecord::Base
   
   
   after_initialize :set_defaults
-  
+  before_create :generate_token
   
   private
+  def generate_token
+    self.token = loop do
+      random_token = SecureRandom.urlsafe_base64(nil, false)
+      break random_token unless Organization.exists?(token: random_token)
+    end
+  end
+
   def set_defaults
     self.is_public ||= false
     self.num_bingos = 0
