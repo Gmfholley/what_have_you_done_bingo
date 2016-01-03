@@ -145,4 +145,25 @@ class TemplatesControllerTest < ActionController::TestCase
   end
   
   
+  ##################### 
+  # Test embedded nested params creation
+  ####################
+  test "upon creation should create nested params" do
+    login_user(user = @admin, route = login_path) 
+    
+    @new_template = Template.new
+    CreateSquares.work(@new_template)
+    squares_hash = Hash.new
+    @new_template.squares.each_with_index do |square, x|
+      square.question = "test"
+      squares_hash[x.to_s] = square.attributes
+    end
+    # assert_equal Hash.new, squares_hash
+    assert_difference('Square.count', @new_template.num_squares) do
+      post :create, organization_id: organizations(:factory), template: { name: "test", is_public: false, rating: :easy, squares_attributes: squares_hash }
+    end
+    # assert_equal @new_template.errors.full_messages, ""
+  end
+  
+  
 end
