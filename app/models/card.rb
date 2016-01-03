@@ -11,6 +11,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_cards_on_token  (token)
+#
 
 class Card < ActiveRecord::Base
 end
