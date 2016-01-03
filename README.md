@@ -159,7 +159,8 @@ Admins can view cards for their organization but cannot edit, update, or destroy
 Public cards can be seen without a login.
 
 ```ruby
-  resources :cards, except: :new
+  resources :cards, except: :new (#new will be what they click on when they go to templates)
+  get 'play/:token' => 'cards#new' --> this will be how people get the card
   get cards/:token/share => 'cards#share'
 ```
 create --> (params[:card][:template_id]) (only member)
