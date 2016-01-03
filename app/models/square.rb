@@ -13,21 +13,34 @@
 #  updated_at  :datetime         not null
 #
 
-class SquarePositionValidator < ActiveModel::EachValidator
+class SquarePositionValidator < ActiveModel::Validator
  
-  def validate_each(record, attribute, value)
-    unless record.template_id && Template.find(record.template_id).size >= value && value >= 0
-      record.errors(attribute, "cannot be less than 0 or greater than template size")
+  def validate(record)
+    position(record, :position_x, template_size(record))
+    position(record, :position_y, template_size(record))
+  end
+  
+  def template_size(record)
+    if record.template.blank?
+      0
+    else
+      record.template.size
     end
   end
+  
+  def position(record, attribute, value)
+    unless self.template_id && self.send(attribute) >=0 && self.send(attribute) < value
+      self.errors(attribute, "cannot be less than 0 or greater than template size")
+    end
+  end
+  
+  
 end
 
-class Square < ActiveRecord::Base  #
-  # include ActiveModel::Validations
-  # validates_with SquarePositionValidator
+class Square < ActiveRecord::Base
+  include ActiveModel::Validations
+  validates_with SquarePositionValidator
   #
-  validates :position_x, :square_position => true
-  validates :position_y, :square_position => true
   validates :question, presence: true
   validates_uniqueness_of :template_id, :scope => [:position_x, :position_y]
   #
@@ -39,6 +52,6 @@ class Square < ActiveRecord::Base  #
     self.free_space ||= false
     return true
   end
-
+  
   
 end

@@ -19,4 +19,8 @@ class SquareTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  
+  test 'creates new square object' do 
+  
+  end
 end
