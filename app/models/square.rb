@@ -45,6 +45,7 @@ class Square < ActiveRecord::Base
   
   validates :question, presence: true
   validates :template_id, uniqueness: { scope: [:position_x, :position_y] }
+  validates :template, presence: true
   
   belongs_to :template
 

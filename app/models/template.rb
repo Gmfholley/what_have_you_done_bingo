@@ -28,9 +28,7 @@ class Template < ActiveRecord::Base
   
   after_initialize :set_defaults
   before_create :generate_token
-  
-  before_delete :squares
-  
+    
   accepts_nested_attributes_for :squares
 
 
@@ -64,7 +62,6 @@ class Template < ActiveRecord::Base
   def self.largest_size
     6
   end
-
   
   private
   # sets default values of self
@@ -76,4 +73,5 @@ class Template < ActiveRecord::Base
     self.size ||=  5
     true
   end
+  
 end
