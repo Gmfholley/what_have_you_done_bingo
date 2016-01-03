@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   get 'play/:token' => 'cards#new', as: :share_template #path for sharing the template
   post 'play/:token' => 'cards#create'
   
-  resources :cards, except: :new, :create
+  resources :cards, except: [:new, :create]
   get 'cards/:token/share' => 'cards#share', as: :share_card
 
   post 'password_resets' => 'password_resets#create', as: :password_resets
