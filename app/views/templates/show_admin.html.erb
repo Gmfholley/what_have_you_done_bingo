@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Size:</strong>
-  <%= @template.size %>
-</p>
-
+<div class="col col-xs-12">
 <p>
   <strong>Organization:</strong>
-  <%= @template.organization_id %>
+  <%= @template.organization.name %>
 </p>
 
 <p>
@@ -16,7 +11,12 @@
 </p>
 
 <p>
-  <strong>Rating:</strong>
+  <strong>Size of card:</strong>
+  <%= @template.size %>
+</p>
+
+<p>
+  <strong>Difficulty Rating:</strong>
   <%= @template.rating %>
 </p>
 
@@ -25,5 +25,40 @@
   <%= @template.is_public %>
 </p>
 
-<%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id) %> |
-<%= link_to 'Group', organization_path(@organization) %>
+<p>
+  <strong>Shareable link:</strong>
+  <%= link_to @shareable_link, @shareable_link %>
+</p>
+<p><em>Note: Unless your link is shareable, no one else will have access to this url.</em></p>
+
+
+  <% @size = @template.size %>
+  <% @this_col = 0 %>
+  <table class="table table-bordered table-condensed">
+    <tbody class="table-striped">
+    <% @template.squares.each do |square| %>
+      <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
+      
+      <% if @this_col % @size == 0  %>
+        <tr>
+      <% end  %>
+      <td class="col-xs-2">
+          <div>
+            <%= square.question %><br>
+          </div> 
+      </td>
+      <%# When it's the end of the row (ie % is -1), then end the row %>
+      <% if @this_col % @size == (@size - 1)  %>
+        </tr>
+      <% end  %>
+      <% @this_col += 1 %>
+    <% end %>
+      
+    </tbody>
+    
+  </table>
+
+
+<%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id), class: "btn accent-background" %> |
+<%= link_to 'Group', organization_path(@organization), class: "btn accent-background" %>
+</div>

@@ -1,14 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Size:</strong>
-  <%= @template.size %>
-</p>
-
-<p>
-  <strong>Organization:</strong>
-  <%= @template.organization_id %>
-</p>
 
 <p>
   <strong>Name:</strong>
@@ -20,10 +11,32 @@
   <%= @template.rating %>
 </p>
 
-<p>
-  <strong>Public:</strong>
-  <%= @template.is_public %>
-</p>
+  <% @size = @template.size %>
+  <% @this_col = 0 %>
+  <table class="table table-bordered table-condensed">
+    <tbody class="table-striped">
+    <%= @template.squares.each do |square| %>
+      <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
+      
+      <% if @this_col % @size == 0  %>
+        <tr>
+      <% end  %>
+      <td>
+          <div class="form-group">
+            <%= square.question %><br>
+          </div> 
+      </td>
+      <%# When it's the end of the row (ie % is -1), then end the row %>
+      <% if @this_col % @size == (@size - 1)  %>
+        </tr>
+      <% end  %>
+      <% @this_col += 1 %>
+    <% end %>
+      
+    </tbody>
+    
+  </table>
 
-<%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id) %> |
-<%= link_to 'Group', organization_path(@organization) %>
+
+<%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id), class: "btn accent-background" %> |
+<%= link_to 'Group', organization_path(@organization), class: "btn accent-background" %>
