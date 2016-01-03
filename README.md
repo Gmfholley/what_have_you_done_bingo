@@ -155,7 +155,7 @@ index --> (on organizations show page)
 No controllers or views for squares.  All updating of those values are done from nested attributes of templates
 
 ##Cards
-Only a user can create, edit, update, or destroy their own card.
+Only a user can edit, update, or destroy their own card.
 Admins can view cards for their organization but cannot edit, update, or destroy.
 Public cards can be seen without a login.
 
