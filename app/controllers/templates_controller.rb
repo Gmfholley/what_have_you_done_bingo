@@ -31,10 +31,13 @@ class TemplatesController < ApplicationController
   def new
     @template = @organization.templates.build
     CreateSquares.work(@template)
+    @ratings = Template.ratings
   end
-
+  
+  # enum Ratings collection not available in view
   # GET /templates/1/edit
   def edit
+    @ratings = Template.ratings
   end
 
   # POST /templates
