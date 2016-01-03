@@ -42,11 +42,10 @@ end
 class Square < ActiveRecord::Base
   include ActiveModel::Validations
   validates_with SquarePositionValidator
-  #
+  
   validates :question, presence: true
   validates :template_id, uniqueness: { scope: [:position_x, :position_y] }
-  # validates_uniqueness_of :template_id, :scope => [:position_x, :position_y]
-  #
+  
   belongs_to :template
 
   before_save :set_default_free_space, :if => :new_record?
