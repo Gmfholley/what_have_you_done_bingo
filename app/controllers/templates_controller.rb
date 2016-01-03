@@ -63,13 +63,14 @@ class TemplatesController < ApplicationController
     respond_to do |format|
       @template.update(template_only_params)
       @errors = []
-      squares_only_params.each_with_index do |square, x|
-        @square = Square.find_by(position_x: square[1]["position_x"], position_y: square[1]["position_y"], template_id: @template.id)
-        unless @square.update(question: square[1]["question"], free_space: square[1]["free_space"])
-          @errors << @square.errors
+      if !squares_only_params.blank?
+        squares_only_params.each_with_index do |square, x|
+          @square = Square.find_by(position_x: square[1]["position_x"], position_y: square[1]["position_y"], template_id: @template.id)
+          unless @square.update(question: square[1]["question"], free_space: square[1]["free_space"])
+            @errors << @square.errors
+          end
         end
       end
-      
       if @template.errors.blank? && @errors.length == 0
         format.html { redirect_to organization_template_path(@organization, @template), notice: 'Successfully updated.' }
         format.json { render :show, status: :ok, location: @template }
