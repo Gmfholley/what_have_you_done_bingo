@@ -24,6 +24,7 @@ class Template < ActiveRecord::Base
 
   enum rating: [:easy, :medium, :hard]
   belongs_to :organization
+  has_many :squares
   
   before_validation :set_defaults
   before_create :generate_token
