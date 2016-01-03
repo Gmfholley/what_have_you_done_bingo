@@ -1,4 +1,5 @@
 class TemplatesController < ApplicationController
+  include TemplatesHelper
   skip_before_filter :require_login, only: [:show, :share]
   before_action :set_organization, except: [:share]
   before_action :set_template, only: [:show, :edit, :update, :destroy]
@@ -7,6 +8,7 @@ class TemplatesController < ApplicationController
   # GET /templates/1
   # GET /templates/1.json
   def show
+    @shareable_link = shareable_link(@template)
     if logged_in? && is_admin?
       render :show_admin
     elsif @template.is_public || (logged_in? && is_member?)
