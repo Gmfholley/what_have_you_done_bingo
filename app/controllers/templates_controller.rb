@@ -18,17 +18,6 @@ class TemplatesController < ApplicationController
     end
   end
   
-  # GET play/:token
-  def share
-    @template = Template.find_by(token: params[:token])
-    @organization = @template.organization
-    if @template.is_public
-      render :show
-    else
-      redirect_to :root, notice: "Sorry.  That is a private template."
-    end
-  end
-
   # GET /templates/new
   def new
     @template = @organization.templates.build

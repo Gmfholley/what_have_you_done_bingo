@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102233847) do
+ActiveRecord::Schema.define(version: 20160103060308) do
+
+  create_table "cards", force: :cascade do |t|
+    t.integer  "template_id"
+    t.integer  "user_id"
+    t.string   "token"
+    t.boolean  "is_public"
+    t.integer  "num_bingos"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "organization_users", force: :cascade do |t|
     t.integer  "organization_id"

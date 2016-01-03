@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @card.template_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @card.user_id %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @card.token %>
+</p>
+
+<p>
+  <strong>Is public:</strong>
+  <%= @card.is_public %>
+</p>
+
+<p>
+  <strong>Num bingos:</strong>
+  <%= @card.num_bingos %>
+</p>
+
+<%= link_to 'Edit', edit_card_path(@card) %> |
+<%= link_to 'Back', cards_path %>
