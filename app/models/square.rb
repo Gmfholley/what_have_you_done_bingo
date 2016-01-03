@@ -18,7 +18,7 @@ class SquarePositionValidator < ActiveModel::Validator
   def validate(record)
     size = template_size(record)
     this_position(record, :position_x, size)
-    this_position(record, :position_y, template_size(record))
+    this_position(record, :position_y, size)
   end
   
   private  
@@ -54,6 +54,4 @@ class Square < ActiveRecord::Base
     self.free_space ||= false
     return true
   end
-  
-  
 end

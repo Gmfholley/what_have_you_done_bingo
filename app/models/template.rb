@@ -35,8 +35,7 @@ class Template < ActiveRecord::Base
   def num_squares
     self.size ** 2
   end
-
-  private
+  
   # generates a token for itself for public sharing
   #
   # returns a string
@@ -47,6 +46,7 @@ class Template < ActiveRecord::Base
     end
   end
   
+  private
   # sets default values of self
   #
   # returns nothing
