@@ -27,6 +27,7 @@ module WellnessTracker
     config.action_mailer.default_url_options = {
       host: 'example.com', protocol: 'https://'
     }
+    config.autoload_paths += %W(#{config.root}/app)
 
     # # default host for controllers
     # config.action_controller.default_url_options = {
