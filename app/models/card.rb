@@ -39,8 +39,9 @@ class Card < ActiveRecord::Base
   # checks if there is a bingo and returns that number of bingos
   #
   # returns integer
-  def check_num_bingo
-    num_bingos = CheckBingo.work(self)
+  def check_if_bingo
+    check = CheckBingo.new(self)
+    num_bingos = check.work
     self.update(num_bingos: num_bingos)
     num_bingos
   end
