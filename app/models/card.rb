@@ -28,8 +28,21 @@ class Card < ActiveRecord::Base
   
   after_initialize :set_defaults
   before_create :generate_token
-  
+    
+  # indicates if there is a bingo
+  #
+  # returns boolean
   def has_bingo?
+    self.num_bingos > 0
+  end
+  
+  # checks if there is a bingo and returns that number of bingos
+  #
+  # returns integer
+  def check_num_bingo
+    num_bingos = CheckBingo.work(self)
+    self.update(num_bingos: num_bingos)
+    num_bingos
   end
   
   private
