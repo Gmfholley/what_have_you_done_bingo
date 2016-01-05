@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105015305) do
+ActiveRecord::Schema.define(version: 20160105020532) do
 
   create_table "cards", force: :cascade do |t|
     t.integer  "template_id"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160105015305) do
     t.integer  "position_x"
     t.integer  "position_y"
     t.string   "response"
-    t.string   "value"
+    t.string   "question"
     t.string   "picture"
     t.boolean  "part_of_bingo"
     t.datetime "created_at",    null: false

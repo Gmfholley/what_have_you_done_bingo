@@ -7,7 +7,7 @@
 #  position_x    :integer
 #  position_y    :integer
 #  response      :string
-#  value         :string
+#  question      :string
 #  picture       :string
 #  part_of_bingo :boolean
 #  created_at    :datetime         not null

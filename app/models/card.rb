@@ -29,6 +29,9 @@ class Card < ActiveRecord::Base
   after_initialize :set_defaults
   before_create :generate_token
   
+  def has_bingo?
+  end
+  
   private
   def generate_token
     self.token = loop do
