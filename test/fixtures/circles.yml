@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: circles
+#
+#  id            :integer          not null, primary key
+#  card_id       :integer
+#  position_x    :integer
+#  position_y    :integer
+#  response      :string
+#  value         :string
+#  picture       :string
+#  part_of_bingo :boolean
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  card_id: 1
+  position_x: 1
+  position_y: 1
+  response: MyString
+  value: MyString
+  picture: MyString
+  part_of_bingo: false
+
+two:
+  card_id: 1
+  position_x: 1
+  position_y: 1
+  response: MyString
+  value: MyString
+  picture: MyString
+  part_of_bingo: false

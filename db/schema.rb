@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103060918) do
+ActiveRecord::Schema.define(version: 20160105015305) do
 
   create_table "cards", force: :cascade do |t|
     t.integer  "template_id"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20160103060918) do
   end
 
   add_index "cards", ["token"], name: "index_cards_on_token"
+
+  create_table "circles", force: :cascade do |t|
+    t.integer  "card_id"
+    t.integer  "position_x"
+    t.integer  "position_y"
+    t.string   "response"
+    t.string   "value"
+    t.string   "picture"
+    t.boolean  "part_of_bingo"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "organization_users", force: :cascade do |t|
     t.integer  "organization_id"
