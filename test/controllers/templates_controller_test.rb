@@ -132,18 +132,7 @@ class TemplatesControllerTest < ActionController::TestCase
     assert_equal flash[:alert], not_authorized_alert
     
   end
-  
-  test "share should render if public" do 
-    @template.update(is_public: false)
-    get :share, token: @template.token
-    assert_redirected_to :root
-    assert_equal flash[:notice], private_notice
     
-    @template.update(is_public: true)
-    get :share, token: @template.token
-    assert_response :success  
-  end
-  
   
   ##################### 
   # Test embedded nested params creation
