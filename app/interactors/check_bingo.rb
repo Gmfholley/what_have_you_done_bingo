@@ -7,7 +7,7 @@ class CheckBingo
   # card = Card objects
   #
   # returns number of bingos  
-  attr_reader :card, :size, :circles
+  attr_reader :card, :size, :circles, :horizontal, :vertical, :left_x, :right_x, :num_bingos
   
   def initialize(card)
     @card = card
@@ -100,11 +100,12 @@ b.position_y] }
   # returns nothing
   def check_vertical_bingos
     @vertical.each do |k, v|
-    if size == v
-      @num_bingos += 1
-      circles.each do |circle|
-        if circle.position_x == k
-          update_circle(circle)
+      if size == v
+        @num_bingos += 1
+        circles.each do |circle|
+          if circle.position_x == k
+            update_circle(circle)
+          end
         end
       end
     end
@@ -115,11 +116,12 @@ b.position_y] }
   # returns nothing=
   def check_horizontal_bingos
     @horizontal.each do |k, v|
-    if size == v
-      @num_bingos += 1
-      circles.each do |circle|
-        if circle.position_y == k
-          update_circle(circle)
+      if size == v
+        @num_bingos += 1
+        circles.each do |circle|
+          if circle.position_y == k
+            update_circle(circle)
+          end
         end
       end
     end
@@ -152,10 +154,10 @@ b.position_y] }
   # returns boolean  
   # 
   # e.g.:  solutions with a size of 5
-  #        (1, 5), (2, 4), (3, 3), (4, 2), (5, 1)
+  #        (0, 4), (1, 3), (2, 2), (3, 1), (4, 0)
   #  --> true
   def part_of_right_x?(x, y)
-    (x - 1) == (size - y)
+    x == (size - y - 1)
   end
   
 end

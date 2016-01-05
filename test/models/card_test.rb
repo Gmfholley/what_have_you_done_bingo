@@ -61,5 +61,75 @@ class CardTest < ActiveSupport::TestCase
     assert_instance_of User, a.user, "Does not have a user"
     assert_instance_of Template, a.template, "Does not have a template"
   end
+  
+  test "should check for bingo for a set of cards" do 
+    # Set up - create and save squares from a template and create a card and save the assoc. circles
+    template = templates(:template_two)
+    squares = CreateSquares.work(template)
+    template.squares.each do |s|
+      s.question = "s"
+      s.save
+    end
+    
+    card = Card.create(template: template, user: users(:david))
+    circles = CreateCircles.work(card)
+    circles.each do |c|
+      c.save
+    end
+    
+    check = CheckBingo.new(card).work
+    assert_equal CheckBingo.new(card).work, 0, "There is a bingo to start"
+    
+    circles.each do |c|
+      if c.position_x == 0
+        c.update(response: "something")
+      end
+    end
+    
+    assert_equal CheckBingo.new(card).work, 1, "There is no bingo after you update all responses in column x"
+    
+    circles.each do |c|
+      if c.position_x == 1
+        c.update(response: "something")
+      end
+    end
+    assert_equal CheckBingo.new(card).work, 2, "There is no bingo after you update all responses in column x"
+
+    circles.each do |c|
+      if c.position_y == 0
+        c.update(response: "something")
+      end
+    end
+    
+    assert_equal CheckBingo.new(card).work, 3, "There is no bingo after you update all responses in column x"
+    
+    circles.each do |c|
+      if c.position_y == 1
+        c.update(response: "something")
+      end
+    end
+    assert_equal CheckBingo.new(card).work, 4, "There is no bingo after you update all responses in column x"
+    
+    circles.each do |c|
+      if c.position_x == c.position_y
+        c.update(response: "something")
+      end
+    end
+    
+    assert_equal CheckBingo.new(card).work, 6, "Should have created left and right bingo"
+    
+    circles.each do |c|
+      c.update(response: nil)
+    end
+    
+    circles.each do |c|
+      if c.position_x == (card.template.size - c.position_y - 1)
+        c.update(response: "something")
+      end
+    end
+    assert_equal CheckBingo.new(card).work, 1, "There is no bingo after right side bingo"
+    
+    
+  end
 
 end

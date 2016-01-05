@@ -104,5 +104,5 @@ class CircleTest < ActiveSupport::TestCase
       end
     end
   end
-    
+  
 end
