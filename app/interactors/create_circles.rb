@@ -11,7 +11,7 @@ class CreateCircles
     card.template.squares.each do |square|
       a = card.circles.build(position_x: square.position_x, position_y: square.position_y, question: square.question)
       if square.free_space
-        a.response = true
+        a.response = "free space"
       end
     end
     card.circles
