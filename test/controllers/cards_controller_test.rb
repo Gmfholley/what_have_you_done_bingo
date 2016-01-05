@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CardsControllerTest < ActionController::TestCase
   setup do
-    @card = cards(:one)
+    @card = cards(:card_one)
   end
 
   test "should get index" do
