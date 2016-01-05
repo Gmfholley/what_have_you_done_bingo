@@ -77,7 +77,7 @@ class CircleTest < ActiveSupport::TestCase
   test "create CreateCircles interactor method that should build circles for a given card" do
     # Set up - create and save squares from a template
     template = templates(:template_two)
-    CreateSquares.work(template)
+    squares = CreateSquares.work(template)
     template.squares.each do |s|
       s.question = "s"
       s.save
@@ -94,14 +94,15 @@ class CircleTest < ActiveSupport::TestCase
     assert_equal circles.first.position_x, squares.first.position_x, "Should have copied over position x"
     assert_equal circles.first.position_y, squares.first.position_y, "Should have copied over position y"
     assert_equal circles.first.question, squares.first.question, "Should have copied over the question"
-    assert_equal circles.first.marked, true, "Should have marked circles from a square with a free space"
-    assert_equal circles.last.marked, false, "Showed circle as marked before it was marked"
+    assert_equal circles.first.marked?, true, "Should have marked circles from a square with a free space"
+    assert_equal circles.last.marked?, false, "Showed circle as marked before it was marked"
     
     # test whether they have the info they need to be saved and are made in the proper amount
-    assert_difference('Circles.count', template.squares.count) do
+    assert_difference('Circle.count', template.squares.count) do
       circles.each do |c|
         c.save
       end
     end
+  end
     
 end
