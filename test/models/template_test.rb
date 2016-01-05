@@ -80,7 +80,7 @@ class TemplateTest < ActiveSupport::TestCase
     assert_instance_of Template, organizations(:factory).templates.first, "Has_many relationship does not exist"
   end
   
-  test "create squares helper method should build templates for this template" do
+  test "create squares helper method should build squares for this template" do
     assert_instance_of Square, CreateSquares.work(templates(:template_two)).first
     num_squares = 0
     # you can't do squares.count because they aren't saved
