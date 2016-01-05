@@ -21,7 +21,7 @@ one:
   position_x: 1
   position_y: 1
   response: MyString
-  value: MyString
+  question: MyString
   picture: MyString
   part_of_bingo: false
 
@@ -30,6 +30,6 @@ two:
   position_x: 1
   position_y: 1
   response: MyString
-  value: MyString
+  question: MyString
   picture: MyString
   part_of_bingo: false

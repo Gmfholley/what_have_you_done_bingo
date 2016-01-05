@@ -22,8 +22,8 @@ class Circle < ActiveRecord::Base
   validates :card_id, uniqueness: { scope: [:position_x, :position_y] }
   
   belongs_to :card
-  belongs_to :user, through: :card
-  belongs_to :template, through: :template
+  has_one :user, through: :card
+  has_one :template, through: :card
   
   after_initialize :set_default_part_of_bingo, :if => :new_record?
   
