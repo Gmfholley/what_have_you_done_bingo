@@ -88,11 +88,10 @@ method: has_bingo? (called after every change and saved, because otherwise it ha
 ##Circles
 - belong to a card
 - belong_to a user and a template through card
-- belongs_to a square (saving the position)
 - response
 - part_of_bingo? (default to false); go ahead and store this, as it otherwise it will have to be computed all the time
 - copies of original value at time of creation (in case admin changes after user starts playing)
- - value
+ - question
  - picture
  - position_x
  - position_y
