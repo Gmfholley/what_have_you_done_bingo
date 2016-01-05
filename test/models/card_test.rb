@@ -57,7 +57,7 @@ class CardTest < ActiveSupport::TestCase
   # Test associations
   ###################
   test 'should have associations to user and template' do
-    a = cards(:one)
+    a = cards(:card_one)
     assert_instance_of User, a.user, "Does not have a user"
     assert_instance_of Template, a.template, "Does not have a template"
   end

@@ -43,7 +43,7 @@ class CircleTest < ActiveSupport::TestCase
   
   test "defaults should be created for part of bingo" do
     a = Circle.new(card: cards(:card_one), position_x: -1, position_y: 0, question: "test")
-    assert a.part_of_bingo, false, "Part of bingo defaults to true"
+    assert_equal a.part_of_bingo, false, "Part of bingo defaults to true"
   end
   
   ####################
@@ -51,14 +51,14 @@ class CircleTest < ActiveSupport::TestCase
   ###################
   test "test marked should be true if response has anything in it" do
     a = Circle.new(card: cards(:card_one), position_x: -1, position_y: 0, question: "test")
-    assert a.marked?, false, "With no result, marked is true"
+    assert_equal a.marked?, false, "With no result, marked is true"
     a.response = "test"
-    assert a.marked?, true, "With a result, marked is not true"
+    assert_equal a.marked?, true, "With a result, marked is not true"
   end
   
   test "should not allow a circle to have same card, x, and y values" do
-    a = Circle.create(card: cards(:card_one), position_x: 0, position_y: 0, question: "test")
-    b = Circle.new(card: cards(:card_one), position_x: 0, position_y: 0, question: "test")
+    a = Circle.create(card: cards(:card_one), position_x: 2, position_y: 2, question: "test")
+    b = Circle.new(card: cards(:card_one), position_x: 2, position_y: 2, question: "test")
     assert_not b.save, "Allowed duplicate to be created"
     b.position_x = 1
     assert b.save, "Did not allow different x, and y to be created"    
