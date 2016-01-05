@@ -18,15 +18,15 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+card_one:
   template: template_one
   user: susan
   token: MyString
   is_public: false
   num_bingos: 0
 
-two:
-  template_id: template_one
+card_two:
+  template: template_one
   user: david
   token: MyString
   is_public: false
