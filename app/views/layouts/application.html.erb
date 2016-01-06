@@ -23,7 +23,7 @@
          </div>
          <div class="collapse navbar-collapse" id="my-navbar">
            <ul class="nav navbar-nav pull-right">
-            <% if current_user %>
+            <% if logged_in? %>
               <li><%= link_to ("<i class='fa fa-2x fa-cogs'></i> Edit Profile").html_safe, edit_profile_path, class: "btn" %></li>
               <li><%= link_to ("<i class='fa fa-2x fa-sign-out'></i> Logout").html_safe, :logout, method: :delete, class: "btn" %></li>
             <% else %>
