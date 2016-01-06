@@ -9,7 +9,7 @@
       </div>
     <div class="margin30"></div>
     <h3 class="text-center">Link to share for new member sign-ups:</h3>
-    <h5 class="text-center"><%= organization_sign_up_path(@organization.token) %></h5>
+    <h5 class="text-center"><%= organization_sign_up_url(@organization.token) %></h5>
     <%= link_to "Update your company's token.", update_organization_token_path(@organization), class: 'accent-background btn' %>
   <% end %>
   
@@ -26,7 +26,7 @@
             <% if user == @user %>
                 <td><%= link_to "#{user.first_name} #{user.last_name}", profile_path %></td>
                 <td><%= user.role(@organization).name %> 
-                  <%= link_to "Drop organization", organization_user_url(@organization.id, user.id), method: "delete", class: "btn" %></td>
+                  <%= link_to "Drop organization", organization_user_path(@organization.id, user.id), method: "delete", class: "btn" %></td>
               
             <% elsif @is_admin %>  
                 <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id) %></td>
