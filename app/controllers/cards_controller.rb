@@ -22,9 +22,10 @@ class CardsController < ApplicationController
   def create
     @template = Template.find_by(token: params[:token])
     @organization = @template.organization
-    
     if @template.is_public || is_member?
       @card = Card.new(card_params)
+      @card.user = current_user
+      @card.template = @template
     else
        redirect_to :root, notice: "Sorry.  That is a private template."
        return
@@ -94,7 +95,7 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:is_public, :num_bingos)
+      params.require(:card).permit(:is_public)
     end
 
     # checks if current user owns this card
