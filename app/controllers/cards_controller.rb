@@ -33,7 +33,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
-        CheckBingo.new(card: @card).work
+        CheckBingo.new(@card).work
         format.html { redirect_to @card, notice: 'Woot!  You have begun to play this bingo card.' }
         format.json { render :show, status: :created, location: @card }
       else
@@ -69,7 +69,7 @@ class CardsController < ApplicationController
   def update
     respond_to do |format|
       if @card.update(card_params)
-        CheckBingo.new(card: @card).work
+        CheckBingo.new(@card).work
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
         format.json { render :show, status: :ok, location: @card }
       else
