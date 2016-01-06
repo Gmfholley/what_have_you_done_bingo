@@ -10,6 +10,8 @@ class CardsControllerTest < ActionController::TestCase
     @member = users(:david)
     @admin = users(:sally)
     @template = templates(:template_one)
+    request.env["HTTP_REFERER"] = root_url
+    
   end
   
   def not_authorized_alert
@@ -20,17 +22,15 @@ class CardsControllerTest < ActionController::TestCase
     "Sorry.  That is a private template."
   end
   
-  test "share should render template if public" do 
-    login_user(user = @admin, route = login_path) 
-
-    @template = templates(:template_two)
-    @template.update(is_public: false)
+  test "should render template to logged in user if public" do 
+    login_user(user = @non_member, route = login_path) 
+    
     get :new, token: @template.token
     assert_redirected_to :root
     assert_equal flash[:notice], private_notice
     
     @template.update(is_public: true)
-    get :share, token: @template.token
+    get :new, token: @template.token
     assert_response :success  
   end
   
@@ -80,8 +80,9 @@ class CardsControllerTest < ActionController::TestCase
     assert_redirected_to card_path(assigns(:card))
   end
 
-  test "should destroy card" do
-    login_user(user = @admin, route = login_path) 
+  test "owner of card can destroy card" do
+    #non_member is owner of card
+    login_user(user = @non_member, route = login_path) 
 
     assert_difference('Card.count', -1) do
       delete :destroy, id: @card
