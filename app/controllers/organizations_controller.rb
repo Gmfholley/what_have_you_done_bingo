@@ -51,10 +51,13 @@ class OrganizationsController < ApplicationController
   end
   
   def show
+    puts "Got to show action of controller"
     @user = current_user
     @is_admin = is_admin?
+    puts "is_admin: #{is_admin}"
     @admin_id = Role.admin.id
     @user_id = Role.user.id
+    puts "Got to end of controller"
   end
   
   def destroy
