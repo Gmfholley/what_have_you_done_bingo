@@ -17,7 +17,7 @@
 class Circle < ActiveRecord::Base
   validates_numericality_of :position_x, greater_than_or_equal_to: 0
   validates_numericality_of :position_y, greater_than_or_equal_to: 0
-  validates :card, presence: true
+  # validates :card, presence: true
   validates :question, presence: true
   validates :card_id, uniqueness: { scope: [:position_x, :position_y] }
   
