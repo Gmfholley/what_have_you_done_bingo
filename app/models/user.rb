@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   #
   # returns a Role object
   def role(organization)
-    assoc = OrganizationUser.find_by(user_id: self.id, organization_id: organization.id) || OrganizationUser.new
+    assoc = OrganizationUser.find_by(user_id: self.id, organization_id: organization.id) || OrganizationUser.new(role: Role.user)
     assoc.role
   end
   
