@@ -59,7 +59,7 @@ class Card < ActiveRecord::Base
 
   def set_defaults
     self.is_public ||= false
-    self.num_bingos = 0
+    self.num_bingos ||= 0
   end
   
 end
