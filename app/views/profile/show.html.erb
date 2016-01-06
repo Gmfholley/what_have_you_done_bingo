@@ -28,7 +28,7 @@
       <% @user.cards.each do |card| %>
         <tr>
           <td><%= link_to card.template.name, organization_template_path(card.template.organization, card.template) %></td>
-          <td><%= link_to share_card(card.token), share_card(card.token) %></td>
+          <td><%= link_to share_card_path(card.token), share_card_path(card.token) %></td>
           <td><%= card.is_public %></td>
           <td><%= card.num_bingos %></td>
           <td><%= link_to 'Show', card %></td>

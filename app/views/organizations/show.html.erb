@@ -32,7 +32,7 @@
           <tr>
             <td><%= template.name %></td>
             <td><%= template.rating %></td>            
-            <td><%= link_to share_template(template.token), share_card(template.token) %></td>
+            <td><%= link_to share_template_path(template.token), share_template_path(template.token) %></td>
             <td><%= template.is_public %></td>
             <td><%= template.cards.count %></td>
             <td><%= link_to 'Show', organization_template_path(@organization, template) %></td>
