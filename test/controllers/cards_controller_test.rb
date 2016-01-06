@@ -45,7 +45,7 @@ class CardsControllerTest < ActionController::TestCase
 
   test "should get new" do
     login_user(user = @admin, route = login_path) 
-    get :new
+    get :new, token: @template.token
     assert_response :success
   end
 
@@ -53,7 +53,7 @@ class CardsControllerTest < ActionController::TestCase
     login_user(user = @admin, route = login_path) 
     
     assert_difference('Card.count') do
-      post :create, card: { is_public: @card.is_public, num_bingos: @card.num_bingos, template_id: @card.template_id, token: @card.token, user_id: @card.user_id }
+      post :create, token: @template.token, card: { is_public: @card.is_public }
     end
 
     assert_redirected_to card_path(assigns(:card))
@@ -76,7 +76,7 @@ class CardsControllerTest < ActionController::TestCase
   test "should update card" do
     login_user(user = @admin, route = login_path) 
     
-    patch :update, id: @card, card: { is_public: @card.is_public, num_bingos: @card.num_bingos, template_id: @card.template_id, token: @card.token, user_id: @card.user_id }
+    patch :update, id: @card, card: { is_public: @card.is_public, num_bingos: @card.num_bingos, template_id: @card.template_id, user_id: @card.user_id }
     assert_redirected_to card_path(assigns(:card))
   end
 

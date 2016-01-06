@@ -29,9 +29,9 @@ template_one:
   
 template_two:
   size: 5
-  organization: factory
+  organization: bank
   name: MyString
   rating: MyString
-  is_public: false
+  is_public: true
   token: somecrazystring
   
