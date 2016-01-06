@@ -104,17 +104,17 @@ class CardsControllerTest < ActionController::TestCase
         
   end
 
-  test "should get edit" do
-    login_user(user = @admin, route = login_path) 
-    
+  test "should get edit if owner of card" do
+    #@non-member is owner
+    login_user(user = @non_member, route = login_path) 
     get :edit, id: @card
     assert_response :success
   end
 
   test "should update card" do
-    login_user(user = @admin, route = login_path) 
+    login_user(user = @non_member, route = login_path) 
     
-    patch :update, id: @card, card: { is_public: @card.is_public, num_bingos: @card.num_bingos, template_id: @card.template_id, user_id: @card.user_id }
+    patch :update, id: @card, card: { is_public: @card.is_public }
     assert_redirected_to card_path(assigns(:card))
   end
 
