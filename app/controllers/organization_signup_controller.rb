@@ -6,7 +6,11 @@ class OrganizationSignupController < ApplicationController
   
   # GET /organizations/:id/sign_up
   def new
-    @user = User.new
+    if logged_in?
+      @user = current_user
+    else
+      @user = User.new
+    end
     if is_member?
       redirect_to organization_path(@organization), notice: "You are already a member."
     end
