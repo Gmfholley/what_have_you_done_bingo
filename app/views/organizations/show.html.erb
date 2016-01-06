@@ -26,7 +26,7 @@
             <% if user == @user %>
                 <td><%= link_to "#{user.first_name} #{user.last_name}", profile_path %></td>
                 <td><%= user.role(@organization).name %> 
-                  <%= link_to "Drop organization", organization_user_path(@organization.id, user.id), method: "delete", class: "btn" %></td>
+                  <%= link_to "Drop organization", organization_user_url(@organization.id, user.id), method: "delete", class: "btn" %></td>
               
             <% elsif @is_admin %>  
                 <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id) %></td>
