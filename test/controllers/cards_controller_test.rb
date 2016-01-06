@@ -152,7 +152,7 @@ class CardsControllerTest < ActionController::TestCase
       circles_hash[x.to_s] = circle.attributes
     end
     assert_difference('Circle.count', @new_card.circles.count) do
-      post :create, token: @template.token,  card: { is_public: false, circles_attributes: circles_hash }
+      post :create, token: @template.token, card: { is_public: false, circles_attributes: circles_hash }
     end
     # assert_equal @new_template.errors.full_messages, ""
   end

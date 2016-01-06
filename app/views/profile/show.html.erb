@@ -12,4 +12,31 @@
       <%= link_to 'Delete Account', profile_path, method: 'delete', class: 'btn accent-background' %>
     </div>
   </div>  
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Template</th>
+        <th>Url for sharing of public bingos</th>
+        <th>Is public</th>
+        <th>Num bingos</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.cards.each do |card| %>
+        <tr>
+          <td><%= link_to card.template.name, organization_template_path(card.template.organization, card.template) %></td>
+          <td><%= link_to share_card(card.token), share_card(card.token) %></td>
+          <td><%= card.is_public %></td>
+          <td><%= card.num_bingos %></td>
+          <td><%= link_to 'Show', card %></td>
+          <td><%= link_to 'Edit', edit_card_path(card) %></td>
+          <td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
 </div>
