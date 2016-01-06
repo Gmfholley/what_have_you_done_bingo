@@ -41,6 +41,8 @@ gem 'email_validator', '~> 1.6.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
@@ -60,5 +62,7 @@ group :development, :test do
    gem 'binding_of_caller', '0.7.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  #for windows environment time zones for active record
+  gem 'tzinfo-data'
 end
 
