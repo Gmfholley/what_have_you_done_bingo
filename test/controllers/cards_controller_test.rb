@@ -109,6 +109,12 @@ class CardsControllerTest < ActionController::TestCase
     login_user(user = @non_member, route = login_path) 
     get :edit, id: @card
     assert_response :success
+    
+    login_user(user = @admin, route = login_path) 
+    get :edit, id: @card
+    assert_redirected_to :back, "Allowed an admin to edit a user's card"
+    assert_equal flash[:notice], not_authorized_alert
+    
   end
 
   test "should update card" do
@@ -116,6 +122,12 @@ class CardsControllerTest < ActionController::TestCase
     
     patch :update, id: @card, card: { is_public: @card.is_public }
     assert_redirected_to card_path(assigns(:card))
+    
+    login_user(user = @admin, route = login_path) 
+    patch :update, id: @card, card: { is_public: @card.is_public }
+    assert_redirected_to :back, "Allowed an admin to edit a user's card"
+    assert_equal flash[:notice], not_authorized_alert
+    
   end
 
   test "owner of card can destroy card" do
