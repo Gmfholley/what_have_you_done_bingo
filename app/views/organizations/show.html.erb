@@ -25,12 +25,12 @@
           <tr>
             <% if user == @user %>
                 <td><%= link_to "#{user.first_name} #{user.last_name}", profile_path %></td>
-                <td><%= user.role(@organization).name %> 
+                <td><%= user.role(@organization) %> 
                   <%= link_to "Drop organization", organization_user_path(@organization.id, user.id), method: "delete", class: "btn" %></td>
               
             <% elsif @is_admin %>  
                 <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id) %></td>
-                <td><%= user.role(@organization) %> 
+                <td><%= user.role(@organization).name %> 
                   <%= link_to "Remove user", organization_user_path(@organization.id, user.id), method: "delete", class: "btn" %>
                   <% if user.role(@organization) == Role.admin %>
                     <%= link_to "Remove admin", organization_user_path(@organization.id, user.id, organization_user: {role_id: @user_id}), method: "put", class: "btn" %>
