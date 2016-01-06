@@ -80,7 +80,7 @@ class CardsControllerTest < ActionController::TestCase
     @template.update(is_public: true)
     login_user(user = @non_member, route = login_path) 
     assert_difference('Card.count') do
-      post :create, token: @template.token, card: { is_public: @card.is_public }
+        post :create, token: @template.token, card: { is_public: @card.is_public }
     end
     assert_redirected_to card_path(assigns(:card))
   end
@@ -139,5 +139,21 @@ class CardsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to cards_path
+  end
+  
+  test "upon creation should create nested params" do
+    login_user(user = @admin, route = login_path) 
+    
+    @new_card = Card.new(user: @admin, template: @template)
+    CreateCircles.work(@new_card)
+    circles_hash = Hash.new
+    @new_card.circles.each_with_index do |circle, x|
+      circle.response = "test"
+      circles_hash[x.to_s] = circle.attributes
+    end
+    assert_difference('Circle.count', @new_card.circles.count) do
+      post :create, token: @template.token,  card: { is_public: false, circles_attributes: circles_hash }
+    end
+    # assert_equal @new_template.errors.full_messages, ""
   end
 end
