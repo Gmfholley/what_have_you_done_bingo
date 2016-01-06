@@ -13,6 +13,7 @@ class ProfileController < ApplicationController
   end
   
   def show
+    puts "in profile controller"
   end
   
   def destroy
