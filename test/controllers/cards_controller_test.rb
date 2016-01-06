@@ -22,7 +22,26 @@ class CardsControllerTest < ActionController::TestCase
     "Sorry.  That is a private template."
   end
   
-  test "should render template to logged in user if public" do 
+  test "should get logged in user's index of cards" do
+    login_user(user = @admin, route = login_path) 
+
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:cards)
+  end
+
+  test "should get new card for template if user is member or if template is public" do
+    login_user(user = @admin, route = login_path) 
+    get :new, token: @template.token
+    assert_response :success
+    
+    login_user(user = @member, route = login_path)
+    get :new, token: @template.token
+    assert_response :success
+    
+  end
+  
+  test "should also get new card for logged in user if template is public" do 
     login_user(user = @non_member, route = login_path) 
     
     get :new, token: @template.token
@@ -34,30 +53,45 @@ class CardsControllerTest < ActionController::TestCase
     assert_response :success  
   end
   
-  
-  test "should get index" do
-    login_user(user = @admin, route = login_path) 
 
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:cards)
-  end
-
-  test "should get new" do
+  test "should create card for member of private template" do
     login_user(user = @admin, route = login_path) 
-    get :new, token: @template.token
-    assert_response :success
-  end
-
-  test "should create card" do
-    login_user(user = @admin, route = login_path) 
-    
     assert_difference('Card.count') do
       post :create, token: @template.token, card: { is_public: @card.is_public }
     end
+    assert_redirected_to card_path(assigns(:card))
+    
+    login_user(user = @member, route = login_path) 
+    assert_difference('Card.count') do
+      post :create, token: @template.token, card: { is_public: @card.is_public }
+    end
+    assert_redirected_to card_path(assigns(:card))
+    
+    login_user(user = @non_member, route = login_path) 
+    assert_no_difference('Card.count') do
+      post :create, token: @template.token, card: { is_public: @card.is_public }
+    end
+    assert_redirected_to root_path
+    assert_equal flash[:notice], private_notice
 
+  end
+  
+  
+
+  test "should not create card for logged-in user of public template" do
+    login_user(user = @admin, route = login_path) 
+    assert_difference('Card.count') do
+      post :create, token: @template.token, card: { is_public: @card.is_public }
+    end
+    assert_redirected_to card_path(assigns(:card))
+    
+    login_user(user = @member, route = login_path) 
+    assert_difference('Card.count') do
+      post :create, token: @template.token, card: { is_public: @card.is_public }
+    end
     assert_redirected_to card_path(assigns(:card))
   end
+
 
   test "should show card" do
     login_user(user = @admin, route = login_path) 
