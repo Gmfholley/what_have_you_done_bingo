@@ -67,25 +67,18 @@ class CardsControllerTest < ActionController::TestCase
     end
     assert_redirected_to card_path(assigns(:card))
     
+    # should not create for non-member of public template
     login_user(user = @non_member, route = login_path) 
     assert_no_difference('Card.count') do
       post :create, token: @template.token, card: { is_public: @card.is_public }
     end
     assert_redirected_to root_path
     assert_equal flash[:notice], private_notice
-
   end
   
-  
-
-  test "should not create card for logged-in user of public template" do
-    login_user(user = @admin, route = login_path) 
-    assert_difference('Card.count') do
-      post :create, token: @template.token, card: { is_public: @card.is_public }
-    end
-    assert_redirected_to card_path(assigns(:card))
-    
-    login_user(user = @member, route = login_path) 
+  test "should create card for logged-in user of public template" do
+    @template.update(is_public: true)
+    login_user(user = @non_member, route = login_path) 
     assert_difference('Card.count') do
       post :create, token: @template.token, card: { is_public: @card.is_public }
     end
