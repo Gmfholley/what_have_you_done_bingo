@@ -15,7 +15,7 @@ class CardsControllerTest < ActionController::TestCase
   end
   
   def not_authorized_alert
-    "You do not have access to view that page."
+    "You do not have access to that page."
   end
   
   def private_notice
@@ -86,11 +86,22 @@ class CardsControllerTest < ActionController::TestCase
   end
 
 
-  test "should show card" do
+  test "should show card if admin of template or owner but not otherwise" do
     login_user(user = @admin, route = login_path) 
-    
     get :show, id: @card
-    assert_response :success
+    assert_response :success, "Did not allow admin to see card"
+    
+    #non_member is owner
+    login_user(user = @non_member, route = login_path) 
+    get :show, id: @card
+    assert_response :success, "Did not allow user to see their own card"
+
+    #member is not owner
+    login_user(user = @member, route = login_path) 
+    get :show, id: @card
+    assert_redirected_to :back, "Allowed non-admin, non-user to see private card"
+    assert_equal flash[:notice], not_authorized_alert
+        
   end
 
   test "should get edit" do
