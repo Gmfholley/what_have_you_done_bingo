@@ -68,9 +68,19 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1.json
   def update
     respond_to do |format|
-      if @card.update(card_params)
+      @card.update(card_only_params)
+      @errors = []
+      if !circles_only_params.blank?
+        circles_only_params.each_with_index do |circle, x|
+          @circle = Circle.find_by(position_x: circle[1]["position_x"], position_y: circle[1]["position_y"], card_id: @card.id)
+          unless @circle.update(response: circle[1]["response"])
+            @errors << @circle.errors
+          end
+        end
+      end
+      if @card.errors.blank? && @errors.length == 0
         CheckBingo.new(@card).work
-        format.html { redirect_to @card, notice: 'Card was successfully updated.' }
+        format.html { redirect_to @card, notice: 'Successfully updated.' }
         format.json { render :show, status: :ok, location: @card }
       else
         format.html { render :edit }
@@ -103,9 +113,8 @@ class CardsController < ApplicationController
       params.require(:card).permit(:is_public)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def card_params
-      params.require(:card).permit(:is_public)
+    def circles_only_params
+      card_params["circles_attributes"]
     end
 
     # checks if current user owns this card
