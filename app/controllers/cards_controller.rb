@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   skip_before_action :require_login, only: [:share]
   before_action :set_card, only: [:show, :edit, :update, :destroy]
   before_action :require_users_card, only: [:edit, :update, :destroy]
-  before_action :require_admin_or_user, except: [:share, :play, :new, :create]
+  before_action :require_admin_or_user, only: [:show]
   
   # play a card from a public template or user is member of private tmeplate
   # GET play/:token
