@@ -12,7 +12,37 @@
     <h5 class="text-center"><%= organization_sign_up_url(@organization.token) %></h5>
     <%= link_to "Update your company's token.", update_organization_token_path(@organization), class: 'accent-background btn' %>
   <% end %>
-  
+  <div class="col col-xs-12 col-md-8 col-md-offset-2">
+    <h3>Your Bingo Card Templates</h3>
+    <%= link_to "Create a new bingo card template", new_organization_template_path(@organization), class: 'accent-background btn' %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Rating</th>
+          <th>Url for sharing of public templates</th>
+          <th>Is public</th>
+          <th>Number of users</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @organization.templates.each do |template| %>
+          <tr>
+            <td><%= template.name %></td>
+            <td><%= template.rating %></td>            
+            <td><%= link_to share_template(template.token), share_card(template.token) %></td>
+            <td><%= template.is_public %></td>
+            <td><%= template.cards.count %></td>
+            <td><%= link_to 'Show', organization_template_path(@organization, template) %></td>
+            <td><%= link_to 'Edit', edit_organization_template_path(@organization, template) %></td>
+            <td><%= link_to 'Destroy', organization_template_path(@organization, template), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
   
   <div class="col col-xs-12 col-md-8 col-md-offset-2">
     <table class="table table-condensed table-responsive table-hover">
