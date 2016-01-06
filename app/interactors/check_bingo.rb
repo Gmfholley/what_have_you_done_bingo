@@ -26,7 +26,7 @@ b.position_y] }
   # returns an Integer
   def work
     check_marked_circles
-    get_num_bingos
+    @card.update(num_bingos: get_num_bingos)
   end
   
   
