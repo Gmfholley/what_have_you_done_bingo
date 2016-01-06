@@ -29,6 +29,7 @@ class Template < ActiveRecord::Base
   
   after_initialize :set_defaults
   before_create :generate_token
+  before_destroy :destroy_squares
     
   accepts_nested_attributes_for :squares
 

@@ -19,7 +19,7 @@
 class Card < ActiveRecord::Base
   belongs_to :template
   belongs_to :user
-  has_many :circles
+  has_many :circles, dependent: :destroy
   
   validates_numericality_of :num_bingos, :greater_than_or_equal_to => 0
   validates :template, presence: true
@@ -28,6 +28,9 @@ class Card < ActiveRecord::Base
   
   after_initialize :set_defaults
   before_create :generate_token
+  
+  accepts_nested_attributes_for :circles
+  
     
   # indicates if there is a bingo
   #

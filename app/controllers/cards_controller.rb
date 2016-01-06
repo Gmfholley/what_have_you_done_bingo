@@ -11,8 +11,8 @@ class CardsController < ApplicationController
     @organization = @template.organization
     
     if @template.is_public || is_member?
-      @card = @template.cards.build
-      @card.user = current_user
+      @card = @template.cards.build(user: current_user)
+      CreateCircles.work(@card)
     else
       redirect_to :root, notice: "Sorry.  That is a private template."
     end
@@ -33,6 +33,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
+        CheckBingo.new(card: @card).work
         format.html { redirect_to @card, notice: 'Woot!  You have begun to play this bingo card.' }
         format.json { render :show, status: :created, location: @card }
       else
@@ -68,6 +69,7 @@ class CardsController < ApplicationController
   def update
     respond_to do |format|
       if @card.update(card_params)
+        CheckBingo.new(card: @card).work
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
         format.json { render :show, status: :ok, location: @card }
       else
@@ -91,6 +93,14 @@ class CardsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_card
       @card = Card.find(params[:id])
+    end
+
+    def card_params
+      params.require(:card).permit(:is_public, :circles_attributes => [:question, :position_x, :position_y, :response])
+    end
+    
+    def card_only_params
+      params.require(:card).permit(:is_public)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
