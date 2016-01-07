@@ -19,7 +19,7 @@
 class Card < ActiveRecord::Base
   belongs_to :template
   belongs_to :user
-  has_many :circles, dependent: :destroy
+  has_many :circles, -> {order "position_x ASC, position_y ASC"}, dependent: :destroy
   
   validates_numericality_of :num_bingos, :greater_than_or_equal_to => 0
   validates :template, presence: true
