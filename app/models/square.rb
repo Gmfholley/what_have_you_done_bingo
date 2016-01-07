@@ -45,9 +45,9 @@ class Square < ActiveRecord::Base
   
   validates :question, presence: true
   validates :template_id, uniqueness: { scope: [:position_x, :position_y] }
-  # validates :template, presence: true
+  validates :template, presence: true
   
-  belongs_to :template
+  belongs_to :template, inverse_of: :squares
 
   before_save :set_default_free_space, :if => :new_record?
 

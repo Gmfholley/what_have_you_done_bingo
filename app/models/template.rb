@@ -20,7 +20,7 @@
 class Template < ActiveRecord::Base
   enum rating: [:easy, :medium, :hard]
   belongs_to :organization
-  has_many :squares, -> {order "position_x ASC, position_y ASC"}, dependent: :destroy
+  has_many :squares, -> {order "position_x ASC, position_y ASC"}, dependent: :destroy, inverse_of: :template
   has_many :cards # do not destroy dependent cards
 
   validates_numericality_of :size, :greater_than_or_equal_to => 4, :less_than_or_equal_to => 6
