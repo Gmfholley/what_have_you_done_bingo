@@ -30,7 +30,6 @@ class CardsController < ApplicationController
        redirect_to :root, notice: "Sorry.  That is a private template."
        return
     end
-
     respond_to do |format|
       if @card.save
         CheckBingo.new(@card).work

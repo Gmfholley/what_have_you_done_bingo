@@ -144,14 +144,24 @@ class CardsControllerTest < ActionController::TestCase
   test "upon creation should create nested params" do
     login_user(user = @admin, route = login_path) 
     
-    @new_card = Card.new(user: @admin, template: @template)
+    #set up a template for factory, of which user is admin
+    @new_template = Template.create(name: "test", is_public: false, rating: :easy, organization: organizations(:factory))
+    CreateSquares.work(@new_template)
+    @new_template.squares.each_with_index do |square, x|
+      square.question = "test"
+      square.save
+    end
+        
+    
+    # this is the test part - create a card and circles for each card and submit it
+    @new_card = Card.new(user: @admin, template: @new_template)
     CreateCircles.work(@new_card)
     circles_hash = Hash.new
     @new_card.circles.each_with_index do |circle, x|
       circle.response = "test"
       circles_hash[x.to_s] = circle.attributes
     end
-    assert_difference('Circle.count', @new_card.circles.count) do
+    assert_difference('Circle.count', @new_template.squares.count) do
       post :create, token: @template.token, card: { is_public: false, circles_attributes: circles_hash }
     end
     # assert_equal @new_template.errors.full_messages, ""
