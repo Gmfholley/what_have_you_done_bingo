@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
     
   def set_user
-    @user = User.find(params[:id]).includes(:organizations, :organization_users, :cards)
+    @user = User.includes(:organizations, :organization_users, :cards).where(id: params["id"]).first
   end
   
   def set_organization

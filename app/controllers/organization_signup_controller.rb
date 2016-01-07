@@ -66,7 +66,7 @@ class OrganizationSignupController < ApplicationController
   private
 
   def set_organization
-    @organization = Organization.find_by(token: params[:id]).includes(:organization_users, :users)
+    @organization = Organization.includes(:organization_users, :users).where(token: params["id"]).first
     if @organization.blank?
       redirect_to :back, notice: "Sorry, that is not a valid request."
     end

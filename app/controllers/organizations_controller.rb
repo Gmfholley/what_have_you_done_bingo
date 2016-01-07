@@ -68,7 +68,7 @@ class OrganizationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Organization.find(params[:id]).includes(:users, :templates)
+      @organization = Organization.includes(:users, :templates).where(id: params[:id]).first
     end
     
     def organization_and_user_params

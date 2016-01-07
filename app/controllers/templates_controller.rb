@@ -86,7 +86,7 @@ class TemplatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_template
-      @template = Template.find(params[:id]).includes(:squares, :cards, :organization)
+      @template = Template.includes(:squares, :cards, :organization).where(id: params[:id]).first
       # @template.squares.sort! {|a, b| [a.position_x, a.position_y] <=> [b.position_x, b.position_y]}
     end
 
