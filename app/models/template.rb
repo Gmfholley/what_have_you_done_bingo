@@ -64,7 +64,7 @@ class Template < ActiveRecord::Base
     6
   end
   
-  private
+  private 
   # sets default values of self
   #
   # returns nothing
