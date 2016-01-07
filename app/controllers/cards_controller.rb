@@ -102,7 +102,7 @@ class CardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
-      @card = Card.find(params[:id])
+      @card = Card.find(params[:id]).includes(:circles, :template, :user)
     end
 
     def card_params

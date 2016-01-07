@@ -63,7 +63,7 @@ class OrganizationUsersController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_organization
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.find(params[:organization_id]).includes(:users, :organization_users)
     if @organization.blank?
       redirect_to :back, notice: "Sorry, that is not a valid request."
     end
