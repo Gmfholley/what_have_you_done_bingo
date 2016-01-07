@@ -19,14 +19,19 @@
 }
 
 .accent-font {
- font-family: 'Pacifico', cursive; 
+ font-family: 'Pacifico', cursive;
 }
 
 .accent-background, .accent-background a, .accent-background.btn {
-  background-color: red;
+  background-color: #608A44;
   color: white;
 }
-
+/*Blue: 88EBFF*/
+/*Dark Blue: 4BC8E0*/
 .margin30 {
   margin-top: 30px;
+}
+
+.navbar.no-margin-bottom {
+  margin-bottom: 0px;
 }
