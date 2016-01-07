@@ -7,10 +7,10 @@
   background-size: cover;
 }
 
+
 .box {
+  vertical-align: middle;
   position:relative;
-  background-color: red;
-  border-radius: 50%;
   
 }
 .box:before {
@@ -20,9 +20,11 @@
 }
 
 .circle {
+  background-color: red;
+  border-radius: 50%;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0px;
   bottom: 0;
-  right: 0;
+  right: 0px;
 }
