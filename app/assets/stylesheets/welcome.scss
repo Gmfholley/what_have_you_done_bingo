@@ -28,3 +28,109 @@
   bottom: 0;
   right: 0px;
 }
+
+.text {
+  position: relative;
+  text-align: center;
+}
+
+.monospace-font {
+  font: 120px monospace;  
+}
+
+.header-arc-text {
+  vertical-align: middle;
+  position:relative; 
+}
+
+.header-arc-text:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+  position: relative;
+}
+
+.header-arc-text .char {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  transform-origin: bottom center;
+  font-size: 3em;
+  font-family: 'Pacifico', cursive;
+}
+
+.char1 { 
+  -ms-transform: rotate(-54deg); /* IE 9 */
+  -webkit-transform: rotate(-54deg); /* Chrome, Safari, Opera */
+  transform: rotate(-54deg);
+}
+.char2 { 
+  -ms-transform: rotate(-45deg); /* IE 9 */
+-webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+transform: rotate(-45deg);
+}
+.char3 { 
+  -ms-transform: rotate(-36deg); /* IE 9 */
+  -webkit-transform: rotate(-36deg); /* Chrome, Safari, Opera */
+  transform: rotate(-36deg);
+}
+.char4 { 
+  -ms-transform: rotate(-27deg); /* IE 9 */
+  -webkit-transform: rotate(-27deg); /* Chrome, Safari, Opera */
+  transform: rotate(-27deg);
+ }
+.char5 { 
+  -ms-transform: rotate(-18deg); /* IE 9 */
+-webkit-transform: rotate(-18deg); /* Chrome, Safari, Opera */
+transform: rotate(-18deg);
+}
+.char6 { 
+  -ms-transform: rotate(-9deg); /* IE 9 */
+  -webkit-transform: rotate(-9deg); /* Chrome, Safari, Opera */
+  transform: rotate(-9deg);
+}
+.char7 { 
+//  -ms-transform: rotate(33deg); /* IE 9 */
+//  -webkit-transform: rotate(33deg); /* Chrome, Safari, Opera */
+//  transform: rotate(33deg);
+ }
+.char8 { 
+  -ms-transform: rotate(9deg); /* IE 9 */
+-webkit-transform: rotate(9deg); /* Chrome, Safari, Opera */
+transform: rotate(9deg);
+}
+.char9 { 
+  -ms-transform: rotate(18deg); /* IE 9 */
+  -webkit-transform: rotate(18deg); /* Chrome, Safari, Opera */
+  transform: rotate(18deg);
+ }
+.char10 { 
+  -ms-transform: rotate(27deg); /* IE 9 */
+-webkit-transform: rotate(27deg); /* Chrome, Safari, Opera */
+transform: rotate(27deg);
+}
+.char11 { 
+  -ms-transform: rotate(36deg); /* IE 9 */
+  -webkit-transform: rotate(36deg); /* Chrome, Safari, Opera */
+  transform: rotate(36deg);
+}
+.char12 { 
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+ }
+.char13 { 
+  -ms-transform: rotate(54deg); /* IE 9 */
+-webkit-transform: rotate(54deg); /* Chrome, Safari, Opera */
+transform: rotate(54deg);
+}
+
+.below-arc-text {
+  position: absolute;
+  width: 100%;
+  font-size: 115px;
+  top: 250px;
+  font-family: 'Dosis', sans-serif;
+}
