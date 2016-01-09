@@ -23,8 +23,8 @@
 }
 
 .accent-background, .accent-background a, .accent-background.btn {
-  background-color: #608A44;
-  color: white;
+/*  background-color: #608A44;*/
+  color: red;
 }
 /*Blue: 88EBFF*/
 /*Dark Blue: 4BC8E0*/

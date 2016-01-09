@@ -149,6 +149,8 @@ transform: rotate(54deg);
 }
 
 table.bingo-welcome {
+    position: relative;
+    top: 800px;
     border-collapse:separate;  /*can't border collapse if you want rounded edges*/
     border:solid red 6px;
     border-radius:6px;
