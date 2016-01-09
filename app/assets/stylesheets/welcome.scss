@@ -41,17 +41,18 @@
 .header-arc-text {
   vertical-align: middle;
   position:relative; 
+  height: 250px;
 }
 
-.header-arc-text:before {
-  content: "";
-  display: block;
-  padding-top: 100%;
-  position: relative;
-}
+//.header-arc-text:before {
+//  content: "";
+//  display: block;
+//  padding-top: 100%;
+//  position: relative;
+//}
 
 .header-arc-text .char {
-  height: 100%;
+  height: 800px;
   position: absolute;
   width: 100%;
   left: 0;
@@ -139,6 +140,8 @@ transform: rotate(54deg);
   width: 100%;
   border-radius: 50%;
   background-size: cover;
+  opacity: .6;
+  transition: opacity 1s;
 }
 
 .bingo-image-column:before {
@@ -146,11 +149,18 @@ transform: rotate(54deg);
   display: block;
   content: "";
   position: relative;
+//  transition: padding-top 1s;
 }
 
+.bingo-image-column:hover {
+  
+  opacity:1;
+}
+
+
 table.bingo-welcome {
-    position: relative;
-    top: 800px;
+//    position: relative;
+//    left: 0px;
     border-collapse:separate;  /*can't border collapse if you want rounded edges*/
     border:solid red 6px;
     border-radius:6px;
@@ -176,7 +186,12 @@ th.bingo-th {
 th.bingo-th, td.bingo-col {
   border-left: solid red 6px;
 }
-
+td.bingo-col {
+  transition: background-color 1s;
+}
+td.bingo-col:hover {
+   background-color: yellow; 
+}
 tr.bingo-tr {
   padding-top: 5px;
 }
