@@ -52,6 +52,7 @@
 //}
 
 .header-arc-text .char {
+  z-index: -1;
   height: 800px;
   position: absolute;
   width: 100%;
@@ -190,7 +191,7 @@ td.bingo-col {
   transition: background-color 1s;
 }
 td.bingo-col:hover {
-   background-color: yellow; 
+   background-color: #F7F5D8; 
 }
 tr.bingo-tr {
   padding-top: 5px;
