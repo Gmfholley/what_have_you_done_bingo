@@ -198,8 +198,7 @@ tr.bingo-tr {
 }
 td.bingo-col {
   border-left: solid black 1px;
-  border-top: solid red 3px;
-  border-radius: 6px 0 0 0;
+  border-top: solid black 1px;
   padding-top: 5px; /* with border spacing = 0, you need padding in the cells */
   padding-bottom: 5px;
 }
@@ -208,7 +207,12 @@ thead:first-child tr:first-child th.bingo-th:first-child, tbody:first-child tr:f
   border-radius: 6px 0 0 0;
   border: solid red 6px;
 }
-thead:last-child tr:last-child th.bingo-th:first-child, tbody:last-child tr:last-child td.bingo-col:first-child {
+//left hand side is red
+thead:last-child tr:last-child th.bingo-th:first-child, tbody:last-child tr:last-child td.bingo-col:first-child, tr td.bingo-col:first-child {
 //  border-radius: 0 0 0 6px;
   border-left: solid red 6px;
+}
+
+tr:first-child td.bingo-col {
+  border-top: none;
 }
