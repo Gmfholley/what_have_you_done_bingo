@@ -22,9 +22,31 @@
  font-family: 'Pacifico', cursive;
 }
 
-.accent-background, .accent-background a, .accent-background.btn {
+.accent-background, .accent-background a {
 /*  background-color: #608A44;*/
   color: red;
+  
+}
+
+.accent-background:hover, .accent-background a:hover {
+/*  background-color: #608A44;*/
+  color: black;
+  
+  
+}
+
+.accent-background a:hover, .accent-background .btn:hover, .accent-background.btn:hover {
+  background-color: #E3FFFC;
+}
+
+.accent-background.btn {
+/*  background-color: #608A44;*/
+  background-color: red;
+  color: white;
+}
+
+.accent-background.btn:hover {
+  background-color: #B21212;
 }
 /*Blue: 88EBFF*/
 /*Dark Blue: 4BC8E0*/
