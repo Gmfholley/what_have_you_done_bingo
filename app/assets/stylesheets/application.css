@@ -35,3 +35,10 @@
 .navbar.no-margin-bottom {
   margin-bottom: 0px;
 }
+
+td.marked {
+  background-color: #F7F5D8; 
+}
+td.marked .bingo-image-column {
+  opacity: 1;
+}
