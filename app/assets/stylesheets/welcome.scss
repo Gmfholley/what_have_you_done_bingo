@@ -204,7 +204,7 @@ td.bingo-col:hover {
 .explanation-section {
   margin-top: 10%;
   padding: 10%;
-  background-color: #CFDCE3;
+  background-color: #E4F7F7;
   
 }
 .explanation-block {
@@ -217,8 +217,6 @@ td.bingo-col:hover {
   vertical-align: middle;
   position:relative;
   text-align: center;
-
-
 }
 .explanation-ball:before {
   content: "";
@@ -229,7 +227,6 @@ td.bingo-col:hover {
   width:100%;        // +1 to @RonM
   text-align: center;
   position: absolute;
-//  padding-top:100%;
   top: 0;
   left: 0px;
   bottom: 0;
@@ -242,11 +239,9 @@ td.bingo-col:hover {
   filter: progid:DXImageTransform.Microsoft.Matrix(Dx=0,Dy=0); /*IE6, IE7*/
   transform: translateY(25%);    
 }
-
 .exp-empty {
   height: 100px
 }
-
 .explanation-ball {
   padding: 10px;
   background-color: white;
