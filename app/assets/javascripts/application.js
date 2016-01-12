@@ -18,6 +18,203 @@
     CheckBingo();
   }
   
-  function CheckBingo(){
+  function DOMCircles(){
+    // assume only one table on the page
+    var card = {
+      circles: document.getElementsByTagName("td").sort(function(a, b){
+        if (a.id > b.id) {
+          return 1;
+        }
+        if (a.id < b.id) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      }),
+      size: circles.length,
+      num_bingos: 0
+    }
     
+    // returns an Array [x, y], corresponding to the positions x & y of a circle
+    //
+    // circle = Element type TD with id of bingo-x-y
+    //
+    // returns an Array
+    card.circlePosition = function(circle) {
+      var array = circle.id.split("-").shift();
+      for(var i=0; i<array.length;i++) array[i] = +array[i];
+      return array;
+    }
+    
+    card.circleMarked = function(circle) {
+      return circle.classList.includes("marked");
+    }
+    
+    card.markCircle = function(circle) {
+      return circle.classList.add("marked");
+    }
+    
+    card.getCircles = function () {
+      return card.circles;
+    }
+    
+    card.setBingos = function(num) {
+      card.num_bingos = num;
+    }
+    
+    return card;
   }
+  
+  function CheckBingo(DOMCircles){
+    // assume only one table on the page
+    var bingo = {
+      card: DOMCircles(),
+      card_size: card.size,
+      circles: card.getCircles(),
+      horizontal = {},
+      vertical = {},
+      left_bingo = 0,
+      right_bingo = 0,
+      num_bingos: 0
+    }
+  
+    bingo.work = function() {
+      checkMarkedCircles();
+      card.num_bingos = getNumBingos();
+    }
+    
+    function getNumBingos(){
+      checkAndMarkLeftXBingo();
+      checkAndMarkRightXBingo()
+      checkHorizontalBingos();
+      checkVerticalBingos();
+      return bingo.num_bingos;
+    }
+    
+    function checkAndMarkLeftXBingo(){
+      if (bingo.left_bingo == bingo.card_size){
+        card.num_bingos += 1;
+        var len = bingo.circles.len;
+        for (i = 0; i < len; i ++) {
+          if partOfLeftBingo(bingo.card.position(bingo.circles[i])) {
+            bingo.card.markCircle(bingo.circles[i]);
+          }
+        }
+      }
+    }
+    
+    function checkAndMarkRightXBingo(){
+      if (bingo.right_bingo == bingo.card_size){
+        card.num_bingos += 1;
+        var len = bingo.circles.len;
+        for (i = 0; i < len; i ++) {
+          if partOfRightBingo(bingo.card.position(bingo.circles[i])) {
+            bingo.card.markCircle(bingo.circles[i]);
+          }
+        }
+      }
+    }
+    
+    function checkVerticalBingos(){
+      for(var propertyName in bingo.vertical) {
+        if (bingo.vertical[propertyName] === bingo.card_size) {
+          card.num_bingos += 1;
+          var len = bingo.circles.len;
+          for (i = 0; i < len; i ++) {
+            if bingo.card.position(bingo.circles[i]))[0] === propertyName {
+              bingo.card.markCircle(bingo.circles[i]);
+            }
+          }
+        }
+      }
+    }
+    
+    function checkHorizontalBingos(){
+      for(var propertyName in bingo.horizontal) {
+        if (bingo.horizontal[propertyName] === bingo.card_size) {
+          card.num_bingos += 1;
+          var len = bingo.circles.len;
+          for (i = 0; i < len; i ++) {
+            if bingo.card.position(bingo.circles[i]))[1] === propertyName {
+              bingo.card.markCircle(bingo.circles[i]);
+            }
+          }
+        }
+      }
+    }
+      
+    function checkMarkedCircles () {
+      var len = bingo.circles.length;
+      for (var i = 0; i < len; i ++ ) {
+        if card.circleMarked(bingo.circles[i]) {
+          updateMarkedCircles(bingo.card.position(bingo.circles[i]));
+        }
+      }
+    }
+    
+    function updateMarkedCircles(arrXY){
+      var x = arrXY[0].toString();
+      var y = arrXY[1].toString();
+      if (bingo.vertical.hasOwnProperty(x)){
+        bingo.vertical[x] += 1;
+      } else {
+        bingo.vertical[x] = 1;
+      }
+      if (bingo.hortizontal.hasOwnProperty(y)){
+        bingo.horizontal[y] += 1;
+      } else {
+        bingo.horizontal[y] = 1;
+      }
+      
+      if partOfLeftBingo(arrXY)
+        bingo.left_bingo += 1
+      end
+      if partOfRightBingo(arrXY)
+        bingo.right_bingo += 1
+      end
+    }
+    
+  // # check if these indexes are part of a left-most X bingo
+  // #
+  // # arrXY[0] - Integer
+  // # arrXY[1] = y - Integer
+  // #
+  // # returns boolean
+    function partOfLeftBingo(arrXY) {
+      return (arrXY[0] === arrXY[1]);
+    }
+    
+  // # check if these indexes are part of a left-most X bingo
+  // #
+  // # x - Integer
+  // # y - Integer
+  // #
+  // # returns boolean
+  // #
+  // # e.g.:  solutions with a size of 5
+  // #        (0, 4), (1, 3), (2, 2), (3, 1), (4, 0)
+  // #  --> true
+    function partOfRightBingo(arrXY) {
+      return (arrXY[0] == (bingo.size - arrXY[1] - 1));
+    }
+    
+    
+    return bingo;
+  }
+
+  
+  # checks to see if card has a left-x bingo
+  #
+  # returns nothing
+  def check_and_mark_left_x
+
+  
+  
+  # updates the circle's part_of_bingo attribute to true
+  #
+  # circle - Circle object
+  #
+  # returns true
+  def update_circle(circle)
+    circle.update(part_of_bingo: true)
+  end

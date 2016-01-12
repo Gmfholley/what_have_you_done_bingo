@@ -26,7 +26,7 @@
       <% if @this_col % @size == 0  %>
         <tr>
       <% end  %>
-      <td>
+      <td id='<%="bingo-#{ff.position_x}-#{ff.position_y}" %>'>
         <div class="col col-xs-12">
           <div class="form-group">
             <%= ff.hidden_field :position_x %>
