@@ -199,3 +199,63 @@ td.bingo-col {
 td.bingo-col:hover {
    background-color: #F7F5D8; 
 }
+
+
+.explanation-section {
+  margin-top: 10%;
+  padding: 10%;
+  background-color: #CFDCE3;
+  
+}
+.explanation-block {
+  max-width: 970px;
+  margin: auto;
+}
+
+//Explanation of site in white ball
+.explanation-ball {
+  vertical-align: middle;
+  position:relative;
+  text-align: center;
+
+
+}
+.explanation-ball:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+.explanation-content {
+  width:100%;        // +1 to @RonM
+  text-align: center;
+  position: absolute;
+//  padding-top:100%;
+  top: 0;
+  left: 0px;
+  bottom: 0;
+  right: 0px;
+  -webkit-transform: translateY(25%); /* child now centers itself relative to the midline based on own contents */
+  -moz-transform: translateY(25%);
+  -ms-transform: translateY(25%);
+  -o-transform: translateY(25%);
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Matrix(Dx=0,Dy=0)'; /*IE8 */
+  filter: progid:DXImageTransform.Microsoft.Matrix(Dx=0,Dy=0); /*IE6, IE7*/
+  transform: translateY(25%);    
+}
+
+.exp-empty {
+  height: 100px
+}
+
+.explanation-ball {
+  padding: 10px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.explanation-list {
+  font-size: 1em;
+  list-style-type: none;
+  padding: 0px;
+  margin-left: 0px;
+}
