@@ -163,7 +163,7 @@ table.bingo-welcome {
     border-radius:6px;
     -moz-border-radius:6px;
     border-spacing: 0px; /* with border collapse separate, if you don't set border spacing to 0 then you will see spaces between borders*/
-    border-left: 0px; /*if you don't border-left, you will have a double thickness left border*/
+    border-left: solid red 6px; /*if you don't border-left, you will have a double thickness left border*/
     width: 100%;  /*Needed so that it takes up all 12 cols from bootstrap*/
 }
 // Makes header red
@@ -176,15 +176,15 @@ th.bingo-th {
 // adds border top and left to all inner circles
 // adds padding to cells
 td.bingo-col {
-  border-left: solid gray 1px;
-  border-top: solid gray 1px;
+  border-left: solid #DDDDDD 1px;
+  border-top: solid #DDDDDD 1px;
   padding-top: 5px; /* with border spacing = 0, you need padding in the cells */
   padding-bottom: 5px;
 }
 
-//left hand side is red
+//left hand side should not be doubled
 th.bingo-th, tr td.bingo-col:first-child {
-  border-left: solid red 6px;
+  border-left: none;
 }
 // there should be no grey lines above the first row
 tr:first-child td.bingo-col {
