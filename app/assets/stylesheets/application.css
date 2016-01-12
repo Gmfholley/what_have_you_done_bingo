@@ -50,10 +50,14 @@ td.marked .bingo-image-column {
 }
 
 #show-bingo {
+  position: absolute;
+  left: 0px;
+  top: -48px;
+  margin-left: 40%;
   font-size: 35px;
   color: red;
   opacity: 0;
-  transition: opacity .25s ease-in-out;
-  -moz-transition: opacity .25s ease-in-out;
-  -webkit-transition: opacity .25s ease-in-out;
+  transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 1s ease-in-out;
 }
