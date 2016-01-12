@@ -21,33 +21,29 @@
   function DOMCircles(){
     // assume only one table on the page
     var card = {
-      circles: document.getElementsByTagName("td").sort(function(a, b){
-        if (a.id > b.id) {
-          return 1;
-        }
-        if (a.id < b.id) {
-          return -1;
-        }
-        // a must be equal to b
-        return 0;
-      }),
-      size: circles.length,
+      circles: [],
+      size: 0,
       num_bingos: 0
     }
     
+    card.initialize = function() {
+      card.circles = document.getElementsByTagName("td"); 
+      card.size = card.circles.length;
+    }
     // returns an Array [x, y], corresponding to the positions x & y of a circle
     //
     // circle = Element type TD with id of bingo-x-y
     //
     // returns an Array
     card.circlePosition = function(circle) {
-      var array = circle.id.split("-").shift();
+      var array = circle.id.split("-");
+      array.shift();
       for(var i=0; i<array.length;i++) array[i] = +array[i];
       return array;
     }
     
     card.circleMarked = function(circle) {
-      return circle.classList.includes("marked");
+      return circle.classList.contains("marked");
     }
     
     card.markCircle = function(circle) {
@@ -71,10 +67,10 @@
       card: DOMCircles(),
       card_size: card.size,
       circles: card.getCircles(),
-      horizontal = {},
-      vertical = {},
-      left_bingo = 0,
-      right_bingo = 0,
+      horizontal: {},
+      vertical: {},
+      left_bingo: 0,
+      right_bingo: 0,
       num_bingos: 0
     }
   
@@ -96,7 +92,7 @@
         card.num_bingos += 1;
         var len = bingo.circles.len;
         for (i = 0; i < len; i ++) {
-          if partOfLeftBingo(bingo.card.position(bingo.circles[i])) {
+          if (partOfLeftBingo(bingo.card.position(bingo.circles[i]))) {
             bingo.card.markCircle(bingo.circles[i]);
           }
         }
@@ -108,7 +104,7 @@
         card.num_bingos += 1;
         var len = bingo.circles.len;
         for (i = 0; i < len; i ++) {
-          if partOfRightBingo(bingo.card.position(bingo.circles[i])) {
+          if (partOfRightBingo(bingo.card.position(bingo.circles[i]))) {
             bingo.card.markCircle(bingo.circles[i]);
           }
         }
@@ -121,7 +117,7 @@
           card.num_bingos += 1;
           var len = bingo.circles.len;
           for (i = 0; i < len; i ++) {
-            if bingo.card.position(bingo.circles[i]))[0] === propertyName {
+            if (bingo.card.position(bingo.circles[i])[0] === propertyName ){
               bingo.card.markCircle(bingo.circles[i]);
             }
           }
@@ -135,7 +131,7 @@
           card.num_bingos += 1;
           var len = bingo.circles.len;
           for (i = 0; i < len; i ++) {
-            if bingo.card.position(bingo.circles[i]))[1] === propertyName {
+            if (bingo.card.position(bingo.circles[i])[1] === propertyName) {
               bingo.card.markCircle(bingo.circles[i]);
             }
           }
@@ -146,7 +142,7 @@
     function checkMarkedCircles () {
       var len = bingo.circles.length;
       for (var i = 0; i < len; i ++ ) {
-        if card.circleMarked(bingo.circles[i]) {
+        if (card.circleMarked(bingo.circles[i])) {
           updateMarkedCircles(bingo.card.position(bingo.circles[i]));
         }
       }
@@ -166,12 +162,14 @@
         bingo.horizontal[y] = 1;
       }
       
-      if partOfLeftBingo(arrXY)
+      if (partOfLeftBingo(arrXY)){
         bingo.left_bingo += 1
-      end
-      if partOfRightBingo(arrXY)
+      }
+      
+      if (partOfRightBingo(arrXY)){
         bingo.right_bingo += 1
-      end
+      }
+    
     }
     
   // # check if these indexes are part of a left-most X bingo
@@ -201,20 +199,3 @@
     
     return bingo;
   }
-
-  
-  # checks to see if card has a left-x bingo
-  #
-  # returns nothing
-  def check_and_mark_left_x
-
-  
-  
-  # updates the circle's part_of_bingo attribute to true
-  #
-  # circle - Circle object
-  #
-  # returns true
-  def update_circle(circle)
-    circle.update(part_of_bingo: true)
-  end
