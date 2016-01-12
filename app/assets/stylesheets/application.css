@@ -42,3 +42,9 @@ td.marked {
 td.marked .bingo-image-column {
   opacity: 1;
 }
+
+@media(max-width: 750px){
+  .hide-if-xs {
+    height:0p;
+  }  
+}

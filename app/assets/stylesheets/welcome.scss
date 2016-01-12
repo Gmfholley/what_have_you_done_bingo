@@ -44,6 +44,7 @@
   height: 250px;
 }
 
+
 //.header-arc-text:before {
 //  content: "";
 //  display: block;
@@ -63,6 +64,13 @@
   font-family: 'Pacifico', cursive;
 }
 
+@media(max-width: 685px) {
+    
+    .header-arc-text .char {
+      font-size: 2em;
+      height: 500px;
+    }
+}
 .char1 { 
   -ms-transform: rotate(-54deg); /* IE 9 */
   -webkit-transform: rotate(-54deg); /* Chrome, Safari, Opera */
@@ -210,6 +218,7 @@ td.bingo-col:hover {
 .explanation-block {
   max-width: 970px;
   margin: auto;
+
 }
 
 //Explanation of site in white ball
@@ -217,6 +226,8 @@ td.bingo-col:hover {
   vertical-align: middle;
   position:relative;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .explanation-ball:before {
   content: "";

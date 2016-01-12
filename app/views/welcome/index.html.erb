@@ -38,6 +38,7 @@
           <td class="col col-xs-2 bingo-col" onclick="markCircle(this)">
             <div class="bingo-image-column" style="background-image: url(<%= image_url 'bingo2.jpg' %>);"></div>
           </td>
+
           <td class="col col-xs-2 bingo-col" onclick="markCircle(this)">
             <div class="bingo-image-column" style="background-image: url(<%= image_url 'bingo3.jpg' %>);"></div>
           </td>
@@ -136,10 +137,10 @@
         </ul>
       </div>
     </div>
-    <div class="exp-empty col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0">      
+    <div class="exp-empty hide-if-xs col-sm-4 col-sm-offset-0">      
     </div>
-    <div class="exp-empty col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-0"></div>
-    <div id-"exp-2" class="explanation-ball col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-2">
+    <div class="exp-empty hide-if-xs col-sm-6 col-sm-offset-0"></div>
+    <div id-"exp-2" class="explanation-ball col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-1">
       <div class="explanation-content">
         <p class="accent-background"><i class="fa fa-play-circle fa-5x"></i></p>
         <h4 class="accent-background"><span class="accent-font">Play!</span></h4>
@@ -149,7 +150,7 @@
         </ul>
       </div>
     </div>
-    <div id-"exp-3" class="explanation-ball col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-2">
+    <div id-"exp-3" class="explanation-ball col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-3">
       <div class="explanation-content">
         <p class="accent-background"><i class="fa fa-share fa-5x"></i></p>
         <h4 class="accent-background"><span class="accent-font">Share...</span></h4>
@@ -159,6 +160,6 @@
         </ul>
       </div>
     </div>
-    <div class="exp-empty col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-2"></div>
+    <div class="exp-empty hide-if-xs col-sm-4 col-sm-offset-2"></div>
   </div>
 </div>
