@@ -150,18 +150,14 @@ transform: rotate(54deg);
   display: block;
   content: "";
   position: relative;
-//  transition: padding-top 1s;
 }
 
-.bingo-image-column:hover {
-  
+.bingo-image-column:hover {  
   opacity:1;
 }
 
 
 table.bingo-welcome {
-//    position: relative;
-//    left: 0px;
     border-collapse:separate;  /*can't border collapse if you want rounded edges*/
     border:solid red 6px;
     border-radius:6px;
@@ -170,49 +166,36 @@ table.bingo-welcome {
     border-left: 0px; /*if you don't border-left, you will have a double thickness left border*/
     width: 100%;  /*Needed so that it takes up all 12 cols from bootstrap*/
 }
-
-tbody.bingo-tbody {
-  border: solid red 6px;
-  border-radius: 6px;
-  -moz-border-radius:6px;
-  border-spacing: 1px;
-}
+// Makes header red
 th.bingo-th {
-    background-color: red;
-    color: white;
-    border: none;
-    text-align: center;
+  background-color: red;
+  color: white;
+  border: none;
+  text-align: center;
 }
-
-th.bingo-th, td.bingo-col {
-  border-left: solid red 6px;
-}
+// adds border top and left to all inner circles
+// adds padding to cells
 td.bingo-col {
-  transition: background-color 1s;
-}
-td.bingo-col:hover {
-   background-color: #F7F5D8; 
-}
-tr.bingo-tr {
-  padding-top: 5px;
-}
-td.bingo-col {
-  border-left: solid black 1px;
-  border-top: solid black 1px;
+  border-left: solid gray 1px;
+  border-top: solid gray 1px;
   padding-top: 5px; /* with border spacing = 0, you need padding in the cells */
   padding-bottom: 5px;
 }
 
-thead:first-child tr:first-child th.bingo-th:first-child, tbody:first-child tr:first-child td.bingo-col {
-  border-radius: 6px 0 0 0;
-  border: solid red 6px;
-}
 //left hand side is red
-thead:last-child tr:last-child th.bingo-th:first-child, tbody:last-child tr:last-child td.bingo-col:first-child, tr td.bingo-col:first-child {
-//  border-radius: 0 0 0 6px;
+th.bingo-th, tr td.bingo-col:first-child {
   border-left: solid red 6px;
 }
-
+// there should be no grey lines above the first row
 tr:first-child td.bingo-col {
   border-top: none;
+}
+// Effects
+//sets transition of background color
+td.bingo-col {
+  transition: background-color 1s;
+}
+// changes back ground color on hover
+td.bingo-col:hover {
+   background-color: #F7F5D8; 
 }
