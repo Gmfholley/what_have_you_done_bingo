@@ -15,7 +15,7 @@
 //= require_tree .
   function markCircle(element) {
     element.classList.toggle("marked");
-    CheckBingo();
+    CheckBingo(DOMCircles);
   }
   
   function DOMCircles(){
@@ -28,14 +28,17 @@
     
     card.initialize = function() {
       card.circles = document.getElementsByTagName("td"); 
-      card.size = card.circles.length;
+      
+      setTimeout(function() {
+        card.size = Math.sqrt(card.circles.length);
+      }, 0);
     }
     // returns an Array [x, y], corresponding to the positions x & y of a circle
     //
     // circle = Element type TD with id of bingo-x-y
     //
     // returns an Array
-    card.circlePosition = function(circle) {
+    card.position = function(circle) {
       var array = circle.id.split("-");
       array.shift();
       for(var i=0; i<array.length;i++) array[i] = +array[i];
@@ -65,18 +68,38 @@
     // assume only one table on the page
     var bingo = {
       card: DOMCircles(),
-      card_size: card.size,
-      circles: card.getCircles(),
       horizontal: {},
       vertical: {},
       left_bingo: 0,
       right_bingo: 0,
-      num_bingos: 0
+      num_bingos: 0,
     }
+    
+    bingo.initialize = function() {
+      bingo.card.initialize();
+      bingo["card_size"] = bingo.card.size;
+      bingo["circles"] = bingo.card.getCircles();
+    }
+    //
+    // bingo.initialize = function() {
+    //   bingo.card.initialize();
+    //   bingo.card.size = bingo.card.size;
+    // }
   
+  
+    
     bingo.work = function() {
+      initializeCount();
       checkMarkedCircles();
-      card.num_bingos = getNumBingos();
+      bingo.num_bingos = getNumBingos();
+    }
+    
+    function initializeCount(){
+      bingo.vertical = {};
+      bingo.horizontal = {};
+      bingo.left_bingo = 0;
+      bingo.right_bingo = 0;
+      bingo.num_bingos = 0;
     }
     
     function getNumBingos(){
@@ -88,8 +111,8 @@
     }
     
     function checkAndMarkLeftXBingo(){
-      if (bingo.left_bingo == bingo.card_size){
-        card.num_bingos += 1;
+      if (bingo.left_bingo == bingo.card.size){
+        bingo.num_bingos += 1;
         var len = bingo.circles.len;
         for (i = 0; i < len; i ++) {
           if (partOfLeftBingo(bingo.card.position(bingo.circles[i]))) {
@@ -100,8 +123,8 @@
     }
     
     function checkAndMarkRightXBingo(){
-      if (bingo.right_bingo == bingo.card_size){
-        card.num_bingos += 1;
+      if (bingo.right_bingo == bingo.card.size){
+        bingo.num_bingos += 1;
         var len = bingo.circles.len;
         for (i = 0; i < len; i ++) {
           if (partOfRightBingo(bingo.card.position(bingo.circles[i]))) {
@@ -113,8 +136,8 @@
     
     function checkVerticalBingos(){
       for(var propertyName in bingo.vertical) {
-        if (bingo.vertical[propertyName] === bingo.card_size) {
-          card.num_bingos += 1;
+        if (bingo.vertical[propertyName] === bingo.card.size) {
+          bingo.num_bingos += 1;
           var len = bingo.circles.len;
           for (i = 0; i < len; i ++) {
             if (bingo.card.position(bingo.circles[i])[0] === propertyName ){
@@ -127,8 +150,8 @@
     
     function checkHorizontalBingos(){
       for(var propertyName in bingo.horizontal) {
-        if (bingo.horizontal[propertyName] === bingo.card_size) {
-          card.num_bingos += 1;
+        if (bingo.horizontal[propertyName] === bingo.card.size) {
+          bingo.num_bingos += 1;
           var len = bingo.circles.len;
           for (i = 0; i < len; i ++) {
             if (bingo.card.position(bingo.circles[i])[1] === propertyName) {
@@ -142,7 +165,7 @@
     function checkMarkedCircles () {
       var len = bingo.circles.length;
       for (var i = 0; i < len; i ++ ) {
-        if (card.circleMarked(bingo.circles[i])) {
+        if (bingo.card.circleMarked(bingo.circles[i])) {
           updateMarkedCircles(bingo.card.position(bingo.circles[i]));
         }
       }
@@ -156,7 +179,7 @@
       } else {
         bingo.vertical[x] = 1;
       }
-      if (bingo.hortizontal.hasOwnProperty(y)){
+      if (bingo.horizontal.hasOwnProperty(y)){
         bingo.horizontal[y] += 1;
       } else {
         bingo.horizontal[y] = 1;
@@ -193,7 +216,7 @@
   // #        (0, 4), (1, 3), (2, 2), (3, 1), (4, 0)
   // #  --> true
     function partOfRightBingo(arrXY) {
-      return (arrXY[0] == (bingo.size - arrXY[1] - 1));
+      return (arrXY[0] === (bingo.card.size - arrXY[1] - 1));
     }
     
     
