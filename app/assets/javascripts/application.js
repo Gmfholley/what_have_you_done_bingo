@@ -15,7 +15,27 @@
 //= require_tree .
   function markCircle(element) {
     element.classList.toggle("marked");
-    CheckBingo(DOMCircles);
+    a = CheckBingo(DOMCircles);
+    a.initialize();
+    setTimeout(function() {
+      a.work();
+      setTimeout(function(){
+        if(a.num_bingos > 0) {
+          showBingo();
+        }
+      },1);
+    }, 1);
+ 
+
+  }
+  
+  function showBingo() {
+    var element = document.getElementById("show-bingo");
+    element.style.opacity = 1;
+    setTimeout(function() {
+      element.style.opacity = 0; 
+    }, 5000);
+    
   }
   
   function DOMCircles(){
@@ -111,7 +131,7 @@
     }
     
     function checkAndMarkLeftXBingo(){
-      if (bingo.left_bingo == bingo.card.size){
+      if (bingo.left_bingo === bingo.card.size){
         bingo.num_bingos += 1;
         var len = bingo.circles.len;
         for (i = 0; i < len; i ++) {
@@ -123,7 +143,7 @@
     }
     
     function checkAndMarkRightXBingo(){
-      if (bingo.right_bingo == bingo.card.size){
+      if (bingo.right_bingo === bingo.card.size){
         bingo.num_bingos += 1;
         var len = bingo.circles.len;
         for (i = 0; i < len; i ++) {
