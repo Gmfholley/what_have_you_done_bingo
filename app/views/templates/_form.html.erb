@@ -37,15 +37,17 @@
     
     
 
-    <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">    
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">    
       <table class="bingo-welcome">
-        <tr>
-          <th class="bingo-th below-arc-text col-xs-2">B</th>
-          <th class="bingo-th below-arc-text col-xs-2">I</th>
-          <th class="bingo-th below-arc-text col-xs-2">N</th>
-          <th class="bingo-th below-arc-text col-xs-2">G</th>
-          <th class="bingo-th below-arc-text col-xs-2">O</th>
-        </tr>
+        <thead>
+          <tr>
+            <th class="bingo-th below-arc-text col-xs-2">B</th>
+            <th class="bingo-th below-arc-text col-xs-2">I</th>
+            <th class="bingo-th below-arc-text col-xs-2">N</th>
+            <th class="bingo-th below-arc-text col-xs-2">G</th>
+            <th class="bingo-th below-arc-text col-xs-2">O</th>
+          </tr>
+        </thead>
         <tbody class="bingo-tbody">
         <%= f.fields_for :squares do |ff| %>
           <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
@@ -80,10 +82,13 @@
         <% end %>
         </tbody>
       </table>
- 
+     </div>
+    <div style="clear:both"></div>
     <div class="margin20"></div>
-    <div class="actions form-group">
-      <%= f.button class: "btn accent-background" %>
+    <div class="col col-xs-12">
+      <div class="actions form-group">
+        <%= f.button class: "btn accent-background" %>
+      </div>
     </div>
    </div>
   <% end %>

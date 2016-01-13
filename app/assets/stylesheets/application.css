@@ -17,7 +17,9 @@
 * {
   font-family: 'Open Sans', sans-serif;
 }
-
+.margin30 {
+  margin-top: 30px;
+}
 .margin20 {
   margin-top: 20px;
 }
@@ -53,9 +55,7 @@
 }
 /*Blue: 88EBFF*/
 /*Dark Blue: 4BC8E0*/
-.margin30 {
-  margin-top: 30px;
-}
+
 
 .navbar.no-margin-bottom {
   margin-bottom: 0px;
