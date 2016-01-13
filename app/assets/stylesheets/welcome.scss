@@ -208,6 +208,15 @@ td.bingo-col:hover {
    background-color: #DEFFFC; 
 }
 
+td.bingo-td-no-padding, td.bingo-td-no-padding .form-group, td.bingo-td-no-padding textarea, td.bingo-td-no-padding .checkbox {
+  padding: 2px 2px 2px 2px;
+  margin: 0px 0px;
+}
+
+textarea.resize-none {
+  resize: none;
+  font-size: .8em;
+}
 
 .explanation-section {
   margin-top: 10%;

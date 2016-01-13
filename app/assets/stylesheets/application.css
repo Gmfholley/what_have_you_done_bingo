@@ -18,6 +18,9 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.margin20 {
+  margin-top: 20px;
+}
 .accent-font {
  font-family: 'Pacifico', cursive;
 }

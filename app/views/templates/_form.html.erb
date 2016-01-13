@@ -13,62 +13,78 @@
     <% end %>
     <div class="col col-xs-12">
       <div class="form-group">
-        <%= f.label :size %><br>
-        <%= f.select :size, options_for_select((@template.size ..@template.size).collect {|s| s }), class: "form-control" %>
+        <%= f.hidden_field :size %>
       </div>
       <div class="form-group">
-        <%= f.label :name %><br>
+        <%= f.label :name, "Give your bingo template a cool name." %><br>
         <%= f.text_field :name, class: "form-control" %>
       </div>
       <div class="form-group">
         <%= f.label :rating %><br>
-        <%= f.select :rating, options_for_select(@ratings.collect { |s| [s[0].humanize, s[0]] }), class: "form-control" %>
+        <%= f.select :rating, options_for_select(@ratings.collect { |s| [s[0].humanize, s[0]] }),{}, {class: "form-control"} %>
       </div>
-      <div class="form-group">
-        <%= f.label :is_public %><br>
-        <%= f.check_box :is_public, class: "form-control" %>
+      <div class="checkbox">
+        <%= f.label :is_public do %>
+          <%= f.check_box :is_public %>
+          <span>Share?</span> <em>Public templates can be seen by anyone.  Private templates can only be seen by members of your group.</em> <span>Check to share.</span>
+        <% end %>
       </div>
      </div>
+     
      <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
     <% @size = @template.size %>
     <% @this_col = 0 %>
-    <table class="table table-bordered table-condensed">
-      <tbody class="table-striped">
-      <%= f.fields_for :squares do |ff| %>
-        <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
-      
-        <% if @this_col % @size == 0  %>
-          <tr>
-        <% end  %>
-        <td>
-          <div class="col col-xs-12">
-            <div class="form-group">
-              <%= ff.hidden_field :position_x %>
-              <%= ff.hidden_field :position_y %>
-            </div>
-            <div class="form-group">
-              <%= ff.label :question %><br>
-              <%= ff.text_field :question, class: "form-control" %>
-            </div> 
-             <div class="form-group">
-               <%= ff.label :free_space %><br>
-               <%= ff.check_box :free_space, class: "form-control" %>
-             </div>
-          </div>
-        </td>
-        <%# When it's the end of the row (ie % is -1), then end the row %>
-        <% if @this_col % @size == (@size - 1)  %>
-          </tr>
-        <% end  %>
-        <% @this_col += 1 %>
-      <% end %>
-      
-      </tbody>
     
-    </table>
-  
+    
+
+    <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">    
+      <table class="bingo-welcome">
+        <tr>
+          <th class="bingo-th below-arc-text col-xs-2">B</th>
+          <th class="bingo-th below-arc-text col-xs-2">I</th>
+          <th class="bingo-th below-arc-text col-xs-2">N</th>
+          <th class="bingo-th below-arc-text col-xs-2">G</th>
+          <th class="bingo-th below-arc-text col-xs-2">O</th>
+        </tr>
+        <tbody class="bingo-tbody">
+        <%= f.fields_for :squares do |ff| %>
+          <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
+      
+          <% if @this_col % @size == 0  %>
+            <tr class="bingo-tr">
+          <% end  %>
+          <td id='<%= "bingo-#{ff.object.position_x}-#{ff.object.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
+            <div class="question">
+              <div class="position">
+                <%= ff.hidden_field :position_x %>
+                <%= ff.hidden_field :position_y %>
+              </div>
+              <div class="form-group">
+                <%= ff.label :question, class: "sr-only" %><br>
+                <%= ff.text_area(:question, rows: 3, class: "form-control resize-none") %>
+              </div> 
+              <% if (ff.object.position_x == (@size.to_f/2).floor && ff.object.position_y == (@size.to_f/2).floor)%>
+               <div class="checkbox">
+                 <%= ff.label :free_space do %><br>
+                   <%= ff.check_box :free_space %> free space?
+                 <% end %>
+               </div>
+             <% end %>
+            </div>
+          </td>
+          <%# When it's the end of the row (ie % is -1), then end the row %>
+          <% if @this_col % @size == (@size - 1)  %>
+            </tr>
+          <% end  %>
+          <% @this_col += 1 %>
+        <% end %>
+        </tbody>
+      </table>
+ 
+    <div class="margin20"></div>
     <div class="actions form-group">
       <%= f.button class: "btn accent-background" %>
     </div>
+   </div>
   <% end %>
 </div>
