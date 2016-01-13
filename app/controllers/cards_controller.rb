@@ -63,6 +63,7 @@ class CardsController < ApplicationController
   def edit
   end
   
+  #TODO - this is not returning the right value of rnumber of bingos
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
