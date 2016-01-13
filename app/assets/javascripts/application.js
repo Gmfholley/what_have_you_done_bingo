@@ -69,8 +69,17 @@
       return circle.classList.contains("marked");
     }
     
-    card.markCircle = function(circle) {
-      return circle.classList.add("marked");
+    card.markPartOfBingo = function(circle) {
+      return circle.classList.add("part-of-bingo");
+    }
+    
+    card.removeAllPartOfBingo = function() {
+      var len = card.circles.length;
+      for (i = 0; i < len; i ++) {
+        if (card.circles[i].classList.contains("part-of-bingo") ){
+          card.circles[i].classList.remove("part-of-bingo");
+        }
+      }
     }
     
     card.getCircles = function () {
@@ -123,6 +132,7 @@
     }
     
     function getNumBingos(){
+      bingo.card.removeAllPartOfBingo();
       checkAndMarkLeftXBingo();
       checkAndMarkRightXBingo()
       checkHorizontalBingos();
@@ -133,10 +143,10 @@
     function checkAndMarkLeftXBingo(){
       if (bingo.left_bingo === bingo.card.size){
         bingo.num_bingos += 1;
-        var len = bingo.circles.len;
+        var len = bingo.circles.length;
         for (i = 0; i < len; i ++) {
           if (partOfLeftBingo(bingo.card.position(bingo.circles[i]))) {
-            bingo.card.markCircle(bingo.circles[i]);
+            bingo.card.markPartOfBingo(bingo.circles[i]);
           }
         }
       }
@@ -145,10 +155,10 @@
     function checkAndMarkRightXBingo(){
       if (bingo.right_bingo === bingo.card.size){
         bingo.num_bingos += 1;
-        var len = bingo.circles.len;
+        var len = bingo.circles.length;
         for (i = 0; i < len; i ++) {
           if (partOfRightBingo(bingo.card.position(bingo.circles[i]))) {
-            bingo.card.markCircle(bingo.circles[i]);
+            bingo.card.markPartOfBingo(bingo.circles[i]);
           }
         }
       }
@@ -158,10 +168,10 @@
       for(var propertyName in bingo.vertical) {
         if (bingo.vertical[propertyName] === bingo.card.size) {
           bingo.num_bingos += 1;
-          var len = bingo.circles.len;
+          var len = bingo.circles.length;
           for (i = 0; i < len; i ++) {
-            if (bingo.card.position(bingo.circles[i])[0] === propertyName ){
-              bingo.card.markCircle(bingo.circles[i]);
+            if (bingo.card.position(bingo.circles[i])[0].toString() === propertyName ){
+              bingo.card.markPartOfBingo(bingo.circles[i]);
             }
           }
         }
@@ -172,10 +182,10 @@
       for(var propertyName in bingo.horizontal) {
         if (bingo.horizontal[propertyName] === bingo.card.size) {
           bingo.num_bingos += 1;
-          var len = bingo.circles.len;
+          var len = bingo.circles.length;
           for (i = 0; i < len; i ++) {
-            if (bingo.card.position(bingo.circles[i])[1] === propertyName) {
-              bingo.card.markCircle(bingo.circles[i]);
+            if (bingo.card.position(bingo.circles[i])[1].toString() === propertyName) {
+              bingo.card.markPartOfBingo(bingo.circles[i]);
             }
           }
         }

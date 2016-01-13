@@ -65,6 +65,10 @@ td.marked .bingo-image-column {
   opacity: 1;
 }
 
+td.marked.part-of-bingo {
+  background-color: #F7F594;
+}
+
 @media(max-width: 750px){
   .hide-if-xs {
     height:0p;
