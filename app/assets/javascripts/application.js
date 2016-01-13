@@ -15,6 +15,21 @@
 //= require_tree .
   function markCircle(element) {
     element.classList.toggle("marked");
+    checkForBingo();
+  }
+  
+  function alwaysMarkCircle(element) {
+    element.classList.add("marked");    
+    checkForBingo();
+  }
+  
+  function unMarkCircle(element) {
+    element.classList.remove("marked");    
+    checkForBingo();
+    
+  }
+  
+  function checkForBingo() {
     a = CheckBingo(DOMCircles);
     a.initialize();
     setTimeout(function() {
@@ -25,8 +40,14 @@
         }
       },1);
     }, 1);
- 
-
+  }
+  
+  function responseIsMarked(element) {
+    if (element.value != "" ) {
+      alwaysMarkCircle(element.parentElement.parentElement);
+    } else {
+      unMarkCircle(element.parentElement.parentElement);
+    }
   }
   
   function showBingo() {

@@ -1,59 +1,83 @@
-<%= form_for @card, url: share_template_path(@card.template.token), method: "post" do |f| %>
-  <% if @card.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+<div class="row">
+  <div id="show-bingo">BINGO</div>
+  <%= form_for @card, url: share_template_path(@card.template.token), method: "post" do |f| %>
+    <% if @card.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@card.errors.count, "error") %> prohibited this template from being saved:</h2>
 
-      <ul>
-      <% @card.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :is_public %><br>
-    <%= f.check_box :is_public %>
-  </div>
-  
-  <% @size = @card.template.size %>
-  <% @this_col = 0 %>
-  <table class="table table-bordered table-condensed">
-    <tbody class="table-striped">
-    <%= f.fields_for :circles do |ff| %>
-      <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
-      
-      <% if @this_col % @size == 0  %>
-        <tr>
-      <% end  %>
-      <td id='<%="bingo-#{ff.position_x}-#{ff.position_y}" %>'>
-        <div class="col col-xs-12">
-          <div class="form-group">
-            <%= ff.hidden_field :position_x %>
-            <%= ff.hidden_field :position_y %>
-          </div>
-          <div class="form-group">
-            <%= ff.label :question %><br>
-            <%= ff.text_field :question, class: "form-control", :readonly => true %>
-          </div> 
-           <div class="form-group">
-             <%= ff.label :response %><br>
-             <%= ff.text_field :response, class: "form-control" %>
-           </div>
-        </div>
-      </td>
-      <%# When it's the end of the row (ie % is -1), then end the row %>
-      <% if @this_col % @size == (@size - 1)  %>
-        </tr>
-      <% end  %>
-      <% @this_col += 1 %>
+        <ul>
+        <% @card.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
     <% end %>
-      
-    </tbody>
+    <div class="col col-xs-12">
+      <div class="checkbox">
+        <%= f.label :is_public do %>
+          <%= f.check_box :is_public %>
+          <span>Share?</span> <em>Public cards can be seen by anyone with a link. Private cards can only be seen by you and the admin of your group.</em> <span>Check to make your card shareable.</span>
+        <% end %>
+      </div>
+     </div>
+     
+     <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
+    <% @size = @card.template.size %>
+    <% @this_col = 0 %>
     
-  </table>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    
+
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">    
+      <table class="bingo-welcome">
+        <thead>
+          <tr>
+            <th class="bingo-th below-arc-text col-xs-2">B</th>
+            <th class="bingo-th below-arc-text col-xs-2">I</th>
+            <th class="bingo-th below-arc-text col-xs-2">N</th>
+            <th class="bingo-th below-arc-text col-xs-2">G</th>
+            <th class="bingo-th below-arc-text col-xs-2">O</th>
+          </tr>
+        </thead>
+        <tbody class="bingo-tbody">
+        <%= f.fields_for :circles do |ff| %>
+          <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
+      
+          <% if @this_col % @size == 0  %>
+            <tr class="bingo-tr">
+          <% end  %>
+          <% if (ff.object.marked?) %>
+            <td id='<%= "bingo-#{ff.object.position_x}-#{ff.object.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+          <% else %>
+            <td id='<%= "bingo-#{ff.object.position_x}-#{ff.object.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
+          <% end %>
+              <div class="square-info">
+                <%= ff.hidden_field :position_x %>
+                <%= ff.hidden_field :position_y %>
+                <%= ff.hidden_field :question %>
+              </div>
+              <h6><%= ff.object.question %></h6> 
+              <div class="form-group">
+                <%= ff.label :response, class: "sr-only" %><br>
+                <%= ff.text_field :response, class: "form-control", onchange: "responseIsMarked(this)"  %>
+              </div>
+            </div>
+          </td>
+          <%# When it's the end of the row (ie % is -1), then end the row %>
+          <% if @this_col % @size == (@size - 1)  %>
+            </tr>
+          <% end  %>
+          <% @this_col += 1 %>
+        <% end %>
+        </tbody>
+      </table>
+     </div>
+    <div style="clear:both"></div>
+    <div class="margin20"></div>
+    <div class="col col-xs-12">
+      <div class="actions form-group">
+        <%= f.button class: "btn accent-background" %>
+      </div>
+    </div>
+   </div>
+  <% end %>
+</div>
