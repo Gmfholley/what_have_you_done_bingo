@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col col-xs-12 errors">
       <% @user.errors.full_messages.each do |error| %>
-        <p class="has-feedback has-error"><%= error %></p>
+        <div class="col col-xs-12 errors">
+            <p class="has-feedback has-error"><%= error %></p>
+        </div>
       <% end %>
-    </div>
 
-    <div class="form form-horizontal col col-xs-12">
       <%= form_for @user, url: @submit_url, method: :post  do |f| %>
+        <div class="col col-xs-12">
           <div class="form-group">
              <%= f.label :email %><br />
              <%= f.text_field :email, class: "form-control", placeholder: "email@address.com" %>
@@ -30,8 +30,7 @@
           <div class="form-group">
             <%= f.button class: "btn accent-background" %>
           </div>
-          
+        </div>          
       <% end %>
   
-    </div>
 </div>

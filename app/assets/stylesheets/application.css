@@ -59,14 +59,16 @@
 }
 
 td.marked {
-  background-color: #F7F5D8; 
+/*  background-color: #F7F5D8;  yellow*/
+  background-color: #DEFFFC; /*blue*/
 }
 td.marked .bingo-image-column {
   opacity: 1;
 }
 
 td.marked.part-of-bingo {
-  background-color: #F7F594;
+/*  background-color: #F7F594; /*yellow*/
+  background-color: #9CFFFC; /*blue*/
 }
 
 @media(max-width: 750px){
