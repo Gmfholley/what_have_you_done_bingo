@@ -65,8 +65,10 @@
           <% else %>
             <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
           <% end %>
-              <h6><%= circle.question %></h6> 
-              <p><%= circle.response %></p>
+              <div class="bingo-contents">
+                <h6><%= circle.question %></h6> 
+                <p><%= circle.response %></p>
+              </div>
             </td>
           <%# When it's the end of the row (ie % is -1), then end the row %>
           <% if @this_col % @size == (@size - 1)  %>

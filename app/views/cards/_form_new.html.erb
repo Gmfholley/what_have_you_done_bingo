@@ -50,6 +50,7 @@
           <% else %>
             <td id='<%= "bingo-#{ff.object.position_x}-#{ff.object.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
           <% end %>
+            <div class="bingo-contents">
               <div class="square-info">
                 <%= ff.hidden_field :position_x %>
                 <%= ff.hidden_field :position_y %>
