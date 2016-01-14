@@ -55,11 +55,13 @@
             <tr class="bingo-tr">
           <% end  %>
           <% if (square.free_space ) %>
-            <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+            <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked bingo-col-square">
           <% else %>
-            <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
+            <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding bingo-col-square">
           <% end %>
-              <h6><%= square.question %></h6> 
+              <div class="bingo-contents">
+                <h6><%= square.question %></h6> 
+              </div>
             </td>
           <%# When it's the end of the row (ie % is -1), then end the row %>
           <% if @this_col % @size == (@size - 1)  %>

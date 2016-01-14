@@ -6,7 +6,7 @@
   font-family: 'Dosis', sans-serif;
   font-weight: normal;
 }
-
+//image-column used on first page for images
 .bingo-image-column {
   vertical-align: middle;
   position: relative;  
@@ -26,6 +26,22 @@
 
 .bingo-image-column:hover {  
   opacity:1;
+}
+////for other contents uses this css
+//.bingo-col-square {
+//  display: inline-block;
+//  position: relative;
+//  width: 100%;
+//}
+//
+//.bingo-col-square:before {
+//  margin-top: 75%;
+//}
+
+.bingo-contents {
+  width: 100%;
+  height: 0px;
+  padding-bottom: 85%;
 }
 
 
