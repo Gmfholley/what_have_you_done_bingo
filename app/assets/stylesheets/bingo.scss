@@ -87,3 +87,25 @@ textarea.resize-none {
   resize: none;
   font-size: .8em;
 }
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  #section-to-print td {
+    width: 50pt;
+  }
+  #section-to-print th {
+    height: 50pt;
+  }
+
+}
