@@ -27,34 +27,26 @@
  font-family: 'Pacifico', cursive;
 }
 
-.accent-background, .accent-background a {
+.accent-background, .accent-background a, .navbar-brand.accent-font.btn {
 /*  background-color: #608A44;*/
   color: red;
-  
 }
 
-.accent-background:hover, .accent-background a:hover {
-/*  background-color: #608A44;*/
-  color: black;
-  
-  
+a.accent-background:hover, .accent-background:hover, .accent-background a:hover, .navbar-brand.accent-font.btn:hover {
+  color: #B21212;
+  background-color: white;
 }
 
-.accent-background a:hover, .accent-background .btn:hover, .accent-background.btn:hover {
-  background-color: #E3FFFC;
-}
 
 .accent-background.btn {
-/*  background-color: #608A44;*/
   background-color: red;
   color: white;
 }
 
 .accent-background.btn:hover {
   background-color: #B21212;
+  color: white;
 }
-/*Blue: 88EBFF*/
-/*Dark Blue: 4BC8E0*/
 
 
 .navbar.no-margin-bottom {
