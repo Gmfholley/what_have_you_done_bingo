@@ -31,7 +31,7 @@
 <div class="row">
   <div id="show-bingo">BINGO</div>
      <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
-    <% @size = @card.template.size %>
+    <% @size = @template.size %>
     <% @this_col = 0 %>
     
     <div class="margin20"></div>
@@ -55,9 +55,9 @@
             <tr class="bingo-tr">
           <% end  %>
           <% if (square.free_space ) %>
-            <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+            <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
           <% else %>
-            <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
+            <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
           <% end %>
               <h6><%= square.question %></h6> 
             </td>
@@ -77,69 +77,3 @@
 <%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id), class: "btn accent-background" %> 
 <%= link_to 'Play!', share_template_path(@template.token), class: "btn accent-background" %> 
 <%= link_to "Return to #{@organization.name}", organization_path(@organization), class: "btn accent-background" %>
-
-
-
-<div class="col col-xs-12">
-<p>
-  <strong>Organization:</strong>
-  <%= @template.organization.name %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @template.name %>
-</p>
-
-<p>
-  <strong>Size of card:</strong>
-  <%= @template.size %>
-</p>
-
-<p>
-  <strong>Difficulty Rating:</strong>
-  <%= @template.rating %>
-</p>
-
-<p>
-  <strong>Public:</strong>
-  <%= @template.is_public %>
-</p>
-
-<p>
-  <strong>Shareable link:</strong>
-  <%= link_to @shareable_link, @shareable_link %>
-</p>
-<p><em>Note: Unless your link is shareable, no one else will have access to this url.</em></p>
-
-
-  <% @size = @template.size %>
-  <% @this_col = 0 %>
-  <table class="table table-bordered table-condensed">
-    <tbody class="table-striped">
-    <% @template.squares.each do |square| %>
-      <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
-      
-      <% if @this_col % @size == 0  %>
-        <tr>
-      <% end  %>
-      <td class="col-xs-2">
-          <div>
-            <%= square.question %><br>
-          </div> 
-      </td>
-      <%# When it's the end of the row (ie % is -1), then end the row %>
-      <% if @this_col % @size == (@size - 1)  %>
-        </tr>
-      <% end  %>
-      <% @this_col += 1 %>
-    <% end %>
-      
-    </tbody>
-    
-  </table>
-
-
-<%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id), class: "btn accent-background" %> 
-<%= link_to 'Group', organization_path(@organization), class: "btn accent-background" %>
-</div>
