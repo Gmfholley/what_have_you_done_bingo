@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # public sign up pages for users to create or destroy group
   get 'organizations/:id/sign_up' => 'organization_signup#new', as: :organization_sign_up
   post 'organizations/:id/sign_up' => 'organization_signup#create'
-  delete 'organization/:id/remove'  => 'organization_signup#destroy'
+  delete 'organization/:id/remove'  => 'organization_signup#destroy', as: :organization_remove
   
   
   get 'organization/:id/update_token' => 'organizations#update_token', as: :update_organization_token
