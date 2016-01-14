@@ -1,13 +1,12 @@
 
 
-<div class="row">
-    <div class="col col-xs-12 errors">
+    <div class="errors">
       <% @user.errors.full_messages.each do |error| %>
         <p class="has-feedback has-error"><%= error %></p>
       <% end %>
     </div>
 
-    <div class="form form-horizontal col col-xs-12">
+    <div class="form form-horizontal">
       <%= form_for @user, url: organization_sign_up_url, method: :post  do |f| %>
           <div class="form-group">
              <%= f.label :email %><br />
@@ -35,4 +34,3 @@
       <% end %>
   
     </div>
-</div>
