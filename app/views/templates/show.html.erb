@@ -1,40 +1,84 @@
-<p id="notice"><%= notice %></p>
-
-
-<p>
-  <strong>Name:</strong>
-  <%= @template.name %>
-</p>
+<h1 class="accent-font text-center">Reviewing Your <%= @card.template.name %> Card</h1>
 
 <p>
   <strong>Rating:</strong>
-  <%= @template.rating %>
+  <%= @card.template.rating %>
 </p>
 
-  <% @size = @template.size %>
-  <% @this_col = 0 %>
-  <table class="table table-bordered table-condensed">
-    <tbody class="table-striped">
-    <%= @template.squares.each do |square| %>
-      <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
-      
-      <% if @this_col % @size == 0  %>
-        <tr>
-      <% end  %>
-      <td>
-          <div class="form-group">
-            <%= square.question %><br>
-          </div> 
-      </td>
-      <%# When it's the end of the row (ie % is -1), then end the row %>
-      <% if @this_col % @size == (@size - 1)  %>
-        </tr>
-      <% end  %>
-      <% @this_col += 1 %>
-    <% end %>
-      
-    </tbody>
+<p>
+  <strong>Template:</strong>
+  <%= link_to template_link(@card.template), template_link(@card.template) %>
+</p>
+<p>
+    <em><%= template_public_or_private_note(@card.template) %></em>
+</p>
+<p>
+  <strong>Started:</strong>
+  <%= humanized_time(@card.created_at) %>
+</p>
+<% if @card.is_public %>
+<p>
+  <strong>Shareable link:</strong>
+  <%= link_to card_link(@card), card_link(@card) %>
+</p>
+<% end %>
+
+<p>
+  <strong>Number of bingos:</strong>
+  <%= @card.num_bingos %>
+</p>
+<% if @card.num_bingos > 0 %>
+  <p class="font-accent">Great job!</p>
+<% end %>
+
+
+<div class="row">
+  <div id="show-bingo">BINGO</div>
+     <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
+    <% @size = @card.template.size %>
+    <% @this_col = 0 %>
     
-  </table>
-<%= link_to 'Play!', share_template_path(@template.token), class: "btn accent-background" %>
-<%= link_to 'Group', organization_path(@organization), class: "btn accent-background" %>
+    <div class="margin20"></div>
+
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">    
+      <table class="bingo-welcome">
+        <thead>
+          <tr>
+            <th class="bingo-th below-arc-text col-xs-2">B</th>
+            <th class="bingo-th below-arc-text col-xs-2">I</th>
+            <th class="bingo-th below-arc-text col-xs-2">N</th>
+            <th class="bingo-th below-arc-text col-xs-2">G</th>
+            <th class="bingo-th below-arc-text col-xs-2">O</th>
+          </tr>
+        </thead>
+        <tbody class="bingo-tbody">
+        <% @card.circles.each do |circle| %>
+          <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
+      
+          <% if @this_col % @size == 0  %>
+            <tr class="bingo-tr">
+          <% end  %>
+          <% if (circle.marked?) %>
+            <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+          <% else %>
+            <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
+          <% end %>
+              <h6><%= circle.question %></h6> 
+              <p><%= circle.response %></p>
+            </td>
+          <%# When it's the end of the row (ie % is -1), then end the row %>
+          <% if @this_col % @size == (@size - 1)  %>
+            </tr>
+          <% end  %>
+          <% @this_col += 1 %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div style="clear:both"></div>
+    <div class="margin20"></div>
+</div>
+
+
+<%= link_to 'Edit', edit_card_path(@card), class: "btn accent-background" %> |
+<%= link_to 'Back', cards_path, class: "btn accent-background" %>
