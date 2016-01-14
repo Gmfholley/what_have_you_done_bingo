@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+  
+
+  
   function markCircle(element) {
     element.classList.toggle("marked");
     checkForBingo();
