@@ -1,6 +1,13 @@
-<h1>Editing Template</h1>
+<div class="row">
 
-<%= render 'form' %>
+  <div class="form col col-xs-12 col-md-10 col-md-offset-1">
 
-<%= link_to 'Show', organization_template_path(@organization.id, @template.id) %> |
-<%= link_to 'Back', organization_path(@organization) %>
+    <h1>Editing Template</h1>
+
+    <%= render 'form' %>
+
+    <%= link_to 'Show', organization_template_path(@organization.id, @template.id) %> |
+    <%= link_to 'Back', organization_path(@organization) %>
+
+  </div>
+</div>

@@ -1,6 +1,5 @@
-<div class="row">
   <%= form_tag login_path, :method => :post do %>
-    <div class="form col col-xs-12">
+    <div class="form">
       <div class="form-group">
         <%= label_tag :email %><br />
         <%= text_field_tag :email, nil, class: "form-control", placeholder: "email@address.com" %>
@@ -14,4 +13,3 @@
       </div>
     </div>
   <% end %>
-</div>

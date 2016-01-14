@@ -1,8 +1,14 @@
-<div class="container">
-  <% if @organization.blank? %>
-    <h2 class="accent-font">Sign up!</h2>
-  <% else %>
-    <h2 class="accent-font">Join <%= @organization.name %>'s group!</h2>
-  <% end %>
-  <%= render 'form' %>  
+<div class="row">
+
+  <div class="form col col-xs-12 col-md-10 col-md-offset-1">
+
+    <% if @organization.blank? %>
+      <h2 class="accent-font">Sign up!</h2>
+    <% else %>
+      <h2 class="accent-font">Join <%= @organization.name %>'s group!</h2>
+    <% end %>
+    <%= render 'form' %>  
+
+  </div>
+
 </div>
