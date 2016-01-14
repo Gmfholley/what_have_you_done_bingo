@@ -1,15 +1,17 @@
 <div class="row">
+
+  <div class="form col col-xs-12 col-md-10 col-md-offset-1">
   <% if @user.id.blank? %>
-    <div class="row">
-      <div class="col col-xs-12">
-        <h2 class="accent-font"><%= "Join #{@organization.name}'s group!" %></h2>
-        <h4 class="text-center">By joining a group, you get to play all of their private bingo templates.</h4>
-        <%= render 'form' %>
-      <% else %>
-        <h2 class="accent-font"><%= "#{@user.first_name}, Join #{@organization.name}'s group!" %></h2>
-        <%= link_to 'Join!', organization_sign_up_path(@organization.token), method: "post", class: "btn accent-background" %>
-        <%= link_to "Review #{@organization.name}", organization_path(@organization), class: "btn accent-background" %>
-    </div>
-  </div>
+    <h2 class="accent-font"><%= "Join #{@organization.name}'s group!" %></h2>
+    <h4 class="text-center">By joining a group, you get to play all of their private bingo templates.</h4>
+    <%= render 'form' %>
+        
+  <% else %>
+    <h2 class="accent-font"><%= "#{@user.first_name}, Join #{@organization.name}'s group!" %></h2>
+    <%= link_to 'Join!', organization_sign_up_path(@organization.token), method: "post", class: "btn accent-background" %>
+    <%= link_to "Review #{@organization.name}", organization_path(@organization), class: "btn accent-background" %>
   <% end %>
+  
+  </div>
+  
 </div>
