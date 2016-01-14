@@ -1,7 +1,15 @@
-<h1 class="accent-font">New Organization</h1>
+<div class="row">
 
-<% if current_user %>
-<%= render 'form' %>
-<% else %>
-<%= render 'form_with_nested_attributes' %>
-<% end %>
+  <div class="form col col-xs-12 col-md-10 col-md-offset-1">
+
+    <h1 class="accent-font">New Organization</h1>
+
+    <% if current_user %>
+    <%= render 'form' %>
+    <% else %>
+    <%= render 'form_with_nested_attributes' %>
+    <% end %>
+  
+  </div>
+
+</div>
