@@ -25,12 +25,12 @@
          <div class="collapse navbar-collapse" id="my-navbar">
            <ul class="nav navbar-nav pull-right">
             <% if logged_in? %>
-              <li><%= link_to ("<i class='fa fa-2x fa-cogs'></i> Edit Profile").html_safe, edit_profile_path, class: "btn" %></li>
-              <li><%= link_to ("<i class='fa fa-2x fa-sign-out'></i> Logout").html_safe, :logout, method: :delete, class: "btn" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-cogs'></i> Edit Profile").html_safe, edit_profile_path, class: "accent-background" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-sign-out'></i> Logout").html_safe, :logout, method: :delete, class: "accent-background" %></li>
             <% else %>
-              <li><%= link_to ("<i class='fa fa-2x fa-users'></i> Create a Group").html_safe, new_organization_path, class: "btn" %></li>
-              <li><%= link_to ("<i class='fa fa-2x fa-user-plus'></i> Create Account").html_safe, new_user_path, class: "btn" %></li>
-              <li><%= link_to ("<i class='fa fa-2x fa-sign-in'></i> Login").html_safe, :login, class: "btn" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-users'></i> Create a Group").html_safe, new_organization_path, class: "accent-background" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-user-plus'></i> Create Account").html_safe, new_user_path, class: "accent-background" %></li>
+              <li><%= link_to ("<i class='fa fa-2x fa-sign-in'></i> Login").html_safe, :login, class: "accent-background" %></li>
             <% end %>
           </ul>
         </div>
