@@ -1,4 +1,85 @@
-<p id="notice"><%= notice %></p>
+<h1 class="accent-font text-center">Reviewing the <%= @template.name %> Template</h1>
+<h4 class="accent-font text-center"><%= "Belonging to you, #{@template.organization.name}" %></h4>
+
+<% if @template.cards.count == 0 %>
+  <h4 class="text-center">Not played yet.</h4>
+<% else %>
+  <h4 class="text-center">Played <%= @template.cards.count %> times!</h4>
+<% end %>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @template.rating %>
+</p>
+
+<p>
+  <strong>Created on:</strong>
+  <%= humanized_time(@template.created_at) %>
+</p>
+
+<p>
+  <strong>Public or Private:</strong>
+  <%= public_or_private(@template) %>
+</p>
+
+<p>
+  <strong>Shareable link:</strong>
+  <%= link_to shareable_link(@template), shareable_link(@template) %>
+  <p><em>Note: Unless your link is public, only members will have access to this url.</em></p>
+</p>
+
+<div class="row">
+  <div id="show-bingo">BINGO</div>
+     <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
+    <% @size = @card.template.size %>
+    <% @this_col = 0 %>
+    
+    <div class="margin20"></div>
+
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">    
+      <table class="bingo-welcome">
+        <thead>
+          <tr>
+            <th class="bingo-th below-arc-text col-xs-2">B</th>
+            <th class="bingo-th below-arc-text col-xs-2">I</th>
+            <th class="bingo-th below-arc-text col-xs-2">N</th>
+            <th class="bingo-th below-arc-text col-xs-2">G</th>
+            <th class="bingo-th below-arc-text col-xs-2">O</th>
+          </tr>
+        </thead>
+        <tbody class="bingo-tbody">
+        <% @template.squares.each do |square| %>
+          <%# when the mod of the @this_col % @size == 0, then make a new row, otherwise, make a new cell %>
+      
+          <% if @this_col % @size == 0  %>
+            <tr class="bingo-tr">
+          <% end  %>
+          <% if (square.free_space ) %>
+            <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+          <% else %>
+            <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
+          <% end %>
+              <h6><%= square.question %></h6> 
+            </td>
+          <%# When it's the end of the row (ie % is -1), then end the row %>
+          <% if @this_col % @size == (@size - 1)  %>
+            </tr>
+          <% end  %>
+          <% @this_col += 1 %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div style="clear:both"></div>
+    <div class="margin20"></div>
+</div>
+
+<%= link_to 'Edit', edit_organization_template_path(@organization.id, @template.id), class: "btn accent-background" %> 
+<%= link_to 'Play!', share_template_path(@template.token), class: "btn accent-background" %> 
+<%= link_to "Return to #{@organization.name}", organization_path(@organization), class: "btn accent-background" %>
+
+
+
 <div class="col col-xs-12">
 <p>
   <strong>Organization:</strong>
