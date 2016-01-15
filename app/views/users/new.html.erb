@@ -5,10 +5,27 @@
     <% if @organization.blank? %>
       <h2 class="accent-font">Sign up!</h2>
     <% else %>
-      <h2 class="accent-font">Join <%= @organization.name %>'s group!</h2>
+      <h2 class="accent-font text-center">Join <%= @organization.name %>'s group!</h2>
+      <h4>By joining a group, you can...</h4>
+      <ul>
+        <li>See <%= @organization.name %>'s private bingo templates</li>
+        <li>Play them yourself!</li>
+      </ul>
+      <h4>In return, the group admin can...</h4>
+        <li>See you've joined (first and last name, not email)</li>
+        <li>See (but not edit) your bingos</li>
+        <li>(No other group members have access, unless you choose to share)</li>
+      </ul>
+      <h5>Perfect for...</h5>
+      <ul>
+        <li>Corporate challenges</li>
+        <li>Friends challenging each other</li>
+        <li>Anyone who wants to have fun!</li>
+      </ul>
+      
     <% end %>
-    <%= render 'form' %>  
-
+    <%= render 'form' %>      
+    
   </div>
 
 </div>
