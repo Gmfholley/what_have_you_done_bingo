@@ -8,7 +8,10 @@
           <strong>Rating:</strong>
           <%= @card.template.rating %>
         </p>
-
+        <p>
+          <strong>Group:</strong>
+          <%= @card.template.organization.name %>
+        </p>
         <p>
           <strong>Template:</strong>
           <%= link_to template_link(@card.template), template_link(@card.template) %>
@@ -25,6 +28,10 @@
           <strong>Shareable link:</strong>
           <%= link_to card_link(@card), card_link(@card) %>
         </p>
+        <% else %>
+        <p>
+          <strong>Privacy:</strong>
+          Your card is currently private.<em>Visible only to you and <%= @card.template.organization.name %>'s admin.</em></p>
         <% end %>
 
         <p>
@@ -40,7 +47,9 @@
         <% @this_col = 0 %>
     
         <div class="margin20"></div>
-
+        <%= link_to 'Play', edit_card_path(@card), class: "btn accent-background" %> | <%= link_to 'Delete', card_path(@card), method: "delete", class: "btn accent-background", data: {confirm: "Are you sure?"} %> 
+        <div class="margin20"></div>
+        
         <div id="show-bingo">BINGO</div>   
         <table class="bingo-welcome">
           <thead>
@@ -87,7 +96,6 @@
     </div>
     <div style="clear:both"></div>
     <div class="margin20"></div>
-    <%= link_to 'Edit', edit_card_path(@card), class: "btn accent-background" %> | <%= link_to 'Delete', card_path(@card), method: "delete", class: "btn accent-background", data: {confirm: "Are you sure?"} %> |
     <%= link_to 'Back', cards_path, class: "btn accent-background" %>
   </div>
 </div>
