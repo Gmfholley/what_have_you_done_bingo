@@ -6,7 +6,7 @@
     
     <div class="margin30"></div>
     
-    <div class="profile-organizations row">
+    <div class="profile-organizations row" id="mygroups">
       <% @user.organizations.each do |org| %>
         <div class="col-xs-6 col-sm-4 col-lg-3">
           <div class="profile-organization">
@@ -19,15 +19,32 @@
       <% end %>
     </div>
     
+    <div class="margin30"></div>
     
-    
-    
-    
-    <div class="text-center">
-      <%= link_to 'Edit Profile', edit_profile_path, class: 'btn accent-background' %>    
+    <div class="profile-cards row" id="mycards">
+      <% @user.cards.each do |card| %>
+        <div class="col-xs-6 col-sm-4 col-lg-3">
+          <div class="bingo-div-card">
+            <div class="bingo-div-body">
+              <h6 class="accent-font accent-background"><%= "#{card.template.name} card" %></h6>
+              <p><%= "#{card.num_bingos} bingos" %></p>
+              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play'></i>").html_safe, edit_card_path(card) %>
+              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle'></i>").html_safe, card_path(card) %>
+              
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="text-center">
-      <%= link_to 'Delete Account', profile_path, method: 'delete', class: 'btn accent-background' %>
+    
+    
+    <div id="profile">
+      <div class="text-center">
+        <%= link_to 'Edit Profile', edit_profile_path, class: 'btn accent-background' %>    
+      </div>
+      <div class="text-center">
+        <%= link_to 'Delete Account', profile_path, method: 'delete', class: 'btn accent-background' %>
+      </div>
     </div>
   
     <table>
