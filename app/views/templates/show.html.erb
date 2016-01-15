@@ -35,7 +35,7 @@
     <div id="show-bingo">BINGO</div>
   
      <%# @size and @this_col will be used to determine if should make rows or cells in the table %>      
-    <% @size = @card.template.size %>
+    <% @size = @template.size %>
     <% @this_col = 0 %>
     <table class="bingo-welcome">
       <thead>
@@ -55,9 +55,9 @@
           <tr class="bingo-tr">
         <% end  %>
         <% if (square.free_space ) %>
-          <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+          <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
         <% else %>
-          <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
+          <td id='<%= "bingo-#{square.position_x}-#{square.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
         <% end %>
             <div class="bingo-contents">
               <h6 class="circle"><%= square.question %></h6> 
