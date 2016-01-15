@@ -87,7 +87,7 @@
     </div>
     <div style="clear:both"></div>
     <div class="margin20"></div>
-    <%= link_to 'Edit', edit_card_path(@card), class: "btn accent-background" %> |
+    <%= link_to 'Edit', edit_card_path(@card), class: "btn accent-background" %> | <%= link_to 'Delete', card_path(@card), method: "delete", class: "btn accent-background", data: {confirm: "Are you sure?"} %> |
     <%= link_to 'Back', cards_path, class: "btn accent-background" %>
   </div>
 </div>
