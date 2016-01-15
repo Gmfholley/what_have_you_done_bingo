@@ -35,6 +35,15 @@
   text-align: center;
 }
 
+table.bingo-welcome.bingo-template {
+  border: solid #B21212 6px;
+  border-left: solid #B21212 6px;
+}
+
+.bingo-template th.bingo-th {
+  background-color: #B21212;
+}
+
 table.bingo-welcome {
     border-collapse:separate;  /*can't border collapse if you want rounded edges*/
     border:solid red 6px;
