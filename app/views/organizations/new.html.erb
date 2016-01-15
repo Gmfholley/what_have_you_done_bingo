@@ -2,14 +2,36 @@
 
   <div class="form col col-xs-12 col-md-10 col-md-offset-1">
 
-    <h1 class="accent-font">New Organization</h1>
+    <h1 class="accent-font text-center">New Group</h1>
 
     <% if current_user %>
-    <%= render 'form' %>
+      <%= render 'form' %>
     <% else %>
-    <%= render 'form_with_nested_attributes' %>
+      <%= render 'form_with_nested_attributes' %>
     <% end %>
-  
+    
+    <div class="site-explanation well">
+      <h3 class="accent-font accent-background">By Creating a Group, you can...</h3>
+      <ul>
+        <li>Create bingo cards for others to play</li>
+        <li>Invite others to join your group with a shareable (but private) link</li>
+        <li>Manage your members & admin rights</li>
+        <li>See & download who played your bingo cards and how many bingos they have</li>
+      </ul>
+      <h3 class="accent-font accent-background">Bingo Card templates can be...</h3>
+        <li>Public - visible to anyone with a link</li>
+        <li>Private - visible only to group members</li>
+      </ul>
+      <h4 class="accent-font accent-background">Perfect for...</h4>
+      <ul >
+        <li>Corporate challenges</li>
+        <li>Friends challenging each other</li>
+        <li>Anyone who wants to have fun!</li>
+      </ul>
+    </div>
+    
+    
+    
   </div>
 
 </div>

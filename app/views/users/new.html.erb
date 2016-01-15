@@ -3,28 +3,52 @@
   <div class="form col col-xs-12 col-md-10 col-md-offset-1">
 
     <% if @organization.blank? %>
-      <h2 class="accent-font">Sign up!</h2>
+      <h2 class="accent-font text-center">Sign up!</h2>
+      <%= render 'form' %>      
+    
+      <div class="site-explanation well">
+        <h4 class="accent-font">By creating an account, you can...</h4>
+        <ul>
+          <li>Play bingo cards other groups have created</li>
+          <li>Share your bingo cards with others!</li>
+          <li>Join groups to access their private bingo cards</li>
+        </ul>
+        <h4 class="accent-font">You should create a group if...</h4>
+          <li>You want to create your own bingo templates for others to play</li>
+          <li>You want to organize a group of bingo players</li>
+        </ul>
+        <h5 class="accent-font">Perfect for...</h5>
+        <ul >
+          <li>Corporate challenges</li>
+          <li>Friends challenging each other</li>
+          <li>Anyone who wants to have fun!</li>
+        </ul>
+      </div>
+      
     <% else %>
       <h2 class="accent-font text-center">Join <%= @organization.name %>'s group!</h2>
-      <h4>By joining a group, you can...</h4>
-      <ul>
-        <li>See <%= @organization.name %>'s private bingo templates</li>
-        <li>Play them yourself!</li>
-      </ul>
-      <h4>In return, the group admin can...</h4>
-        <li>See you've joined (first and last name, not email)</li>
-        <li>See (but not edit) your bingos</li>
-        <li>(No other group members have access, unless you choose to share)</li>
-      </ul>
-      <h5>Perfect for...</h5>
-      <ul>
-        <li>Corporate challenges</li>
-        <li>Friends challenging each other</li>
-        <li>Anyone who wants to have fun!</li>
-      </ul>
       
+      <%= render 'form' %>      
+    
+      <div class="site-explanation well">
+        <h4 class="accent-font">By joining a group, you can...</h4>
+        <ul>
+          <li>See <%= @organization.name %>'s private bingo templates</li>
+          <li>Play them yourself!</li>
+        </ul>
+        <h4 class="accent-font">In return, the group admin can...</h4>
+          <li>See you've joined (first and last name)</li>
+          <li>See (not edit) your bingos</li>
+          <li>Nobody else has access -- unless you choose to share!</li>
+        </ul>
+        <h5 class="accent-font">Perfect for...</h5>
+        <ul >
+          <li>Corporate challenges</li>
+          <li>Friends challenging each other</li>
+          <li>Anyone who wants to have fun!</li>
+        </ul>
+      </div>
     <% end %>
-    <%= render 'form' %>      
     
   </div>
 
