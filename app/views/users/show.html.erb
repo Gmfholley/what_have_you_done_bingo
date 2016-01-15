@@ -1,8 +1,45 @@
 <div class="row">
   <div class="form col col-xs-12">
     <h2 class="accent-font text-center">This is <%= @user.first_name %>'s page</h2>
-    <% @user.organizations.each do |org| %>
-      <h4 class="text-center">Member of <%= link_to org.name, organization_path(org) %></h4>
-    <% end %>
-  </div>  
+    
+    
+    <div class="margin30"></div>
+    
+    <div class="profile-organizations row" id="mygroups">
+      <h3 class="accent-font accent-background text-center"><%= "#{@user.first_name}'s groups" %></h3>
+      <% @user.organizations.each do |org| %>
+        <div class="col-xs-6 col-sm-4 col-lg-3">
+          <div class="profile-organization">
+            <i class="fa fa-users fa-5x icon"></i>
+            <h6 class="accent-font accent-background"><%= link_to org.name, organization_path(org) %></h6>
+            <p><%= org.templates.count %> templates</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="margin30"></div>
+    
+    <div class="profile-cards row" id="mycards">
+      <h3 class="accent-font accent-background text-center"><%= "#{@user.first_name}'s public cards" %></h3>
+      <% @cards.each do |card| %>
+        <div class="col-xs-6 col-sm-4 col-lg-3">
+          <div class="bingo-div-card">
+            <div class="bingo-div-body">
+              <h6 class="accent-font accent-background"><%= "#{card.template.name} card" %></h6>
+              <p><%= "#{card.num_bingos} bingos" %></p>
+              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle'></i>").html_safe, card_path(card) %>
+              
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if @cards.count == 0 %>
+        <h4 class="accent-font accent-background"><%= "#{@user.first_name} has no public cards." %></h4>
+      <% end %>
+    </div>
+    
+    
+    
+    </div>  
 </div>

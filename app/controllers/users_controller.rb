@@ -42,6 +42,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    @cards = @user.cards.where(is_public: true)
   end
   
   private
