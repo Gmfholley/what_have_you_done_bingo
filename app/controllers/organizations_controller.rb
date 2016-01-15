@@ -53,6 +53,11 @@ class OrganizationsController < ApplicationController
   def show
     @user = current_user
     @is_admin = is_admin?
+    if @is_admin
+      @templates = @organization.templates
+    else
+      @templates = @organization.templates.where(is_public: true)
+    end
     @admin_id = Role.admin.id
     @user_id = Role.user.id
   end
