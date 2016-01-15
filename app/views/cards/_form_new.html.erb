@@ -8,28 +8,30 @@
       </ul>
     </div>
   <% end %>
+  <div class="margin30"></div>
   
   <%= form_for @card, url: share_template_path(@card.template.token), method: "post" do |f| %>
-    <div class="form-group">
-      <div class="checkbox">
-        <%= f.label :is_public do %>
-        <%= f.check_box :is_public %>
-          <span>Share?</span> 
-          <ul>
-            <li><em>Public cards can be seen by anyone with a link.</li>
-            <li>Private cards can only be seen by you and the admin of your group.</em></li>
-          </ul>
-          <span>Check to make your card shareable.</span>
-        <% end %>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+      <div class="form-group">
+        <div class="checkbox">
+          <%= f.label :is_public do %>
+          <%= f.check_box :is_public %>
+            <span>Share?</span> 
+            <ul>
+              <li><em>Public cards can be seen by anyone with a link.</li>
+              <li>Private cards can only be seen by you and the admin of your group.</em></li>
+            </ul>
+            <span>Check to make your card shareable.</span>
+          <% end %>
+        </div>
       </div>
-    </div>
      
-     <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
-    <% @size = @card.template.size %>
-    <% @this_col = 0 %>
+       <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
+      <% @size = @card.template.size %>
+      <% @this_col = 0 %>
   
-    <div class="row">
-      <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">  
+
         <div id="show-bingo">BINGO</div>  
         <table class="bingo-welcome">
           <thead>

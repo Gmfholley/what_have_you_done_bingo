@@ -1,45 +1,46 @@
 <div class="row">
   <div class="col-xs-12">
     <h1 class="accent-font text-center">Reviewing Your <%= @card.template.name %> Card</h1>
-
-    <p>
-      <strong>Rating:</strong>
-      <%= @card.template.rating %>
-    </p>
-
-    <p>
-      <strong>Template:</strong>
-      <%= link_to template_link(@card.template), template_link(@card.template) %>
-    </p>
-    <p>
-        <em><%= template_public_or_private_note(@card.template) %></em>
-    </p>
-    <p>
-      <strong>Started:</strong>
-      <%= humanized_time(@card.created_at) %>
-    </p>
-    <% if @card.is_public %>
-    <p>
-      <strong>Shareable link:</strong>
-      <%= link_to card_link(@card), card_link(@card) %>
-    </p>
-    <% end %>
-
-    <p>
-      <strong>Number of bingos:</strong>
-      <%= @card.num_bingos %>
-    </p>
-    <% if @card.num_bingos > 0 %>
-      <p class="font-accent">Great job!</p>
-    <% end %>
-
-     <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
-    <% @size = @card.template.size %>
-    <% @this_col = 0 %>
-    
-    <div class="margin20"></div>
+    <div class="margin30"></div>
     <div class="row">
-      <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" id="section-to-print"> 
+      <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" id="section-to-print">
+        <p>
+          <strong>Rating:</strong>
+          <%= @card.template.rating %>
+        </p>
+
+        <p>
+          <strong>Template:</strong>
+          <%= link_to template_link(@card.template), template_link(@card.template) %>
+        </p>
+        <p>
+            <em><%= template_public_or_private_note(@card.template) %></em>
+        </p>
+        <p>
+          <strong>Started:</strong>
+          <%= humanized_time(@card.created_at) %>
+        </p>
+        <% if @card.is_public %>
+        <p>
+          <strong>Shareable link:</strong>
+          <%= link_to card_link(@card), card_link(@card) %>
+        </p>
+        <% end %>
+
+        <p>
+          <strong>Number of bingos:</strong>
+          <%= @card.num_bingos %>
+        </p>
+        <% if @card.num_bingos > 0 %>
+          <p class="font-accent">Great job!</p>
+        <% end %>
+
+         <%# @size and @this_col will be used to determine if should make rows or cells in the table %>
+        <% @size = @card.template.size %>
+        <% @this_col = 0 %>
+    
+        <div class="margin20"></div>
+
         <div id="show-bingo">BINGO</div>   
         <table class="bingo-welcome">
           <thead>
@@ -59,13 +60,19 @@
               <tr class="bingo-tr">
             <% end  %>
             <% if (circle.marked?) %>
-              <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+              <% if circle.part_of_bingo %>
+                <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked part-of-bingo">
+              <% else %>
+                <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding marked">
+              <% end %>
             <% else %>
               <td id='<%= "bingo-#{circle.position_x}-#{circle.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
             <% end %>
                 <div class="bingo-contents">
-                  <h6><%= circle.question %></h6> 
-                  <p><%= circle.response %></p>
+                  <h6><%= circle.question %></h6>
+                  <div class="form-group"> 
+                    <p><%= circle.response %></p>
+                  </div>
                 </div>
               </td>
             <%# When it's the end of the row (ie % is -1), then end the row %>

@@ -47,9 +47,9 @@
   
   function responseIsMarked(element) {
     if (element.value != "" ) {
-      alwaysMarkCircle(element.parentElement.parentElement);
+      alwaysMarkCircle(element.parentElement.parentElement.parentElement);
     } else {
-      unMarkCircle(element.parentElement.parentElement);
+      unMarkCircle(element.parentElement.parentElement.parentElement);
     }
   }
   
