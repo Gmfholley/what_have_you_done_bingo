@@ -27,9 +27,9 @@
           <div class="bingo-div-card">
             <div class="bingo-div-body">
               <% if card.is_public %>
-                <h6 class="accent-font accent-background"><i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="public"></i> <%= "#{card.template.name} card" %></h6>
+                <h4 class="accent-font"><i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="public"></i> <%= "#{card.template.name} card" %></h4>
               <% else %>
-                <h6 class="accent-font accent-background"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{card.template.name} card" %></h6>
+                <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{card.template.name} card" %></h4>
               <% end %>
               <p><%= "#{card.num_bingos} bingos" %></p>
               <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play-circle'></i>").html_safe, edit_card_path(card) %> | 
