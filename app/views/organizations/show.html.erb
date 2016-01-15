@@ -1,82 +1,110 @@
 <div class="row">
-  <h2 class="accent-font text-center"><%= @organization.name %></h2>
-    <% if @is_admin %>
-      <div class="col col-xs-12 col-md-6 text-center">
-        <%= link_to 'Edit Organization', edit_organization_path(@organization), class: 'accent-background btn' %>    
-      </div>
-      <div class="col col-xs-12 col-md-6 text-center">
-        <%= link_to 'Delete Organization', organization_path(@organization), method: 'delete', class: 'accent-background btn' %>
-      </div>
-    <div class="margin30"></div>
-    <h3 class="text-center">Link to share for new member sign-ups:</h3>
-    <h5 class="text-center"><%= organization_sign_up_url(@organization.token) %></h5>
-    <%= link_to "Update your company's token.", update_organization_token_path(@organization), class: 'accent-background btn' %>
-  <% end %>
-  <div class="col col-xs-12 col-md-8 col-md-offset-2">
-    <h3>Your Bingo Card Templates</h3>
-    <%= link_to "Create a new bingo card template", new_organization_template_path(@organization), class: 'accent-background btn' %>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Rating</th>
-          <th>Url for sharing of public templates</th>
-          <th>Is public</th>
-          <th>Number of users</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @organization.templates.each do |template| %>
-          <tr>
-            <td><%= template.name %></td>
-            <td><%= template.rating %></td>            
-            <td><%= link_to share_template_path(template.token), share_template_path(template.token) %></td>
-            <td><%= template.is_public %></td>
-            <td><%= template.cards.count %></td>
-            <td><%= link_to 'Show', organization_template_path(@organization, template) %></td>
-            <td><%= link_to 'Edit', edit_organization_template_path(@organization, template) %></td>
-            <td><%= link_to 'Destroy', organization_template_path(@organization, template), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <div class="col col-xs-12 col-md-10 col-md-offset-1">
   
-  <div class="col col-xs-12 col-md-8 col-md-offset-2">
-    <table class="table table-condensed table-responsive table-hover">
-      <thead class="accent-background">
-        <th>Name</th>
-        <th>Status</th>
-      </thead>
-      <tbody>
-        <% @organization.users.each do |user| %>
-          <tr>
-            <% if user == @user %>
-                <td><%= link_to "#{user.first_name} #{user.last_name}", profile_path %></td>
-                <td><%= user.role(@organization).name %> 
-                  <%= link_to "Drop organization", organization_sign_up_path(@organization.token), method: "delete", class: "btn" %></td>
-              
-            <% elsif @is_admin %>  
-                <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id) %></td>
-                <td><%= user.role(@organization).name %> 
-                  <%= link_to "Remove user", organization_user_path(@organization.id, user.id), method: "delete", class: "btn" %>
-                  <% if user.role(@organization) == Role.admin %>
-                    <%= link_to "Remove admin", organization_user_path(@organization.id, user.id, organization_user: {role_id: @user_id}), method: "put", class: "btn" %>
-                  <% else %>
-                    <%= link_to "Make an admin", organization_user_path(@organization.id, user.id, organization_user: {role_id: @admin_id}), method: "put", class: "btn" %>              
-                  <% end %>
-                </td>
-            <% else %>
-                <td><%= "#{user.first_name} #{user.last_name}" %></td>
-                <td></td>
-            <% end %>
-          </tr>
-        <% end %>
-        <tr></tr>
-      </tbody>
-    </table>
+    <h2 class="accent-font text-center"><%= @organization.name %></h2>
+
+    
+    <div class="margin30"></div>
+    
+      <% if @is_admin %>
+        <h4 class="text-center"><a href="#group">Your Group</a> | <a href="#mymembers">Your Members</a> | <a href="#mytemplates">Your Templates</a></h4>    
+        
+      <% end %>
+      
+      <div class="margin30"></div>
+    
+    <% if @is_admin %>
+      <div class="admin-organization well" id="group">
+        <h4 class="accent-font text-center">Your Group Settings</h4>
+        <p>
+          <strong>Sign Up Link:</strong>
+          <%= link_to organization_sign_up_url(@organization.token), organization_sign_up_url(@organization.token) %>   <%= link_to ("<i class='fa fa-refresh' data-tooltip='tooltip' data-placement='top' title='Refresh token'></i>").html_safe, update_organization_token_path(@organization) %>
+        </p>
+        <p>
+          <em>Share this with members who should join.  The link isn't private but isn't guessable.  Refresh as needed.</em>
+        </p>
+      <div class="margin30"></div>
+      <div class="text-center">
+        <%= link_to "Edit", edit_organization_path(@organization), class: "btn accent-background" %> | 
+        <%= link_to "Delete", organization_path(@organization), method: "delete", class: "btn accent-background", data: { confirm: "Are you sure?" }  %>
+      </div>
+      </div>
+
+    <% end %>
+    
+    <div class="margin30"></div>
+
+    <% if @is_admin %>
+      <div class="organization-templates row" id="mymembers">
+        <h4 class="accent-font text-center">Members</h4>
+          <div class="col-xs-12 col-md-8">
+          <a download="somedata.xls" href="#" class="btn" onclick="return ExcellentExport.excel(this, 'tabledata', 'Sheet Name Here');" data-toggle="tooltip" data-placement="top" title="Export to Excel"><i class="fa fa-file-excel-o"></i></a>
+          <a download="somedata.csv" href="#" class="btn" onclick="return ExcellentExport.csv(this, 'tabledata');" ata-toggle="tooltip" data-placement="top" title="Export to CSV"><i class="fa fa-file"></i></a>
+            <table id="tabledata">
+              <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+              </thead>
+              <tbody>
+                <% @organization.users.each do |user| %>
+                  <tr>
+                    <% if user == @user %>
+                        <td><%= link_to "#{user.first_name}", profile_path %></td>
+                        <td><%= link_to "#{user.last_name}", profile_path %></td>
+                        <td><%= user.role(@organization).name %> 
+                          <%= link_to ("<i class='fa fa-chain-broken' data-toggle='tooltip' data-placement='bottom' title='Drop Group'></i>" ).html_safe, organization_sign_up_path(@organization.token), method: "delete", class: "btn", data: {confirm: "Are you sure?"} %></td>
+                   <% else %>
+                        <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user.id) %></td>
+                        <td><%= user.role(@organization).name %> 
+                          <%= link_to ("<i class='fa fa-chain-broken' data-toggle='tooltip' data-placement='bottom' title='Remove User'></i>" ).html_safe, organization_user_path(@organization.id, user.id), method: "delete", class: "btn" %>
+                          <% if user.role(@organization) == Role.admin %>
+                            <%= link_to ("<i class='fa fa-user-times' data-toggle='tooltip' data-placement='bottom' title='Remove admin'></i>" ).html_safe, organization_user_path(@organization.id, user.id, organization_user: {role_id: @user_id}), method: "put", class: "btn" %>
+                          <% else %>
+                            <%= link_to ("<i class='fa fa-user-plus' data-toggle='tooltip' data-placement='bottom' title='Make an admin'></i>" ).html_safe, organization_user_path(@organization.id, user.id, organization_user: {role_id: @admin_id}), method: "put", class: "btn" %>              
+                          <% end %>
+                        </td>
+                   
+                        <td><%= "#{user.first_name} #{user.last_name}" %></td>
+                        <td></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+                <tr></tr>
+              </tbody>
+            </table>
+        <div>
+      </div>
+    <% end %>
+
+  <div class="margin30"></div>
+    
+    <div class="organization-templates row" id="mytemplates">
+      <% @templates.each do |template| %>
+        <div class="col-xs-6 col-sm-4 col-lg-3">
+          <div class="bingo-div-template">
+            <div class="bingo-div-body">
+              <% if template.is_public %>
+                <h4 class="accent-font"><i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="public"></i> <%= "#{template.name} template" %></h4>
+              <% else %>
+                <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{template.name} template" %></h4>
+              <% end %>
+              <p><span><%= template.cards.count %></span> cards played</p>
+              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Edit' class='fa fa-pencil fa-1x'></i>").html_safe, edit_organization_template_path(@organization, template) %> | 
+              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle fa-1x'></i>").html_safe, organization_template_path(@organization, template) %>  |
+              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Delete' class='fa fa-trash fa-1x'></i>").html_safe, organization_template_path(@organization, template), method: "delete" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  
+  
+  
+
+
+    <div class="margin30"></div>
+    
+    
   </div>
-  <div class="clear:both"></div>
 </div>
