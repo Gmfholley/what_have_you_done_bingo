@@ -54,7 +54,7 @@
 
 .header-arc-text .char {
   z-index: -1;
-  height: 800px;
+  height: 150%;
   position: absolute;
   width: 100%;
   left: 0;
@@ -68,9 +68,24 @@
     
     .header-arc-text .char {
       font-size: 2em;
-      height: 500px;
+      height: inherit;
     }
 }
+
+@media(max-width: 400px) {
+  .fa-star.fa-4x {
+    font-size:  3em;
+  }
+  .below-arc-text {
+    font-size: 30px;
+  }
+  .header-arc-text {
+    height: 200px;
+    font-size: 24px;
+  }
+
+}
+
 .char1 { 
   -ms-transform: rotate(-54deg); /* IE 9 */
   -webkit-transform: rotate(-54deg); /* Chrome, Safari, Opera */
