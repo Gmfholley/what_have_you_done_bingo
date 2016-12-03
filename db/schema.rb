@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160105020532) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cards", force: :cascade do |t|
     t.integer  "template_id"
     t.integer  "user_id"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160105020532) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "cards", ["token"], name: "index_cards_on_token"
+  add_index "cards", ["token"], name: "index_cards_on_token", using: :btree
 
   create_table "circles", force: :cascade do |t|
     t.integer  "card_id"
@@ -52,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160105020532) do
     t.string   "token"
   end
 
-  add_index "organizations", ["token"], name: "index_organizations_on_token"
+  add_index "organizations", ["token"], name: "index_organizations_on_token", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -82,7 +85,7 @@ ActiveRecord::Schema.define(version: 20160105020532) do
     t.integer  "rating"
   end
 
-  add_index "templates", ["token"], name: "index_templates_on_token"
+  add_index "templates", ["token"], name: "index_templates_on_token", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                           null: false
@@ -100,8 +103,8 @@ ActiveRecord::Schema.define(version: 20160105020532) do
     t.string   "profile_picture"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
 end
