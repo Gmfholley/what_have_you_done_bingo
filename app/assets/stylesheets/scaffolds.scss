@@ -18,17 +18,13 @@ pre {
   font-size: 11px;
 }
 
-a {
-  color: #000;
+a, a.bingo-link {
+  color: #1485CC;
+}
 
-  &:visited {
-    color: #666;
-  }
-
-  &:hover {
-    color: #000;
-    background-color: #E3FFFC;
-  }
+a.bingo-link:visited, a.bingo-link:hover, a.bingo-link:active, a.bingo-link:focus {
+  color: #096CAB;
+  text-decoration: none;
 }
 
 div {

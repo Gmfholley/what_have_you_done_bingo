@@ -2,51 +2,59 @@
   <div class="col col-xs-12 col-md-10 col-md-offset-1">
     <h2 class="accent-font text-center">Hi, <%= @user.first_name %></h2>
     <div class="margin30"></div>
-    <h4 class="text-center"><a href="#profile">Your Profile</a> | <a href="#myggroups">Your Groups</a> | <a href="#mycards">Your Cards</a></h4>
+    <h4 class="text-center"><a href="#profile" class="bingo-link" aria-controls="profile" role="tab" data-toggle="tab">Your Profile</a> | <a href="#mygroups" class="bingo-link" aria-controls="mygroups" role="tab" data-toggle="tab">Your Groups</a> | <a href="#mycards" class="bingo-link" aria-controls="mycards" role="tab" data-toggle="tab">Your Cards</a></h4>
     
     <div class="margin30"></div>
-    
-    <div class="profile-organizations row" id="mygroups">
-      <% @user.organizations.each do |org| %>
-        <div class="col-xs-6 col-sm-4 col-lg-3">
-          <div class="profile-organization">
-            <i class="fa fa-users fa-5x icon"></i>
-            <h6 class="accent-font accent-background"><%= link_to org.name, organization_path(org) %></h6>
-            <p><span class="badge"><%= org.templates.count %></span> templates</p>
-            <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Remove group' class='fa fa-chain-broken'></i>").html_safe, organization_remove_path(org.token), method: "delete", data: { confirm: "Are you sure?" }  %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="margin30"></div>
-    
-    <div class="profile-cards row" id="mycards">
-      <% @user.cards.each do |card| %>
-        <div class="col-xs-6 col-sm-4 col-lg-3">
-          <div class="bingo-div-card">
-            <div class="bingo-div-body">
-              <% if card.is_public %>
-                <h4 class="accent-font"><i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="public"></i> <%= "#{card.template.name} card" %></h4>
-              <% else %>
-                <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{card.template.name} card" %></h4>
-              <% end %>
-              <p><span><%= card.num_bingos %></span> bingos</p>
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play-circle fa-1x'></i>").html_safe, edit_card_path(card) %> | 
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle fa-1x'></i>").html_safe, card_path(card) %>
-              
+    <div class="tab-content">
+      <div class="profile-organizations row tab-pane" role="tab-pane" id="mygroups">
+        <% if @user.organizations.count == 0 %>
+          <h6 class="accent-font accent-background">You are not a member of any groups yet</h6>
+        <% end %>
+        <% @user.organizations.each do |org| %>
+          <div class="col-xs-6 col-sm-4 col-lg-3">
+            <div class="profile-organization">
+              <i class="fa fa-users fa-5x icon"></i>
+              <h6 class="accent-font accent-background"><%= link_to org.name, organization_path(org) %></h6>
+              <p><span class="badge"><%= org.templates.count %></span> templates</p>
+              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Remove group' class='fa fa-chain-broken'></i>").html_safe, organization_remove_path(org.token), method: "delete", data: { confirm: "Are you sure?" }  %>
             </div>
           </div>
+        <% end %>
+      </div>
+      
+      <div class="margin30"></div>
+      
+      <div class="profile-cards row tab-pane" id="mycards" role="tab-pane">
+        <% @user.cards.each do |card| %>
+          <div class="col-xs-6 col-sm-4 col-lg-3">
+            <div class="bingo-div-card">
+              <div class="bingo-div-body">
+                <% if card.is_public %>
+                  <h4 class="accent-font"><i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="public"></i> <%= "#{card.template.name} card" %></h4>
+                <% else %>
+                  <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{card.template.name} card" %></h4>
+                <% end %>
+                <p><span><%= card.num_bingos %></span> bingos</p>
+                <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play-circle fa-1x'></i>").html_safe, edit_card_path(card) %> | 
+                <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle fa-1x'></i>").html_safe, card_path(card) %>
+                
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="text-center">
+          <%= link_to "Find new card to play", templates_path, class: "btn accent-background text-center" %>
+          <%= link_to "Create your own templates", new_organization_path, class: "btn accent-background text-center" %>
+          <h4 class="accent-font">Find a card to play from one of your group's templates.  Or form a group so you can make your own templates.</h4>
         </div>
-      <% end %>
-    </div>
+      </div>
     
-    <div class="margin30"></div>
-    <div id="profile" class="text-center">
-      <%= link_to 'Edit Profile', edit_profile_path, class: 'btn accent-background' %> |
-      <%= link_to 'Delete Account', profile_path, method: 'delete', class: 'btn accent-background' %>
+      <div class="margin30"></div>
+      <div id="profile" class="text-center tab-pane active" role="tab-pane">
+        <%= link_to 'Edit Profile', edit_profile_path, class: 'btn accent-background' %> |
+        <%= link_to 'Delete Account', profile_path, method: 'delete', class: 'btn accent-background' %>
+      </div>
     </div>
-  
   </div>  
   
 </div>
