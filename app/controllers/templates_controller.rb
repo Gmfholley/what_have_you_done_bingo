@@ -1,12 +1,12 @@
 class TemplatesController < ApplicationController
   include TemplatesHelper
   skip_before_filter :require_login, only: [:show, :share]
-  before_action :set_organization, except: [:share]
+  before_action :set_organization, except: [:share, :index]
   before_action :set_template, only: [:show, :edit, :update, :destroy]
   before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
 
-  # GET /templates/1
-  # GET /templates/1.json
+  # GET organizations/1/templates/1
+  # GET organizations/1/templates/1.json
   def show
     @shareable_link = shareable_link(@template)
     if logged_in? && is_admin?
@@ -18,7 +18,7 @@ class TemplatesController < ApplicationController
     end
   end
   
-  # GET /templates/new
+  # GET organizations/1/templates/new
   def new
     @template = @organization.templates.build
     CreateSquares.work(@template)
@@ -26,13 +26,13 @@ class TemplatesController < ApplicationController
   end
   
   # enum Ratings collection not available in view
-  # GET /templates/1/edit
+  # GET organizations/n/templates/1/edit
   def edit
     @ratings = Template.ratings
   end
 
-  # POST /templates
-  # POST /templates.json
+  # POST organiztions/n/templates
+  # POST organizations/n/templates.json
   def create
     @template = @organization.templates.create(template_params)
     respond_to do |format|
@@ -47,8 +47,13 @@ class TemplatesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /templates/1
-  # PATCH/PUT /templates/1.json
+  # GET /templates
+  def index
+    @templates = Template.where(is_public: true)
+  end
+
+  # PATCH/PUT organizations/1/templates/1
+  # PATCH/PUT organizations/1/templates/1.json
   def update
     #TODO - refactor this prettier
     respond_to do |format|
@@ -73,8 +78,8 @@ class TemplatesController < ApplicationController
     end
   end
 
-  # DELETE /templates/1
-  # DELETE /templates/1.json
+  # DELETE organizations/1/templates/1
+  # DELETE organizations/1/templates/1.json
   def destroy
     @template.destroy
     respond_to do |format|
