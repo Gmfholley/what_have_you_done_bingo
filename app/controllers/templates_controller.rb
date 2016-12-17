@@ -49,7 +49,13 @@ class TemplatesController < ApplicationController
 
   # GET /templates
   def index
-    @templates = Template.where(is_public: true)
+    @public_templates = Template.where(is_public: true)
+    @group_templates = []
+    if current_user
+      for org in current_user.organizations 
+        @group_templates.push(*org.templates)
+      end
+    end
   end
 
   # PATCH/PUT organizations/1/templates/1

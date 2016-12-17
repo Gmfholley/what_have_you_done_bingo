@@ -1,8 +1,55 @@
 <div class="row">
   	<div class="col col-xs-12 col-md-10 col-md-offset-1">
-  
-    	<h2 class="accent-font text-center">Templates</h2>
+    	<h2 class="accent-font text-center">Your Group Templates</h2>
 
+	    <div class="organization-templates row tab-pane" id="mytemplates">
+	      <% if @group_templates.count == 0 %> 
+	        <h4 class="accent-font text-center">No group templates yet</h4>
+	      <% end %> 
+	      <% @group_templates.each do |template| %>
+	        <div class="col-xs-6 col-sm-4 col-lg-3">
+	          <%= link_to share_template_path(template.token) do %>
+	          <div class="bingo-div-template">
+	            <div class="bingo-div-body">
+	              <% if template.is_public %>
+	                <h4 class="accent-font"><i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="public"></i> <%= "#{template.name} template" %></h4>
+	              <% else %>
+	                <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{template.name} template" %></h4>
+	              <% end %>
+
+	              <p><span><%= template.cards.count %></span> cards played</p>
+
+
+	            </div>
+	          </div>
+	          <% end %>
+              <p><span>Group Name: </span> <%= link_to template.organization.name, organization_path(template.organization.id) %></p>
+	        </div>
+	      <% end %>
+	    </div>
+
+	     <div class="margin30"></div>
+
+    	<h2 class="accent-font text-center">Public Templates</h2>
+
+	    <div class="organization-templates row tab-pane" id="mytemplates">
+	      <% if @public_templates.count == 0 %> 
+	        <h4 class="accent-font text-center">No public templates yet</h4>
+	      <% end %> 
+	      <% @public_templates.each do |template| %>
+	        <div class="col-xs-6 col-sm-4 col-lg-3">
+	        <%= link_to share_template_path(template.token) do %>
+	          <div class="bingo-div-template">
+	            <div class="bingo-div-body">
+	                <h4 class="accent-font"><i class="fa fa-unlock" data-toggle="tooltip" data-placement="bottom" title="public"></i> <%= "#{template.name} template" %></h4>
+	              <p><span><%= template.cards.count %></span> cards played</p>
+	            </div>
+	          </div>
+	          <% end %>
+	            <p><span>Group Name: </span> <%= link_to template.organization.name, organization_path(template.organization.id) %></p>
+	        </div>
+	      <% end %>
+	    </div>
 
 
 	</div>
