@@ -69,8 +69,6 @@
                             <%= link_to ("<i class='fa fa-user-plus' data-toggle='tooltip' data-placement='bottom' title='Make an admin'></i>" ).html_safe, organization_user_path(@organization.id, user.id, organization_user: {role_id: @admin_id}), method: "put", class: "btn" %>              
                           <% end %>
                         </td>
-                   
-                        <td><%= "#{user.first_name} #{user.last_name}" %></td>
                     <% end %>
                   </tr>
                 <% end %>
