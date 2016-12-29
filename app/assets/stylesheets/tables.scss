@@ -9,7 +9,7 @@ table {
   border-spacing: 0px; /* with border collapse separate, if you don't set border spacing to 0 then you will see spaces between borders*/
   border-left: solid #eee 3px; /*if you don't border-left, you will have a double thickness left border*/
   width: 100%; 
-  
+  table-layout: fixed;
 }
 
 td, th {
