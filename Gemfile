@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # heroku runs postgresql
@@ -45,7 +45,6 @@ gem 'email_validator', '~> 1.6.0'
 
 group :development, :test do
   # Use pg as the database for Active Record
-  gem 'pg'
   
   gem 'rails-erd', '~> 1.4', '>= 1.4.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
