@@ -21,10 +21,19 @@ b.position_y] }
     @num_bingos = 0
   end
   
+
+  # unmarks all circles as part of bingo, since you are re-checking
+  def unmark_circles_part_of_bingo
+    @circles.each do |circle|
+      circle.update(part_of_bingo: false)
+    end
+  end
+
   # checks the card for bingos and returns the number
   #
   # returns an Integer
   def work
+    unmark_circles_part_of_bingo
     check_marked_circles
     @card.update(num_bingos: get_num_bingos)
     @card.num_bingos
