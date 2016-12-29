@@ -13,8 +13,12 @@
                 <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{card.template.name} card" %></h4>
               <% end %>
               <p><%= "#{card.num_bingos} bingos" %></p>
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play-circle'></i>").html_safe, edit_card_path(card) %> | 
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle'></i>").html_safe, card_path(card) %>
+              <%= link_to (edit_card_path(card)) do %>
+                <i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play-circle'></i>
+               <% end %> | 
+              <%= link_to card_path(card) do %>
+                <i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle'></i>
+              <% end %>
               
             </div>
           </div>

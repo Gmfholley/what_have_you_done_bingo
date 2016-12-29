@@ -28,8 +28,9 @@
             <div class="bingo-div-body">
               <h6 class="accent-font accent-background"><%= "#{card.template.name} card" %></h6>
               <p><%= "#{card.num_bingos} bingos" %></p>
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle'></i>").html_safe, card_path(card) %>
-              
+              <%= link_to card_path(card) do %>
+                <i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle'></i>
+              <% end %>
             </div>
           </div>
         </div>

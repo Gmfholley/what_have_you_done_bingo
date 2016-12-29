@@ -19,7 +19,10 @@
         <h4 class="accent-font text-center">Your Group Settings</h4>
         <p>
           <strong>Sign Up Link:</strong>
-          <%= link_to organization_sign_up_url(@organization.token), organization_sign_up_url(@organization.token), class: "bingo-link" %>   <%= link_to ("<i class='fa fa-refresh' data-tooltip='tooltip' data-placement='top' title='Refresh token'></i>").html_safe, update_organization_token_path(@organization) %>
+          <%= link_to organization_sign_up_url(@organization.token), organization_sign_up_url(@organization.token), class: "bingo-link" %>   
+            <%= link_to update_organization_token_path(@organization) do %>
+              <i class='fa fa-refresh' data-tooltip='tooltip' data-placement='top' title='Refresh token'></i>
+            <% end %>
         </p>
         <p>
           <em>Share this with members who should join.  The link isn't private but isn't guessable.  Refresh as needed.</em>
@@ -56,17 +59,26 @@
                         <td><%= user.last_name %></td>
                         <td><%= link_to "#{user.email}", profile_path %></td>
                         <td><%= user.role(@organization).name %> 
-                          <%= link_to ("<i class='fa fa-chain-broken' data-toggle='tooltip' data-placement='bottom' title='Drop Group'></i>" ).html_safe, organization_sign_up_path(@organization.token), method: "delete", class: "btn", data: {confirm: "Are you sure?"} %></td>
+                          <%= link_to organization_sign_up_path(@organization.token), method: "delete", class: "btn", data: {confirm: "Are you sure?"} do %>
+                              <i class='fa fa-chain-broken' data-toggle='tooltip' data-placement='bottom' title='Drop Group'></i>
+                          <% end %>    
+                        </td>
                    <% else %>
                         <td><%= user.first_name %></td>
                         <td><%= user.last_name %></td>
                         <td><%= link_to "#{user.email}", user_path(user.id) %></td>
                         <td><%= user.role(@organization).name %> 
-                          <%= link_to ("<i class='fa fa-chain-broken' data-toggle='tooltip' data-placement='bottom' title='Remove User'></i>" ).html_safe, organization_user_path(@organization.id, user.id), method: "delete", class: "btn" %>
+                          <%= link_to organization_user_path(@organization.id, user.id), method: "delete", class: "btn" do %>
+                            <i class='fa fa-chain-broken' data-toggle='tooltip' data-placement='bottom' title='Remove User'></i>
+                          <% end %>
                           <% if user.role(@organization) == Role.admin %>
-                            <%= link_to ("<i class='fa fa-user-times' data-toggle='tooltip' data-placement='bottom' title='Remove admin'></i>" ).html_safe, organization_user_path(@organization.id, user.id, organization_user: {role_id: @user_id}), method: "put", class: "btn" %>
+                            <%= link_to organization_user_path(@organization.id, user.id, organization_user: {role_id: @user_id}), method: "put", class: "btn" do %>
+                                <i class='fa fa-user-times' data-toggle='tooltip' data-placement='bottom' title='Remove admin'></i>
+                            <% end %>
                           <% else %>
-                            <%= link_to ("<i class='fa fa-user-plus' data-toggle='tooltip' data-placement='bottom' title='Make an admin'></i>" ).html_safe, organization_user_path(@organization.id, user.id, organization_user: {role_id: @admin_id}), method: "put", class: "btn" %>              
+                            <%= link_to organization_user_path(@organization.id, user.id, organization_user: {role_id: @admin_id}), method: "put", class: "btn" do %>    
+                              <i class='fa fa-user-plus' data-toggle='tooltip' data-placement='bottom' title='Make an admin'></i>          
+                            <% end %>
                           <% end %>
                         </td>
                     <% end %>
@@ -94,9 +106,15 @@
                 <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{template.name} template" %></h4>
               <% end %>
               <p><span><%= template.cards.count %></span> cards played</p>
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Edit' class='fa fa-pencil fa-1x'></i>").html_safe, edit_organization_template_path(@organization, template) %> | 
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle fa-1x'></i>").html_safe, organization_template_path(@organization, template) %>  |
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Delete' class='fa fa-trash fa-1x'></i>").html_safe, organization_template_path(@organization, template), method: "delete" %>
+              <%= link_to edit_organization_template_path(@organization, template) do %>
+                <i data-tooltip='tooltip' data-placement='left' title='Edit' class='fa fa-pencil fa-1x'></i>
+              <% end %> | 
+              <%= link_to organization_template_path(@organization, template) do %>
+                <i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle fa-1x'></i>
+              <% end %>  |
+              <%= link_to organization_template_path(@organization, template), method: "delete" do %>
+                <i data-tooltip='tooltip' data-placement='left' title='Delete' class='fa fa-trash fa-1x'></i>
+              <% end %>
             </div>
           </div>
         </div>

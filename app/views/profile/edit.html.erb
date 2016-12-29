@@ -6,7 +6,9 @@
 
     <%= render 'form' %>
 
-    <%= link_to ("<i class='fa fa-fast-backward'></i> Back to Profile").html_safe, profile_path, class: "btn accent-background" %>
+    <%= link_to profile_path, class: "btn accent-background" do %>
+    	<i class='fa fa-fast-backward'></i> Back to Profile
+    <% end %>
   
   </div>
   

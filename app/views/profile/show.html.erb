@@ -16,7 +16,9 @@
               <i class="fa fa-users fa-5x icon"></i>
               <h6><%= link_to org.name, organization_path(org),class: 'accent-font accent-background' %></h6>
               <p><span class="badge"><%= org.templates.count %></span> templates</p>
-              <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Remove group' class='fa fa-chain-broken'></i>").html_safe, organization_remove_path(org.token), method: "delete", data: { confirm: "Are you sure?" }  %>
+              <%= link_to organization_remove_path(org.token), method: "delete", data: { confirm: "Are you sure?" } do %>
+                <i data-tooltip='tooltip' data-placement='left' title='Remove group' class='fa fa-chain-broken'></i>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -35,9 +37,12 @@
                   <h4 class="accent-font"><i class="fa fa-lock" data-toggle="tooltip" data-placement="bottom" title="private"></i> <%= "#{card.template.name} card" %></h4>
                 <% end %>
                 <p><span><%= card.num_bingos %></span> bingos</p>
-                <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play-circle fa-1x'></i>").html_safe, edit_card_path(card) %> | 
-                <%= link_to ("<i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle fa-1x'></i>").html_safe, card_path(card) %>
-                
+                <%= link_to edit_card_path(card) do %>
+                  <i data-tooltip='tooltip' data-placement='left' title='Play' class='fa fa-play-circle fa-1x'></i>
+                <% end %> | 
+                <%= link_to card_path(card) do %>
+                  <i data-tooltip='tooltip' data-placement='left' title='Show' class='fa fa-info-circle fa-1x'></i>
+                <% end %>
               </div>
             </div>
           </div>
