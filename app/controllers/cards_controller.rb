@@ -68,17 +68,10 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1.json
   def update
     respond_to do |format|
-      @card.update(card_only_params)
-      @errors = []
-      if !circles_only_params.blank?
-        circles_only_params.each_with_index do |circle, x|
-          @circle = Circle.find_by(position_x: circle[1]["position_x"], position_y: circle[1]["position_y"], card_id: @card.id)
-          unless @circle.update(response: circle[1]["response"])
-            @errors << @circle.errors
-          end
-        end
-      end
-      if @card.errors.blank? && @errors.length == 0
+      #if you attempt to update circles here, you will duplicate
+      @card.update(card_params)
+      if @card.errors.blank?
+        #this will update the card with the number of bingos
         CheckBingo.new(@card).work
         format.html { redirect_to @card, notice: 'Successfully updated.' }
         format.json { render :show, status: :ok, location: @card }
@@ -105,8 +98,10 @@ class CardsController < ApplicationController
       @card = Card.includes(:circles, :template, :user).where(id: params["id"]).first
     end
 
+    # it is safe to add 'id' to permitted nested params, as these are checked by active record
+    # :id in nested params is needed as part of the update
     def card_params
-      params.require(:card).permit(:is_public, :circles_attributes => [:question, :position_x, :position_y, :response])
+      params.require(:card).permit(:is_public, circles_attributes: [:id, :position_x, :position_y, :question, :response])
     end
     
     def card_only_params
