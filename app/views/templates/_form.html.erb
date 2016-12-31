@@ -53,16 +53,16 @@
                 <tr class="bingo-tr">
               <% end  %>
                   <td id='<%= "bingo-#{ff.object.position_x}-#{ff.object.position_y}"  %>' class="col col-xs-2 bingo-col bingo-td-no-padding">
-                    <div class="bingo-contents">
+                    <div class="bingo-contents" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="trial">
                       <div class="question">
                         <div class="position">
                           <%= ff.hidden_field :position_x %>
                           <%= ff.hidden_field :position_y %>
+                          <%= ff.hidden_field :question %>
                         </div>
-                        <div class="form-group">
-                          <%= ff.label :question, class: "sr-only" %><br>
-                          <%= ff.text_area(:question, rows: 3, class: "form-control resize-none") %>
-                        </div> 
+                        <p>
+                          <%= ff.object.question %>
+                        </p>
                         <% if (ff.object.position_x == (@size.to_f/2).floor && ff.object.position_y == (@size.to_f/2).floor)%>
                          <div class="checkbox">
                            <%= ff.label :free_space do %><br>
@@ -84,6 +84,34 @@
      </div>
     </div>
     <div style="clear:both"></div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <div class="margin20"></div>
     <div class="actions form-group">
       <%= f.button class: "btn accent-background" %>
