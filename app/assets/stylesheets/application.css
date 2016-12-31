@@ -50,6 +50,13 @@ a.accent-background:hover, .accent-background:hover, .accent-background a:hover,
   color: white;
 }
 
+#logo {
+  display: inline-block;
+}
+
+.navbar-brand.accent-font.btn {
+  padding: 0px 0px;
+}
 
 .navbar.no-margin-bottom {
   margin-bottom: 0px;
