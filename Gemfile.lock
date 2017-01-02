@@ -45,6 +45,8 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
+    autoprefixer-rails (6.6.0)
+      execjs
     bcrypt (3.1.10)
     bcrypt (3.1.10-x86-mingw32)
     better_errors (2.1.1)
@@ -53,6 +55,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -219,6 +224,9 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    turbolinks (5.0.1)
+      turbolinks-source (~> 5)
+    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     tzinfo-data (1.2015.7)
@@ -241,6 +249,7 @@ DEPENDENCIES
   annotate (= 2.6.10)
   better_errors (= 2.1.1)
   binding_of_caller (= 0.7.2)
+  bootstrap-sass (~> 3.3.6)
   byebug
   carrierwave (~> 0.10.0)
   chartkick
@@ -260,6 +269,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sorcery (= 0.9.1)
   spring
+  turbolinks
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
