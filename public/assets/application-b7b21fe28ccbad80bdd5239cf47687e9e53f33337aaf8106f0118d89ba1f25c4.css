@@ -1,0 +1,667 @@
+/* line 4, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+.below-arc-text {
+  font-size: 85px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: normal;
+}
+
+/* line 10, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+.bingo-image-column {
+  vertical-align: middle;
+  position: relative;
+  width: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  opacity: .6;
+  transition: opacity 1s;
+}
+
+/* line 20, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+.bingo-image-column:before {
+  padding-top: 100%;
+  display: block;
+  content: "";
+  position: relative;
+}
+
+/* line 27, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+.bingo-image-column:hover {
+  opacity: 1;
+}
+
+/* line 31, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+.bingo-contents {
+  width: 100%;
+  height: 0px;
+  padding-bottom: 90%;
+  text-align: center;
+}
+
+/* line 38, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+table.bingo-welcome.bingo-template {
+  border: solid #B21212 6px;
+  border-left: solid #B21212 6px;
+}
+
+/* line 43, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+.bingo-template th.bingo-th {
+  background-color: #B21212;
+}
+
+/* line 47, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+table.bingo-welcome {
+  border-collapse: separate;
+  /*can't border collapse if you want rounded edges*/
+  border: solid red 6px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-spacing: 0px;
+  /* with border collapse separate, if you don't set border spacing to 0 then you will see spaces between borders*/
+  border-left: solid red 6px;
+  /*if you don't border-left, you will have a double thickness left border*/
+  width: 100%;
+  /*Needed so that it takes up all 12 cols from bootstrap*/
+}
+
+/* line 57, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+th.bingo-th {
+  background-color: red;
+  color: white;
+  border: none;
+  text-align: center;
+}
+
+/* line 65, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+td.bingo-col {
+  border-left: solid #DDDDDD 1px;
+  border-top: solid #DDDDDD 1px;
+  padding-top: 5px;
+  /* with border spacing = 0, you need padding in the cells */
+  padding-bottom: 5px;
+}
+
+/* line 73, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+th.bingo-th, tr td.bingo-col:first-child {
+  border-left: none;
+}
+
+/* line 77, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+tr:first-child td.bingo-col {
+  border-top: none;
+}
+
+/* line 82, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+td.bingo-col {
+  transition: background-color 1s;
+}
+
+/* line 86, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+td.bingo-col:hover {
+  background-color: #DEFFFC;
+}
+
+/* line 90, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+td.bingo-td-no-padding, td.bingo-td-no-padding .form-group, td.bingo-td-no-padding textarea, td.bingo-td-no-padding .checkbox {
+  padding: 2px 2px 2px 2px;
+  margin: 0px 0px;
+}
+
+/* line 95, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+textarea.resize-none {
+  resize: none;
+  font-size: .8em;
+}
+
+@media print {
+  /* line 102, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+  body * {
+    visibility: hidden;
+  }
+
+  /* line 105, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+
+  /* line 108, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  /* line 113, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+  #section-to-print td {
+    width: 50pt;
+  }
+
+  /* line 116, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/bingo.scss */
+  #section-to-print th {
+    height: 50pt;
+  }
+}
+/* line 4, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/profile.scss */
+.profile-organization {
+  width: 100%;
+  height: 0px;
+  padding-bottom: 100%;
+  margin: 0 0 10px 10px;
+  border-radius: 50%;
+  background-color: #DEFFFC;
+  color: black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* line 16, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/profile.scss */
+.profile-organization .icon {
+  position: relative;
+  margin-top: 15%;
+}
+
+/* line 21, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/profile.scss */
+.bingo-div-card {
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 0px;
+  padding-top: 75%;
+  border-width: 40px 6px 6px 6px;
+  border-style: solid;
+  border-color: red;
+  border-radius: 6px 6px 6px 6px;
+  position: relative;
+}
+
+/* line 35, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/profile.scss */
+.bingo-div-template {
+  width: 80%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 0px;
+  padding-top: 75%;
+  border-width: 40px 6px 6px 6px;
+  border-style: solid;
+  border-color: #B21212;
+  border-radius: 6px 6px 6px 6px;
+  position: relative;
+}
+
+/* line 51, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/profile.scss */
+.bingo-div-body {
+  margin-top: 15%;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+}
+/* line 1, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+a, a.bingo-link {
+  color: #1485CC;
+}
+
+/* line 25, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+a.bingo-link:visited, a.bingo-link:hover, a.bingo-link:active, a.bingo-link:focus {
+  color: #096CAB;
+  text-decoration: none;
+}
+
+/* line 31, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 36, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: black;
+}
+
+/* line 40, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 46, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 54, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 65, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/* line 4, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/tables.scss */
+table {
+  border-collapse: collapse;
+  /*can't border collapse if you want rounded edges*/
+  border: solid #eee 3px;
+  border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-spacing: 0px;
+  /* with border collapse separate, if you don't set border spacing to 0 then you will see spaces between borders*/
+  border-left: solid #eee 3px;
+  /*if you don't border-left, you will have a double thickness left border*/
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* line 15, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/tables.scss */
+td, th {
+  border-left: solid #DDDDDD 1px;
+  border-top: solid #DDDDDD 1px;
+  padding-top: 5px;
+  /* with border spacing = 0, you need padding in the cells */
+  padding-bottom: 5px;
+}
+/* line 4, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.header {
+  height: 300px;
+  background-position: center bottom;
+  background-size: cover;
+}
+
+/* line 11, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.box {
+  vertical-align: middle;
+  position: relative;
+}
+
+/* line 16, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.box:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+/* line 22, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.circle {
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  bottom: 0;
+  right: 0px;
+}
+
+/* line 32, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.text {
+  position: relative;
+  text-align: center;
+}
+
+/* line 37, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.monospace-font {
+  font: 120px monospace;
+}
+
+/* line 41, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.header-arc-text {
+  vertical-align: middle;
+  position: relative;
+  height: 250px;
+}
+
+/* line 55, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.header-arc-text .char {
+  z-index: -1;
+  height: 150%;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  transform-origin: bottom center;
+  font-size: 3em;
+  font-family: 'Pacifico', cursive;
+}
+
+@media (max-width: 685px) {
+  /* line 69, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+  .header-arc-text .char {
+    font-size: 2em;
+    height: inherit;
+  }
+}
+@media (max-width: 400px) {
+  /* line 76, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+  .fa-star.fa-4x {
+    font-size: 3em;
+  }
+
+  /* line 79, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+  .below-arc-text {
+    font-size: 30px;
+  }
+
+  /* line 82, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+  .header-arc-text {
+    height: 200px;
+    font-size: 24px;
+  }
+}
+/* line 89, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char1 {
+  -ms-transform: rotate(-54deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-54deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-54deg);
+}
+
+/* line 94, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char2 {
+  -ms-transform: rotate(-45deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-45deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-45deg);
+}
+
+/* line 99, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char3 {
+  -ms-transform: rotate(-36deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-36deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-36deg);
+}
+
+/* line 104, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char4 {
+  -ms-transform: rotate(-27deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-27deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-27deg);
+}
+
+/* line 109, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char5 {
+  -ms-transform: rotate(-18deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-18deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-18deg);
+}
+
+/* line 114, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char6 {
+  -ms-transform: rotate(-9deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-9deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(-9deg);
+}
+
+/* line 124, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char8 {
+  -ms-transform: rotate(9deg);
+  /* IE 9 */
+  -webkit-transform: rotate(9deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(9deg);
+}
+
+/* line 129, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char9 {
+  -ms-transform: rotate(18deg);
+  /* IE 9 */
+  -webkit-transform: rotate(18deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(18deg);
+}
+
+/* line 134, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char10 {
+  -ms-transform: rotate(27deg);
+  /* IE 9 */
+  -webkit-transform: rotate(27deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(27deg);
+}
+
+/* line 139, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char11 {
+  -ms-transform: rotate(36deg);
+  /* IE 9 */
+  -webkit-transform: rotate(36deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(36deg);
+}
+
+/* line 144, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char12 {
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+  -webkit-transform: rotate(45deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+}
+
+/* line 149, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.char13 {
+  -ms-transform: rotate(54deg);
+  /* IE 9 */
+  -webkit-transform: rotate(54deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(54deg);
+}
+
+/* line 156, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.explanation-section {
+  margin-top: 10%;
+  padding: 10%;
+  background-color: #E3FFFC;
+}
+
+/* line 162, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.explanation-block {
+  max-width: 970px;
+  margin: auto;
+}
+
+/* line 169, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.explanation-ball {
+  vertical-align: middle;
+  position: relative;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* line 176, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.explanation-ball:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+/* line 181, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.explanation-content {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  bottom: 0;
+  right: 0px;
+  -webkit-transform: translateY(25%);
+  /* child now centers itself relative to the midline based on own contents */
+  -moz-transform: translateY(25%);
+  -ms-transform: translateY(25%);
+  -o-transform: translateY(25%);
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Matrix(Dx=0,Dy=0)';
+  /*IE8 */
+  filter: progid:DXImageTransform.Microsoft.Matrix(Dx=0,Dy=0);
+  /*IE6, IE7*/
+  transform: translateY(25%);
+}
+
+/* line 197, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.exp-empty {
+  height: 100px;
+}
+
+/* line 200, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.explanation-ball {
+  padding: 10px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* line 206, /Users/gwendolyn1/Code/what_have_you_done_bingo/app/assets/stylesheets/welcome.scss */
+.explanation-list {
+  font-size: 1em;
+  list-style-type: none;
+  padding: 0px;
+  margin-left: 0px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+/*1485CC = blue complement to dark red
+0971B2 = darker blue complement to bright red
+*/
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+.margin30 {
+  margin-top: 30px;
+}
+.margin20 {
+  margin-top: 20px;
+}
+.accent-font {
+ font-family: 'Pacifico', cursive;
+}
+
+.accent-background, .accent-background a, .navbar-brand.accent-font.btn {
+/*  background-color: #608A44;*/
+  color: red;
+}
+
+a.accent-background:hover, .accent-background:hover, .accent-background a:hover, .navbar-brand.accent-font.btn:hover {
+  color: #B21212;
+  background-color: white;
+}
+
+
+.accent-background.btn {
+  background-color: red;
+  color: white;
+}
+
+.accent-background.btn:hover {
+  background-color: #B21212;
+  color: white;
+}
+
+#logo {
+  display: inline-block;
+}
+
+.navbar-brand.accent-font.btn {
+  padding: 0px 0px;
+}
+
+.navbar.no-margin-bottom {
+  margin-bottom: 0px;
+}
+
+td.marked {
+/*  background-color: #F7F5D8;  yellow*/
+  background-color: #DEFFFC; /*blue*/
+}
+td.marked .bingo-image-column {
+  opacity: 1;
+}
+
+td.marked.part-of-bingo {
+/*  background-color: #F7F594; /*yellow*/
+  background-color: #9CFFFC; /*blue*/
+}
+
+@media(max-width: 750px){
+  .hide-if-xs {
+    height:0p;
+  }  
+}
+
+#show-bingo {
+  position: absolute;
+  left: 0px;
+  top: -48px;
+  margin-left: 40%;
+  font-size: 35px;
+  color: red;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 1s ease-in-out;
+}
+
+.well.site-explanation, .well.admin-organization {
+  background-color: rgba(255, 0, 0, .02);
+}
+
+table {
+  margin: 0 auto;
+}
